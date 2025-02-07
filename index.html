@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Hola, Jerry here</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">>
+<style>
+body 
+{
+    background-color: #FC0055;
+    margin: 0;
+    padding: 0;
+    font-family: 'Barlow', sans-serif;
+    font-size: 1.25em;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.main-content 
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    gap: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.footer 
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 20px 20px 20px;
+    box-sizing: border-box;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-family: lora;
+    font-size: smaller;
+}
+
+.footer-left 
+{
+    max-width: 60%;
+    text-align: left;
+}
+
+.footer-left p 
+{
+    margin: 0 0 5px 0;
+}
+
+.footer-links 
+{
+    display: flex;
+    gap: 20px;
+    font-family: monospace;
+}
+
+.footer-links a 
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-right 
+{
+    text-align: right;
+}
+
+img 
+{
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 200px;
+}
+
+@media (max-width: 768px) 
+{
+    body 
+    {
+        font-size: 1em;
+    }
+
+    .main-content 
+    {
+        gap: 15px;
+    }
+
+    .footer 
+    {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-left, .footer-right 
+    {
+        max-width: 100%;
+    }
+
+    img {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    body 
+    {
+        font-size: 0.9em;
+    }
+
+    .main-content 
+    {
+        gap: 10px;
+        padding: 5px;
+    }
+
+    img 
+    {
+        max-height: 120px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="main-content">
+    <span>Jerry is putting pieces together.</span>
+    <span><img src="j1.gif" alt="Jerry GIF"></span>
+    <span>here. Have some bytes while you wait</span>
+</div>
+<div class="footer">
+    <div class="footer-left">
+        <p>Have a question, some feedback, or an outrageous idea? <BR> Reach out to me</p>
+        <br>
+        <div class="footer-links">
+            <a href="mailto:workwithjerry@gmail.com"> >Email</a>
+            <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/"> >LinkedIn</a>
+            <a href="https://open.spotify.com/user/23ens7pvd14tf86pszus61ns8?si=6cc21c0a724b41ac"> >Spotify</a>
+        </div>
+    </div>
+    <br>
+    <br></rb>
+    <div class="footer-right">
+        Coded with 💚 + HTML + CSS
+    </div>
+</div>
+</body>
+</html>
