@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Hola, Jerry here</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @font-face {
+        font-family: "PixelOperator";
+        src: url("PixelOperator.ttf") format("truetype");
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #fc0055;
+        font-family: "Barlow", sans-serif;
+        font-size: 1.25em;
+        color: white;
+        min-height: 100vh;
+        overflow-y: auto;
+      }
+
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        font-family: lora;
+        font-size: smaller;
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .header.hidden {
+        transform: translateY(-100%);
+      }
+
+      .content-wrapper {
+        margin-top: 80px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+      }
+
+      .main-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px 10px;
+      }
+
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+        padding: 20px;
+        width: 95%;
+        margin: 0 auto;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.01);
+        box-shadow: 0px 4px 8px 5px rgba(255, 255, 255, 0.25) inset;
+      }
+
+      .pinterest-gallery {
+        width: 95%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .gallery-grid {
+        column-count: 3;
+        column-gap: 20px;
+      }
+
+      .gallery-item {
+        break-inside: avoid;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .gallery-item img,
+      .gallery-item video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+      }
+
+      .marquee {
+        font-family: "PixelOperator", sans-serif;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 10px 0;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        font-family: lora;
+        font-size: smaller;
+        margin-top: 40px;
+      }
+
+      .footer-left {
+        max-width: 60%;
+        text-align: left;
+      }
+
+      .footer-left p {
+        margin: 0 0 5px 0;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 20px;
+        font-family: monospace;
+      }
+
+      .footer-links a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        font-style: italic;
+      }
+
+      .footer-right {
+        text-align: right;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        max-height: 200px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          font-size: 1em;
+        }
+
+        .gallery-grid {
+          column-count: 2;
+        }
+
+        .footer {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .footer-left,
+        .footer-right {
+          max-width: 100%;
+        }
+
+        img {
+          max-height: 150px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          font-size: 0.9em;
+        }
+
+        .gallery-grid {
+          column-count: 1;
+        }
+
+        .main-content {
+          gap: 10px;
+          padding: 5px;
+        }
+
+        img {
+          max-height: 120px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <p>ʕノ•ᴥ•ʔノ ︵ ┻━┻</p>
+      <div class="header-links">
+        <a href="mailto:workwithjerry@gmail.com">>Email</a>
+        <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/"
+          >>LinkedIn</a
+        >
+        <a
+          href="https://open.spotify.com/user/23ens7pvd14tf86pszus61ns8?si=6cc21c0a724b41ac"
+          >>Spotify</a
+        >
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="main-title">
+        <span>Jerry is chased by Tom</span>
+      </div>
+
+      <div class="main-content">
+        <span>Jerry is putting pieces together.</span>
+        <span><img src="j1.gif" alt="Jerry GIF" /></span>
+        <span>Here. Have some bytes while you wait</span>
+      </div>
+
+      <div class="pinterest-gallery">
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="project1.jpg" alt="Project 1" />
+          </div>
+          <div class="gallery-item">
+            <video controls>
+              <source src="project2.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marquee Section -->
+    <div class="marquee">
+      <marquee behavior="scroll" direction="left"
+        >🎵 Current vibe:   🐭💨</marquee
+      >
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">
+        <p>Have some feedbacks or an outrageous idea? I feed on them!</p>
+        <div class="footer-links">
+          <a href="mailto:workwithjerry@gmail.com">>Email</a>
+          <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/"
+            >>LinkedIn</a
+          >
+          <a href="https://open.spotify.com/user/23ens7pvd14tf86pszus61ns8"
+            >>Spotify</a
+          >
+        </div>
+      </div>
+      <div class="footer-right">Made with HTML + CSS</div>
+    </div>
+  </body>
+</html>

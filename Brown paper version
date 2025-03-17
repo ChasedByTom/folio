@@ -5,15 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Jerry Jose - Senior Product Designer Portfolio">
   <title>Jerry Jose - Portfolio Cover</title>
-  
-  <!-- Barlow Font Import -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
   <style>
     :root {
-      --bg-color: #e8e4de;
+      --bg-color: #a38d6d;
+      --paper-color: #c0a97f;
       --text-color: #3d2f1b;
       --text-color-secondary: #4f3d29;
     }
@@ -21,64 +16,42 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Arial', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
-    .top-text {
-      position: absolute;
-      top: 25%;
-      transform: translateY(-50%);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-color-secondary);
-    }
-
     .container {
-      width: 80%;
-      max-width: 350px;
-      height: 500px;
+      width: 90%;
+      max-width: 600px;
       margin: 2rem auto;
-      background-image: url('https://raw.githubusercontent.com/ChasedByTom/brownpaper/ead1385b5f5c4bb1178875eb8bd4f8fa732620bb/brown-paper-bg.jpg');
-      background-size: cover;
-      background-position: center;
+      background: var(--paper-color);
       padding: 2rem;
-      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 10px;
       font-size: 16px;
       line-height: 1.6;
-      position: relative;
-      box-shadow: inset 0 5px 10px rgba(255, 255, 255, 0.4), 
-                  inset 0 -5px 10px rgba(0, 0, 0, 0.2);
     }
 
-    .header-group {
-      margin-bottom: 2rem;
-    }
-    
     .intro {
       font-size: 14px;
       color: var(--text-color-secondary);
-      margin-bottom: 0px;
     }
 
     .name {
       font-size: clamp(2rem, 5vw, 2.5rem);
-      font-weight: 700;
-      margin: 0;
-      text-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      margin: 10px 0;
     }
 
     .title {
       font-size: clamp(1rem, 3vw, 1.125rem);
       color: var(--text-color-secondary);
-      margin: 0;
-      font-weight: 500;
+      margin-bottom: 2rem;
     }
 
     .location {
@@ -90,13 +63,13 @@
       display: flex;
       align-items: center;
       margin-bottom: 4rem;
-      font-weight: 600;
+      font-weight: bold;
       font-size: 16px;
     }
 
     .company-logo {
-      margin-left: 8px;
-      height: 24px;
+      margin: 0 8px;
+      font-size: 24px;
     }
 
     .footer {
@@ -109,7 +82,7 @@
       text-decoration: none;
       padding: 5px;
       display: inline-block;
-      font-weight: 500;
+      position: relative;
     }
 
     .footer a:hover {
@@ -129,27 +102,25 @@
   </style>
 </head>
 <body>
-  <p class="top-text">jerry is chased by tom</p>
-
   <main class="container">
-    <div class="header-group">
+    <header>
       <p class="intro">This folio belongs to</p>
       <h1 class="name">Jerry Jose</h1>
       <p class="title">SENIOR PRODUCT DESIGNER</p>
-    </div>
+    </header>
 
     <section>
       <p class="location">based in Bengaluru, India</p>
+
       <div class="current-work">
-        Currently simplifying design @
-        <a href="https://fyers.in" target="_blank">
-          <img src="https://raw.githubusercontent.com/ChasedByTom/brownpaper/main/Fyers-logo-with-depth.svg" alt="FYERS Logo" class="company-logo">
-        </a>
-      </div>      
+        Currently simplifying design @ 
+        <span class="company-logo" aria-hidden="true">→</span>
+        <span>FYERS</span>
+      </div>
     </section>
 
     <footer class="footer">
-      <a href="https://chasedbytom.notion.site/Hola-Jerry-here-8ad413f9e97c4b9488d5adaeaa42c6f7?pvs=74" aria-label="View my previous portfolio work">CHECK OUT MY OLD PORTFOLIO ⎯</a>
+      <a href="https://example.com/old-portfolio" aria-label="View my previous portfolio work">CHECK OUT MY OLD PORTFOLIO ⎯</a>
     </footer>
   </main>
 </body>
