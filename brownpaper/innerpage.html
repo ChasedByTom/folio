@@ -1,28 +1,157 @@
-<html>
-<!-- Text between angle brackets is an HTML tag and is not displayed.
-Most tags, such as the HTML and /HTML tags that surround the contents of
-a page, come in pairs; some tags, like HR, for a horizontal rule, stand 
-alone. Comments, such as the text you're reading, are not displayed when
-the Web page is shown. The information between the HEAD and /HEAD tags is 
-not displayed. The information between the BODY and /BODY tags is displayed.-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Enter a title, displayed at the top of the window.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jerry Jose - Senior Product Designer Portfolio">
+  <title>Portfolio</title>
+  
+  <!-- Barlow Font Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+  
+  <style>
+    :root {
+      --bg-color: #e8e4de;
+      --text-color: #3d2f1b;
+      --text-color-secondary: #4f3d29;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Barlow', sans-serif;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-text {
+      position: absolute;
+      top: 25%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-color-secondary);
+    }
+
+    .container {
+      width: 80%;
+      max-width: 350px;
+      height: 500px;
+      margin: 2rem auto;
+      background-image: url('brown-paper-bg (1).webp');
+      background-size: cover;
+      background-position: center;
+      padding: 2rem;
+      border-radius: 16px;
+      font-size: 16px;
+      line-height: 1.6;
+      position: relative;
+      box-shadow: inset 0 5px 10px rgba(255, 255, 255, 0.4), 
+                  inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-group {
+      margin-bottom: 2rem;
+    }
+    
+    .intro {
+      font-size: 14px;
+      color: var(--text-color-secondary);
+      margin-bottom: 0px;
+    }
+
+    .name {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 700;
+      margin: 0;
+      text-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .title {
+      font-size: clamp(1rem, 3vw, 1.125rem);
+      color: var(--text-color-secondary);
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .location {
+      color: var(--text-color-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .current-work {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4rem;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .company-logo {
+      margin-left: 8px;
+      height: 24px;
+    }
+
+    .footer {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .footer a {
+      color: var(--text-color-secondary);
+      text-decoration: none;
+      padding: 5px;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer a:focus {
+      outline: 2px solid var(--text-color);
+      border-radius: 3px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
-<!-- The information between the BODY and /BODY tags is displayed.-->
 <body>
-<h1>Enter the main heading, usually the same as the title.</h1>
-<p>Be <b>bold</b> in stating your key points. Put them in a list: </p>
-<ul>
-<li>The first item in your list</li>
-<li>The second item; <i>italicize</i> key words</li>
-</ul>
-<p>Improve your image by including an image. </p>
-<p><img src="http://www.mygifs.com/CoverImage.gif" alt="A Great HTML Resource"></p>
-<p>Add a link to your favorite <a href="https://www.dummies.com/">Web site</a>.
-Break up your page with a horizontal rule or two. </p>
-<hr>
-<p>Finally, link to <a href="page2.html">another page</a> in your own Web site.</p>
-<!-- And add a copyright notice.-->
-<p>© Wiley Publishing, 2011</p>
+  <p class="top-text"> </p> <!-- Jerry is chased by tom was here --> 
+
+  <main class="container">
+    <div class="header-group">
+      <p class="intro">This is the innerpage</p>
+      <h1 class="name">Jerry Jose</h1>
+      <p class="title">SENIOR PRODUCT DESIGNER</p>
+    </div>
+
+    <section>
+      <p class="location">based in Bengaluru, India</p>
+      <div class="current-work">
+        Currently simplifying design @
+        <a href="https://fyers.in" target="_blank">
+          <img src="https://raw.githubusercontent.com/ChasedByTom/brownpaper/main/Fyers-logo-with-depth.svg" alt="FYERS Logo" class="company-logo">
+        </a>
+      </div>      
+    </section>
+
+    <footer class="footer">
+      <a href="https://chasedbytom.notion.site/Hola-Jerry-here-8ad413f9e97c4b9488d5adaeaa42c6f7?pvs=74" aria-label="View my previous portfolio work">CHECK OUT MY OLD PORTFOLIO ⎯</a>
+    </footer>
+  </main>
 </body>
 </html>
