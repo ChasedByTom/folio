@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jerry Jose — a portfolio in the spirit of craft.do/imagine." />
+  <title>Jerry Jose — Imagine</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===========================================================
+       Imagine — a recreation of craft.do/imagine's structure,
+       reflowed with portfolio content. Card-grid sections are
+       intentionally deferred (placeholder ribbon in their place).
+       =========================================================== */
+
+    :root {
+      --paper:        #faf8f4;            /* warm cream for most sections */
+      --paper-deep:   #f5efe3;            /* slightly darker cream for alt sections */
+      --sky-l:        #afe4f7;            /* sky-blue, ~+30% vibrance */
+      --sky-m:        #fcd6c2;            /* warm peach, ~+30% vibrance */
+      --sky-r:        #fbcf94;            /* warm amber, ~+30% vibrance */
+      --ink:          #1f1d1a;            /* near-black text */
+      --ink-muted:    #5b574f;            /* secondary text */
+      --ink-soft:     #8a857a;            /* tertiary / labels */
+      --line:         rgba(31, 29, 26, 0.10);
+      --line-strong:  rgba(31, 29, 26, 0.18);
+      --tint-blue:    #427e8a;            /* halftone cloud accent */
+      --tint-pink:    #f0d4d2;
+      --accent:       #2a4cdc;            /* link / CTA blue */
+      --card-bg:      rgba(255, 255, 255, 0.55);
+      --max-w:        1180px;
+      --pad-x:        clamp(20px, 5vw, 60px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background-color: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.55;
+    }
+
+    /* Display headlines use Source Serif 4 (a free, editorial-feeling serif
+       that's an honest stand-in for the commercial face Craft uses in their
+       hero). Body / nav / chips / cards stay on Inter. */
+    .hero h1,
+    .section__head h2,
+    .showcase__copy h3,
+    .cta h2 {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+    .hero h1 em,
+    .showcase__copy h3 em,
+    .cta h2 em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    /* ----------------------------- Top announce bar */
+    .announce {
+      width: 100%;
+      background: rgba(31, 29, 26, 0.92);
+      color: #f6f2e8;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px var(--pad-x);
+      letter-spacing: 0.01em;
+    }
+    .announce a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: #f6f2e8;
+    }
+
+    /* ----------------------------- Site nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(241, 235, 224, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .nav__brand {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .nav__brand span { color: var(--ink-soft); font-weight: 500; }
+    .nav__links {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+    .nav__links a:hover { color: var(--ink); }
+
+    /* ----------------------------- Hero
+       The defining surface of the page: a soft sky gradient (blue → peach →
+       amber, left to right) overlaid with halftone clouds floating across it.
+       The paper grain on body::before keeps the tactile feel on top. */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(60px, 12vh, 140px) 0 clamp(80px, 14vh, 160px);
+      text-align: center;
+      background: linear-gradient(
+        to right,
+        var(--sky-l) 0%,
+        var(--sky-m) 50%,
+        var(--sky-r) 100%
+      );
+    }
+    /* Paper grain scoped to the hero only — sits above clouds but below text. */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image: url('https://www.craft.do/_image/width=3840,quality=85,format=auto/_next/static/media/paper-texture.e3705234.png');
+      background-repeat: repeat;
+      background-size: 1192px 843px;
+      mix-blend-mode: multiply;
+      opacity: 0.35;
+    }
+    .hero__inner { position: relative; z-index: 2; }
+
+    /* Animated clouds: each starts off the right edge and drifts left over
+       225s, looping seamlessly. Negative animation-delays distribute them
+       across the cycle so 3+ are always on screen. Sizes / y-positions /
+       opacities vary to give the field a sense of depth. */
+    .hero .cloud {
+      position: absolute;
+      left: 100%;
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+      will-change: transform;
+      animation: cloud-drift 225s linear infinite;
+    }
+    @keyframes cloud-drift {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-100vw - 100%)); }
+    }
+
+    .hero .cloud--1 { top:   2%; width: 620px; opacity: 0.92; animation-delay:     0s; }
+    .hero .cloud--2 { top:  26%; width: 540px; opacity: 0.78; animation-delay:  -37.5s; }
+    .hero .cloud--3 { top:  48%; width: 700px; opacity: 0.90; animation-delay:  -75s; }
+    .hero .cloud--4 { top:  14%; width: 460px; opacity: 0.70; animation-delay: -112.5s; }
+    .hero .cloud--5 { top:  60%; width: 580px; opacity: 0.82; animation-delay: -150s; }
+    .hero .cloud--6 { top:  36%; width: 500px; opacity: 0.74; animation-delay: -187.5s; }
+
+    /* Static fallback for users who prefer reduced motion. */
+    @media (prefers-reduced-motion: reduce) {
+      .hero .cloud { animation: none; left: auto; transform: none; }
+      .hero .cloud--1 { top:   4%; left: -6%;  }
+      .hero .cloud--2 { top:  30%; right: -4%; left: auto; }
+      .hero .cloud--3 { top:  55%; left: 28%;  }
+      .hero .cloud--4,
+      .hero .cloud--5,
+      .hero .cloud--6 { display: none; }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 28px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      margin: 0 auto 24px;
+      max-width: 16ch;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .hero__sub {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      color: var(--ink-muted);
+      max-width: 38ch;
+      margin: 0 auto 44px;
+      line-height: 1.55;
+    }
+
+    /* Integration row — small monogram chips standing in for tool icons */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      backdrop-filter: blur(4px);
+    }
+    .chip .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--tint-blue);
+    }
+    .chip .dot.pink { background: var(--tint-pink); }
+    .chip .dot.ink { background: var(--ink); }
+
+    /* ----------------------------- Section primitives */
+    .section {
+      padding: clamp(70px, 11vh, 130px) 0;
+      position: relative;
+    }
+    .section--divider { border-top: 1px solid var(--line); }
+
+    .section__head {
+      max-width: 720px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+    .section__head h2 {
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      font-weight: 700;
+      margin: 0 0 14px;
+    }
+    .section__head p {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      margin: 0;
+    }
+
+    /* ----------------------------- Showcase: 2-column */
+    .showcase {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(36px, 5vw, 72px);
+      align-items: center;
+    }
+    .showcase__media {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 60px rgba(31, 29, 26, 0.06);
+      aspect-ratio: 4 / 3;
+    }
+    .showcase__media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .showcase__copy h3 {
+      font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      font-weight: 700;
+      margin: 0 0 18px;
+    }
+    .showcase__copy p {
+      color: var(--ink-muted);
+      font-size: 1.04rem;
+      margin: 0 0 14px;
+      max-width: 46ch;
+    }
+    .showcase__copy .more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .showcase__copy .more::after { content: '→'; transition: transform 0.2s ease; }
+    .showcase__copy .more:hover::after { transform: translateX(3px); }
+
+    @media (max-width: 800px) {
+      .showcase { grid-template-columns: 1fr; }
+    }
+
+    /* ----------------------------- Card grid placeholder ribbon */
+    .deferred {
+      text-align: center;
+      padding: 28px 24px;
+      border: 1px dashed var(--line-strong);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.35);
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .deferred strong { color: var(--ink); font-weight: 600; }
+
+    /* ----------------------------- Integration guides — icon-style grid */
+    .guides__group {
+      margin-top: 56px;
+    }
+    .guides__group h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-soft);
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 28px;
+    }
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .icon-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .icon-card:hover {
+      border-color: var(--line-strong);
+      transform: translateY(-1px);
+    }
+    .icon-card .glyph {
+      flex: none;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    /* ----------------------------- Final CTA */
+    .cta {
+      position: relative;
+      text-align: center;
+      padding: clamp(90px, 14vh, 160px) 0;
+      overflow: hidden;
+    }
+    .cta .cloud {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.45;
+      z-index: 0;
+    }
+    .cta .cloud--left  { top: 8%;  left: -6%;  width: 380px; transform: scaleX(-1); }
+    .cta .cloud--right { bottom: 4%; right: -4%; width: 420px; }
+    .cta__inner { position: relative; z-index: 1; }
+    .cta h2 {
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      font-weight: 700;
+      margin: 0 0 16px;
+      max-width: 18ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta p {
+      color: var(--ink-muted);
+      max-width: 42ch;
+      margin: 0 auto 36px;
+      font-size: 1.05rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: #2a2723; }
+    .btn::after { content: '→'; transition: transform 0.2s ease; }
+    .btn:hover::after { transform: translateX(3px); }
+
+    /* ----------------------------- Footer */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 36px var(--pad-x) 48px;
+    }
+    .footer__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+    .footer__inner a:hover { color: var(--ink); }
+    .footer__links { display: flex; gap: 22px; }
+
+    @media (max-width: 600px) {
+      .nav__links { display: none; }
+      .hero .cloud--tl { width: 360px; }
+      .hero .cloud--tr { width: 380px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top announce bar -->
+  <div class="announce">
+    Currently simplifying design @ FYERS · <a href="mailto:workwithjerry@gmail.com">Say hello</a>
+  </div>
+
+  <!-- Sticky nav -->
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="nav__brand">Jerry Jose <span>· Folio</span></div>
+      <nav class="nav__links">
+        <a href="#work">Work</a>
+        <a href="#tools">Tools</a>
+        <a href="#contact">Contact</a>
+        <a href="cover.html">Cover</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img class="cloud cloud--1"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+    <img class="cloud cloud--2"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+    <img class="cloud cloud--3"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+    <img class="cloud cloud--4"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+    <img class="cloud cloud--5"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+    <img class="cloud cloud--6"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+
+    <div class="container hero__inner">
+      <p class="eyebrow">Senior Product Designer · Bengaluru</p>
+      <h1>Products don't become intuitive by chance. <em>Someone has to fight for that.</em></h1>
+      <p class="hero__sub">
+        Currently simplifying design at FYERS. Wherever the interface gets in
+        the way, my job is to make it quietly step aside.
+      </p>
+
+      <div class="chips" aria-label="Tools I work with">
+        <span class="chip"><span class="dot ink"></span>Figma</span>
+        <span class="chip"><span class="dot"></span>FigJam</span>
+        <span class="chip"><span class="dot pink"></span>Notion</span>
+        <span class="chip"><span class="dot"></span>Linear</span>
+        <span class="chip"><span class="dot ink"></span>Framer</span>
+        <span class="chip"><span class="dot pink"></span>Pitch</span>
+        <span class="chip"><span class="dot"></span>Webflow</span>
+        <span class="chip"><span class="dot ink"></span>Slack</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal showcase (2-col: image + copy) -->
+  <section class="section section--divider" id="work">
+    <div class="container">
+      <div class="showcase">
+        <div class="showcase__media">
+          <img
+            src="https://www.craft.do/_image/width=2048,quality=85,format=auto/_next/static/media/personal-blog-doc-preview.d78ceaf4.png"
+            alt="Preview of recent work"
+          />
+        </div>
+        <div class="showcase__copy">
+          <p class="eyebrow">Currently shipping</p>
+          <h3>Building the calmest trading interface I can think of.</h3>
+          <p>
+            At FYERS I work on the surfaces millions of traders touch every
+            day — order tickets, charts, portfolios. The goal isn't to look
+            clever. It's to read fast, decide faster, and never get in your
+            way at the worst possible moment.
+          </p>
+          <p>
+            Most of the win is restraint: fewer affordances, clearer hierarchy,
+            sturdier defaults. The interesting work is in the boring parts.
+          </p>
+          <a href="https://fyers.in" target="_blank" rel="noopener" class="more">See what FYERS does</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card-grid sections deferred (placeholder per scope decision) -->
+  <section class="section section--divider">
+    <div class="container">
+      <div class="section__head">
+        <h2>Some things I've worked on</h2>
+        <p>Case studies, side experiments, and the odd weekend rabbit hole.</p>
+      </div>
+      <p class="deferred">
+        <strong>Card grids deferred.</strong> Three card-grid sections from
+        craft.do/imagine (ideas, community showcases, app templates) are
+        scaffolded but not built — pending real preview imagery for each card.
+      </p>
+    </div>
+  </section>
+
+  <!-- Integration guides — icon-style grid -->
+  <section class="section section--divider" id="tools">
+    <div class="container">
+      <div class="section__head">
+        <h2>Or follow along on your favorite platform</h2>
+        <p>The same work, wherever you usually live online.</p>
+      </div>
+
+      <div class="guides__group">
+        <h3>Design &amp; thinking</h3>
+        <div class="icon-grid">
+          <a class="icon-card" href="#"><span class="glyph">F</span>Figma</a>
+          <a class="icon-card" href="#"><span class="glyph">FJ</span>FigJam</a>
+          <a class="icon-card" href="#"><span class="glyph">N</span>Notion</a>
+          <a class="icon-card" href="#"><span class="glyph">L</span>Linear</a>
+          <a class="icon-card" href="#"><span class="glyph">M</span>Miro</a>
+          <a class="icon-card" href="#"><span class="glyph">P</span>Pitch</a>
+          <a class="icon-card" href="#"><span class="glyph">A</span>Arc</a>
+          <a class="icon-card" href="#"><span class="glyph">R</span>Raycast</a>
+        </div>
+      </div>
+
+      <div class="guides__group">
+        <h3>Words &amp; images</h3>
+        <div class="icon-grid">
+          <a class="icon-card" href="https://chasedbytom.notion.site" target="_blank" rel="noopener"><span class="glyph">N</span>Old Folio (Notion)</a>
+          <a class="icon-card" href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener"><span class="glyph">in</span>LinkedIn</a>
+          <a class="icon-card" href="mailto:workwithjerry@gmail.com"><span class="glyph">@</span>Email</a>
+          <a class="icon-card" href="https://open.spotify.com/user/23ens7pvd14tf86pszus61ns8" target="_blank" rel="noopener"><span class="glyph">♪</span>Spotify</a>
+          <a class="icon-card" href="#"><span class="glyph">G</span>GitHub</a>
+          <a class="icon-card" href="#"><span class="glyph">X</span>X / Twitter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta" id="contact">
+    <img class="cloud cloud--left"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+    <img class="cloud cloud--right"
+         src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png"
+         alt="" aria-hidden="true" />
+
+    <div class="container cta__inner">
+      <h2>Got something quietly broken? Let's fix it together.</h2>
+      <p>
+        I take on a small number of consulting engagements when the problem
+        is interesting and the team is honest about the constraints.
+      </p>
+      <a class="btn" href="mailto:workwithjerry@gmail.com">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer__inner">
+      <div>© 2026 Jerry Jose · made in Bengaluru</div>
+      <div class="footer__links">
+        <a href="cover.html">Cover page</a>
+        <a href="mailto:workwithjerry@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
