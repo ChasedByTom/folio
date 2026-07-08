@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jerry Jose - Senior Product Designer Portfolio">
+  <title>Jerry Jose - Portfolio Cover</title>
+  
+  <!-- Barlow Font Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+  
+  <style>
+    :root {
+      --bg-color: #e8e4de;
+      --text-color: #3d2f1b;
+      --text-color-secondary: #4f3d29;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Barlow', sans-serif;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Drifting halftone cloud backdrop (inspired by craft.do) */
+    #cloud-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .top-text {
+      position: absolute;
+      top: 25%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-color-secondary);
+    }
+
+    .container {
+      width: 80%;
+      max-width: 350px;
+      height: 500px;
+      margin: 2rem auto;
+      background-image: url('brown-paper-bg (1).webp');
+      background-size: cover;
+      background-position: center;
+      padding: 2rem;
+      border-radius: 16px;
+      font-size: 16px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+      box-shadow: inset 0 5px 10px rgba(255, 255, 255, 0.4),
+                  inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-group {
+      margin-bottom: 2rem;
+    }
+    
+    .intro {
+      font-size: 14px;
+      color: var(--text-color-secondary);
+      margin-bottom: 0px;
+    }
+
+    .name {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 700;
+      margin: 0;
+      text-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .title {
+      font-size: clamp(1rem, 3vw, 1.125rem);
+      color: var(--text-color-secondary);
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .location {
+      color: var(--text-color-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .current-work {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4rem;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .company-logo {
+      margin-left: 8px;
+      height: 24px;
+    }
+
+    .footer {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .footer a {
+      color: var(--text-color-secondary);
+      text-decoration: none;
+      padding: 5px;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer a:focus {
+      outline: 2px solid var(--text-color);
+      border-radius: 3px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="cloud-canvas" aria-hidden="true"></canvas>
+  <p class="top-text"> </p> <!-- Jerry is chased by tom was here -->
+
+  <main class="container">
+    <div class="header-group">
+      <p class="intro">This folio belongs to</p>
+      <h1 class="name">Jerry Jose</h1>
+      <p class="title">SENIOR PRODUCT DESIGNER</p>
+    </div>
+
+    <section>
+      <p class="location">based in Bengaluru, India</p>
+      <div class="current-work">
+        Currently simplifying design @
+        <a href="https://fyers.in" target="_blank">
+          <img src="https://github.com/ChasedByTom/folio/blob/cb57516126efc6c0287603cc2406c74af26fda90/FYERS%20png%20logo.png" alt="FYERS Logo" class="company-logo">
+        </a>
+      </div>      
+    </section>
+
+    <footer class="footer">
+      <a href="https://chasedbytom.notion.site/Hola-Jerry-here-8ad413f9e97c4b9488d5adaeaa42c6f7?pvs=74" aria-label="View my previous portfolio work">CHECK OUT MY OLD PORTFOLIO ⎯</a>
+    </footer>
+  </main>
+
+  <script>
+    // A uniform dot matrix. One specific cloud silhouette (a fixed sum of soft
+    // metaball lumps) translates slowly right -> left across the field. Dots
+    // stay locked to their grid coordinates; only the cloud's x-position
+    // changes per frame, which re-weights radius and opacity wherever it
+    // currently overlaps the matrix. When it exits the left, it wraps back to
+    // the right for a seamless loop.
+    (function () {
+      const canvas = document.getElementById('cloud-canvas');
+      const ctx = canvas.getContext('2d');
+
+      // --- tunables -------------------------------------------------------
+      const GRID    = 15;                 // dot spacing in CSS px (1.5x denser than before)
+      const BASE_R  = 1.1;                // dot radius in open sky
+      const CLOUD_R = 4.5;                // dot radius at the heart of the cloud
+      const SPEED   = 26;                 // cloud drift, CSS px / second (right -> left)
+      const CLOUD_Y_FRAC = 0.22;          // vertical position (fraction of viewport)
+      const GRAY    = [196, 199, 205];    // light-gray base grid
+      const BLUE    = [120, 160, 205];    // soft blue cloud
+      const A_BASE  = 0.30;               // opacity of open-sky dots
+      const A_CLOUD = 0.95;               // opacity of cloud dots
+      const reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // One specific cumulus silhouette: a sum of soft metaball lumps, with
+      // offsets relative to the cloud center. The whole rig translates as one.
+      const LUMPS = [
+        { dx: -160, dy:  20, r:  95 },    // base far-left
+        { dx:  -65, dy:  30, r: 115 },    // base middle-left
+        { dx:   45, dy:  28, r: 110 },    // base middle-right
+        { dx:  150, dy:  15, r:  85 },    // base far-right
+        { dx:  -90, dy: -45, r:  85 },    // shoulder left
+        { dx:    5, dy: -65, r:  95 },    // crown
+        { dx:   95, dy: -40, r:  75 },    // shoulder right
+      ];
+      const CLOUD_HALF_W = 260;           // horizontal extent incl. soft edges
+      const CLOUD_TOP    = 180;           // how far above center the cloud reaches
+      const CLOUD_BOT    = 110;           // how far below center the cloud reaches
+
+      let dpr, vw, vh, cols, rows, x0, y0, start = 0, period;
+
+      // --- helpers --------------------------------------------------------
+      const TAU = Math.PI * 2;
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const smoothstep = (a, b, x) => {
+        const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+        return t * t * (3 - 2 * t);
+      };
+
+      // Density of the cloud at world point (px, py) given cloud center (cx, cy).
+      // Returns [0,1] with soft atmospheric edges. Identical shape, always.
+      function density(px, py, cx, cy) {
+        const lx = px - cx, ly = py - cy;
+        // Bbox reject — keeps the per-frame cost low; most grid points are outside.
+        if (lx < -CLOUD_HALF_W || lx > CLOUD_HALF_W) return 0;
+        if (ly < -CLOUD_TOP    || ly > CLOUD_BOT)    return 0;
+        let f = 0;
+        for (let i = 0; i < LUMPS.length; i++) {
+          const l = LUMPS[i];
+          const dx = lx - l.dx, dy = ly - l.dy;
+          const d2 = (dx * dx + dy * dy) / (l.r * l.r);
+          if (d2 < 1) { const t = 1 - d2; f += t * t; }
+        }
+        return smoothstep(0.10, 0.55, f);
+      }
+
+      // Precompute gray->blue fill styles so we don't build strings per dot.
+      const NB = 28;
+      const styles = [];
+      for (let b = 0; b < NB; b++) {
+        const d = b / (NB - 1);
+        const cr = Math.round(lerp(GRAY[0], BLUE[0], d));
+        const cg = Math.round(lerp(GRAY[1], BLUE[1], d));
+        const cb = Math.round(lerp(GRAY[2], BLUE[2], d));
+        const al = lerp(A_BASE, A_CLOUD, d);
+        styles[b] = `rgba(${cr},${cg},${cb},${al.toFixed(3)})`;
+      }
+
+      function setup() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        vw = window.innerWidth;
+        vh = window.innerHeight;
+        canvas.width = Math.floor(vw * dpr);
+        canvas.height = Math.floor(vh * dpr);
+        canvas.style.width = vw + 'px';
+        canvas.style.height = vh + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // work in CSS pixels
+        cols = Math.ceil(vw / GRID) + 1;
+        rows = Math.ceil(vh / GRID) + 1;
+        x0 = (vw - (cols - 1) * GRID) / 2;       // center the matrix
+        y0 = (vh - (rows - 1) * GRID) / 2;
+        // One full traversal: from just off-right to just off-left of the viewport.
+        period = (vw + 2 * CLOUD_HALF_W) / SPEED;
+      }
+
+      function render(t) {
+        // Wrap the elapsed time into one period; cloud center moves right -> left.
+        const cycle = t - Math.floor(t / period) * period;
+        const cx = vw + CLOUD_HALF_W - SPEED * cycle;
+        const cy = vh * CLOUD_Y_FRAC;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, vw, vh);
+
+        // Cheap row-level reject: skip rows entirely outside the cloud's y-band.
+        const ymin = cy - CLOUD_TOP, ymax = cy + CLOUD_BOT;
+
+        for (let r = 0; r < rows; r++) {
+          const py = y0 + r * GRID;
+          const inBandY = (py >= ymin && py <= ymax);
+          for (let c = 0; c < cols; c++) {
+            const px = x0 + c * GRID;
+            const d = inBandY ? density(px, py, cx, cy) : 0;
+            const rad = BASE_R + (CLOUD_R - BASE_R) * (d * d * (3 - 2 * d));
+            ctx.fillStyle = styles[(d * (NB - 1)) | 0];
+            ctx.beginPath();
+            ctx.arc(px, py, rad, 0, TAU);
+            ctx.fill();
+          }
+        }
+      }
+
+      function frame(ts) {
+        if (!start) start = ts;
+        render((ts - start) / 1000);
+        requestAnimationFrame(frame);
+      }
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => { setup(); if (reduce) render(0); }, 200);
+      });
+
+      setup();
+      if (reduce) render(0);                      // honor reduced-motion: static frame
+      else requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>

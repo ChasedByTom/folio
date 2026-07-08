@@ -1,0 +1,7 @@
+# Personal context — local only, never deploy publicly
+PROFILE.md
+CASE-STUDY-PROMPT.md
+
+# OS cruft
+.DS_Store
+**/.DS_Store

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Zadinga — rebuilding the visual foundation of a retail super-app. A case study by Jerry Jose." />
+  <title>Zadinga — Case Study · Jerry Jose</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===========================================================
+       Zadinga case study — reuses the index.html design system
+       (warm paper, sky hero, Source Serif 4 display + Inter body).
+       Zadinga's own brand green appears only as a reserved accent —
+       a small nod to the case study's core decision.
+       =========================================================== */
+
+    :root {
+      --paper:        #faf8f4;
+      --paper-deep:   #f5efe3;
+      --sky-l:        #afe4f7;
+      --sky-m:        #fcd6c2;
+      --sky-r:        #fbcf94;
+      --ink:          #1f1d1a;
+      --ink-muted:    #5b574f;
+      --ink-soft:     #8a857a;
+      --line:         rgba(31, 29, 26, 0.10);
+      --line-strong:  rgba(31, 29, 26, 0.18);
+      --tint-blue:    #427e8a;
+      --tint-pink:    #f0d4d2;
+      --accent:       #2a4cdc;
+      --brand-green:  #0b7d4f;         /* Zadinga's reserved brand color */
+      --brand-green-soft: rgba(11, 125, 79, 0.10);
+      --card-bg:      rgba(255, 255, 255, 0.55);
+      --max-w:        1180px;
+      --read-w:       720px;           /* comfortable reading measure for prose */
+      --pad-x:        clamp(20px, 5vw, 60px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background-color: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    .hero h1,
+    .case__head h2,
+    .cta h2 {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+    .hero h1 em,
+    .cta h2 em { font-style: italic; font-weight: 400; }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    /* ----------------------------- Top announce bar */
+    .announce {
+      width: 100%;
+      background: rgba(31, 29, 26, 0.92);
+      color: #f6f2e8;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px var(--pad-x);
+      letter-spacing: 0.01em;
+    }
+    .announce a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: #f6f2e8;
+    }
+
+    /* ----------------------------- Site nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(241, 235, 224, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .nav__brand { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+    .nav__brand span { color: var(--ink-soft); font-weight: 500; }
+    .nav__links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-muted); }
+    .nav__links a:hover { color: var(--ink); }
+    .nav__links a.active { color: var(--ink); font-weight: 600; }
+
+    /* ----------------------------- Back link */
+    .backbar { max-width: var(--max-w); margin: 0 auto; padding: 22px var(--pad-x) 0; }
+    .backlink {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; color: var(--ink-muted);
+    }
+    .backlink::before { content: '←'; transition: transform 0.2s ease; }
+    .backlink:hover { color: var(--ink); }
+    .backlink:hover::before { transform: translateX(-3px); }
+
+    /* ----------------------------- Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(48px, 9vh, 96px) 0 clamp(56px, 10vh, 108px);
+      text-align: center;
+      background: linear-gradient(to right, var(--sky-l) 0%, var(--sky-m) 50%, var(--sky-r) 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background-image: url('https://www.craft.do/_image/width=3840,quality=85,format=auto/_next/static/media/paper-texture.e3705234.png');
+      background-repeat: repeat;
+      background-size: 1192px 843px;
+      mix-blend-mode: multiply;
+      opacity: 0.35;
+    }
+    .hero__inner { position: relative; z-index: 2; }
+
+    .hero .cloud {
+      position: absolute; left: 100%; z-index: 1;
+      pointer-events: none; user-select: none; will-change: transform;
+      animation: cloud-drift 225s linear infinite;
+    }
+    @keyframes cloud-drift {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-100vw - 100%)); }
+    }
+    .hero .cloud--1 { top: 4%;  width: 560px; opacity: 0.90; animation-delay: 0s; }
+    .hero .cloud--2 { top: 40%; width: 620px; opacity: 0.82; animation-delay: -75s; }
+    .hero .cloud--3 { top: 20%; width: 480px; opacity: 0.72; animation-delay: -150s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero .cloud { animation: none; left: auto; transform: none; }
+      .hero .cloud--1 { top: 6%; left: -6%; }
+      .hero .cloud--2 { top: 44%; right: -4%; left: auto; }
+      .hero .cloud--3 { display: none; }
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 22px;
+    }
+    .eyebrow::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--brand-green);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 5vw, 3.9rem);
+      line-height: 1.06; letter-spacing: -0.03em; font-weight: 600;
+      margin: 0 auto 20px; max-width: 20ch;
+    }
+    .hero h1 em { font-style: italic; font-weight: 500; color: var(--ink-muted); }
+    .hero__sub {
+      font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+      color: var(--ink-muted); max-width: 46ch; margin: 0 auto; line-height: 1.55;
+    }
+
+    /* ----------------------------- Project meta strip */
+    .meta {
+      background: var(--paper-deep);
+      border-bottom: 1px solid var(--line);
+    }
+    .meta__grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 26px var(--pad-x);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 22px;
+    }
+    .meta__item { display: flex; flex-direction: column; gap: 5px; }
+    .meta__label {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-soft); font-weight: 600;
+    }
+    .meta__value { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.45; }
+    @media (max-width: 760px) {
+      .meta__grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    }
+
+    /* ----------------------------- Case sections */
+    .case { padding: clamp(52px, 8vh, 84px) 0; }
+    .case--divider { border-top: 1px solid var(--line); }
+    .case--alt { background: var(--paper-deep); }
+    .case__inner { max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
+
+    .case__head { margin: 0 0 26px; }
+    .case__num {
+      display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--brand-green); margin-bottom: 12px;
+    }
+    .case__head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      letter-spacing: -0.025em; line-height: 1.12; font-weight: 600; margin: 0;
+    }
+
+    .case p { color: var(--ink-muted); font-size: 1.06rem; margin: 0 0 18px; }
+    .case p strong, .case li strong { color: var(--ink); font-weight: 600; }
+    .case ul { margin: 0 0 18px; padding-left: 0; list-style: none; }
+    .case li {
+      position: relative; padding-left: 26px; margin-bottom: 12px;
+      color: var(--ink-muted); font-size: 1.06rem;
+    }
+    .case li::before {
+      content: ''; position: absolute; left: 4px; top: 11px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--brand-green); opacity: 0.55;
+    }
+
+    /* Lead paragraph after a heading */
+    .case__lead { font-size: 1.14rem; color: var(--ink); }
+
+    /* Pull-quote / key decision callout */
+    .callout {
+      margin: 26px 0; padding: 22px 26px;
+      background: var(--brand-green-soft);
+      border-left: 3px solid var(--brand-green);
+      border-radius: 0 12px 12px 0;
+    }
+    .callout p { margin: 0; color: var(--ink); font-size: 1.08rem; font-style: italic; }
+    .callout p:not(:last-child) { margin-bottom: 10px; }
+
+    /* Honesty / aside note */
+    .note {
+      margin: 24px 0; padding: 16px 20px;
+      border: 1px dashed var(--line-strong); border-radius: 12px;
+      background: rgba(255,255,255,0.35);
+      font-size: 0.98rem; color: var(--ink-muted);
+    }
+    .note strong { color: var(--ink); }
+
+    /* Impact stat band */
+    .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin: 8px 0 24px;
+    }
+    .stat {
+      padding: 22px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--card-bg); text-align: center;
+    }
+    .stat__num {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600;
+      color: var(--brand-green); line-height: 1; margin-bottom: 8px;
+    }
+    .stat__label { font-size: 0.86rem; color: var(--ink-muted); line-height: 1.4; }
+    @media (max-width: 620px) { .stats { grid-template-columns: 1fr; } }
+
+    /* Figma reference link */
+    .reflink {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 6px; color: var(--accent); font-weight: 600; font-size: 0.96rem;
+    }
+    .reflink::after { content: '↗'; }
+
+    /* ----------------------------- Final CTA */
+    .cta {
+      position: relative; text-align: center;
+      padding: clamp(70px, 11vh, 120px) 0; overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .cta__inner { position: relative; z-index: 1; max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .cta h2 {
+      font-size: clamp(1.7rem, 3.2vw, 2.5rem); letter-spacing: -0.03em;
+      line-height: 1.12; font-weight: 600; margin: 0 auto 14px; max-width: 20ch;
+    }
+    .cta p { color: var(--ink-muted); max-width: 44ch; margin: 0 auto 30px; font-size: 1.05rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 24px; background: var(--ink); color: var(--paper);
+      border-radius: 999px; font-weight: 600; font-size: 0.98rem;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: #2a2723; }
+    .btn::after { content: '→'; transition: transform 0.2s ease; }
+    .btn:hover::after { transform: translateX(3px); }
+
+    /* ----------------------------- Footer */
+    footer { border-top: 1px solid var(--line); padding: 36px var(--pad-x) 48px; }
+    .footer__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-muted);
+    }
+    .footer__inner a:hover { color: var(--ink); }
+    .footer__links { display: flex; gap: 22px; }
+
+    @media (max-width: 600px) {
+      .nav__links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top announce bar -->
+  <div class="announce">
+    Currently simplifying design @ FYERS · <a href="mailto:workwithjerry@gmail.com">Say hello</a>
+  </div>
+
+  <!-- Sticky nav -->
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="nav__brand">Jerry Jose <span>· Folio</span></div>
+      <nav class="nav__links">
+        <a href="index.html#work" class="active">Work</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="cover.html">Cover</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="backbar">
+    <a class="backlink" href="index.html#work">Back to work</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img class="cloud cloud--1" src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png" alt="" aria-hidden="true" />
+    <img class="cloud cloud--2" src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png" alt="" aria-hidden="true" />
+    <img class="cloud cloud--3" src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png" alt="" aria-hidden="true" />
+
+    <div class="container hero__inner">
+      <p class="eyebrow">Case Study · Fintech · 2022</p>
+      <h1>Making color mean something in a retail super-app.</h1>
+      <p class="hero__sub">
+        How I rebuilt Zadinga's visual foundation — a theme and design system for
+        India's Kirana shop owners — by taking the brand color <em>away</em> from most of the UI.
+      </p>
+    </div>
+  </section>
+
+  <!-- Project meta strip -->
+  <section class="meta">
+    <div class="meta__grid">
+      <div class="meta__item"><span class="meta__label">Product</span><span class="meta__value">Zadinga — Kirana shop-management app</span></div>
+      <div class="meta__item"><span class="meta__label">Timeline</span><span class="meta__value">~1.5 months · late 2022</span></div>
+      <div class="meta__item"><span class="meta__label">My role</span><span class="meta__value">Design Guide — theme, design system, mentoring</span></div>
+      <div class="meta__item"><span class="meta__label">Team</span><span class="meta__value">Slim squad @ Thence (agency)</span></div>
+      <div class="meta__item"><span class="meta__label">Scope</span><span class="meta__value">Theme → design system → 5 core screens</span></div>
+    </div>
+  </section>
+
+  <!-- 1. Overview -->
+  <section class="case">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">01 — Overview</span><h2>A retail app with super-app ambitions</h2></div>
+      <p class="case__lead">
+        Zadinga is a mobile shop-management app for India's Kirana (neighborhood grocery) owners — they digitize
+        their inventory and fulfill online and offline orders, accepting or rejecting each based on live stock.
+      </p>
+      <p>
+        I joined an in-flight project at <strong>Thence</strong> as <strong>Design Guide</strong> — the craft and
+        visual-system lead. My brief: set a new <strong>theme</strong>, codify it into a <strong>design system</strong>,
+        and mentor the juniors carrying it forward. I owned the visual direction, the system, and five foundational
+        screens — and built the client deck that justified the direction.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Problem & Decision -->
+  <section class="case case--divider case--alt">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">02 — Problem &amp; decision</span><h2>Color everywhere, meaning nowhere</h2></div>
+      <p>
+        The app had color <strong>without a system</strong> — a dull grey and the brand green, reused everywhere. When
+        every button is green, color stops signaling priority: hierarchy collapses, primary actions don't stand out,
+        and duplicate components pile up. For a product with super-app ambitions, you can't scale an interface with no
+        foundation beneath it.
+      </p>
+      <p>
+        I audited the existing UI for inconsistencies and benchmarked <strong>Swiggy</strong> and <strong>Dunzo</strong>
+        for how mature apps use color with restraint. The insight: the problem wasn't a lack of color — it was a lack of
+        <strong>meaning</strong> assigned to it. So I made a counterintuitive call: <strong>reserve the brand green</strong>
+        for identity and key moments, and drive routine primary actions with a <strong>neutral dark-grey gradient</strong>.
+        I kept the green so the rebrand still felt like Zadinga — I just stopped spending it on everything.
+      </p>
+      <div class="callout">
+        <p>"If every button is green, green stops meaning anything. Reserve the brand color for identity and key moments, and use a neutral for routine actions — so hierarchy and the brand both stay strong."</p>
+        <p>— the argument I built into the client deck. It won over a client strict about protecting the green.</p>
+      </div>
+      <a class="reflink" href="https://www.figma.com/design/7bYx9tVT9CV2homnShY71i/UI-Dev-File---For-claude?node-id=7020-20941" target="_blank" rel="noopener">See the pre-redesign UI in Figma</a>
+    </div>
+  </section>
+
+  <!-- 3. Solution & Impact -->
+  <section class="case case--divider">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">03 — Solution &amp; impact</span><h2>A system where color carries signal</h2></div>
+      <p>
+        I applied the new theme to the five screens — <strong>Home, Order Summary, Profile, Plan Details, and a
+        text-heavy internal form</strong> — chosen deliberately: together they hold <strong>70–80% of the app's unique
+        components</strong>, so redesigning them bootstrapped the whole system. Reserved green, dark-grey primary
+        actions, a <strong>spacing grid</strong> to kill the clutter, and duplicate components collapsed into a single
+        documented set.
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">~35%</div><div class="stat__label">more app reviews after the redesign (reported by the product owner)</div></div>
+        <div class="stat"><div class="stat__num">5</div><div class="stat__label">screens covering 70–80% of the app's components</div></div>
+        <div class="stat"><div class="stat__num">1</div><div class="stat__label">theme + design system the team could extend without me</div></div>
+      </div>
+      <p>
+        The redesign was the primary release in that window, so the ~35% lift is credibly its own. Primary actions
+        became unmistakable and screens read calmer — but the deliverable that outlasts the metric was the
+        <strong>theme and design system</strong>, handed off so the team could extend it without me.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. Reflection -->
+  <section class="case case--divider case--alt">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">04 — Reflection</span><h2>What I'd do differently</h2></div>
+      <p>
+        <strong>I'd close the evidence loop</strong> — baseline the rating before shipping and validate with even a
+        lightweight round of Kirana-owner feedback, rather than leaning only on an audit and competitor benchmarks.
+        A "35% more reviews" headline lands harder with a before-number.
+      </p>
+      <p>
+        The lasting lesson: good design is often subtraction, and the most senior thing on a project isn't the pixels —
+        it's the <em>argument</em>. My biggest contribution wasn't the dark-grey button; it was defending it with a
+        principle clear enough that a brand-protective client, whom I never spoke to directly, still said yes.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta__inner">
+      <h2>Got something quietly broken? Let's fix it together.</h2>
+      <p>I take on a small number of consulting engagements when the problem is interesting and the team is honest about the constraints.</p>
+      <a class="btn" href="mailto:workwithjerry@gmail.com">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer__inner">
+      <div>© 2026 Jerry Jose · made in Bengaluru</div>
+      <div class="footer__links">
+        <a href="index.html">Folio</a>
+        <a href="cover.html">Cover page</a>
+        <a href="mailto:workwithjerry@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
