@@ -534,6 +534,19 @@
       margin-top: 12px;
     }
 
+    /* Video pair — two card-interaction demos side by side, 70% of column width */
+    .video-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 70%;
+      margin: 20px 0;
+    }
+    .video-pair .figure { margin: 0; }
+    @media (max-width: 620px) {
+      .video-pair { width: 100%; grid-template-columns: 1fr; }
+    }
+
     /* Reflection — themed labelled paragraphs */
     .reflection { display: flex; flex-direction: column; gap: 18px; }
     .refl-item h4 {
@@ -711,18 +724,6 @@
       <section class="section" id="strategy">
         <span class="badge">Strategy</span>
         <h2 class="two-tone">Turning credit journeys <strong>into decisions</strong>.</h2>
-        <p>
-          The design bet was <strong>soft over sharp</strong>. Two visual directions went in front
-          of the client — Direction 1 stayed close to the existing UI, sharper corners, evolutionary.
-          Direction 2 broke further: soft, rounded, more human. I pushed for Direction 2.
-        </p>
-        <div class="callout">
-          <p>"Credit is already intimidating. If we want a 25-to-45 user, not a fintech geek, to actually apply — the surfaces need to stop looking like a bank statement. Trend gave us the license; the audience did the work."</p>
-          <p>The argument I built for the client. Direction 2 shipped.</p>
-        </div>
-        <figure class="figure figure--wide">
-          <img src="case-studies/deem/D7.jpg" alt="Visual inspiration board — wallet references alongside early Deem card and dashboard concept screens." loading="lazy" />
-        </figure>
 
         <!-- Intervention 01 -->
         <div class="interv">
@@ -783,12 +784,14 @@
             <em>no cards</em> and <em>credit-limit nudge</em> and <em>minimum payment due</em>
             all felt like one product.
           </p>
-          <figure class="figure">
-            <video src="case-studies/deem/Card_details_page_-_switching.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          </figure>
-          <figure class="figure">
-            <video src="case-studies/deem/Upgrade_card_-_pulled_down.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          </figure>
+          <div class="video-pair">
+            <figure class="figure">
+              <video src="case-studies/deem/Card_details_page_-_switching.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            </figure>
+            <figure class="figure">
+              <video src="case-studies/deem/Upgrade_card_-_pulled_down.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            </figure>
+          </div>
         </div>
       </section>
 
@@ -812,12 +815,6 @@
           <div class="stat"><div class="stat__num">−60–70%</div><div class="stat__label">on-call queries (Grievance)</div></div>
           <div class="stat"><div class="stat__num">+50%</div><div class="stat__label">MAU (Spending Tracker)</div></div>
         </div>
-        <div class="note">
-          <strong>Honest framing.</strong> All numbers above were measured post-launch and reported
-          by the Deem product team. I don't have clean pre-redesign baselines beyond the 1.8
-          rating, and no A/B split — the app was rebuilt end-to-end.
-        </div>
-
         <div class="showcase">
           <figure class="figure figure--wide">
             <img src="case-studies/deem/D3.jpg" alt="Angled mockup grid of Deem app screens — OTP verification, card verification, PIN setup, credit card selection, benefits, Cards Portfolio, and support categorisation." loading="lazy" />
