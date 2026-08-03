@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Deem — softening a UAE lending app until users stayed. A case study by Jerry Jose." />
+  <title>Deem — Case Study · Jerry Jose</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===========================================================
+       Deem case study — same visual system as zadinga.html:
+       warm paper, sky hero, Source Serif 4 display + Inter body,
+       Deem purple as reserved accent. Structural moves borrowed
+       from the Tanya reference: meta-in-hero, left-rail TOC,
+       badge tags, two-tone section headers, numbered interventions.
+       =========================================================== */
+
+    :root {
+      --paper:        #faf8f4;
+      --paper-deep:   #f5efe3;
+      --sky-l:        #afe4f7;
+      --sky-m:        #fcd6c2;
+      --sky-r:        #fbcf94;
+      --ink:          #1f1d1a;
+      --ink-muted:    #5b574f;
+      --ink-soft:     #8a857a;
+      --line:         rgba(31, 29, 26, 0.10);
+      --line-strong:  rgba(31, 29, 26, 0.18);
+      --tint-blue:    #427e8a;
+      --accent:       #2a4cdc;
+      --brand-purple: #6C2BD9;
+      --brand-purple-soft: rgba(108, 43, 217, 0.10);
+      --card-bg:      rgba(255, 255, 255, 0.55);
+      --max-w:        1180px;
+      --read-w:       720px;
+      --pad-x:        clamp(20px, 5vw, 60px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background-color: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    .hero h1,
+    .two-tone,
+    .cta h2,
+    .impact__hero-num {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+    .hero h1 em,
+    .cta h2 em { font-style: italic; font-weight: 400; }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    /* ----------------------------- Top announce bar */
+    .announce {
+      width: 100%;
+      background: rgba(31, 29, 26, 0.92);
+      color: #f6f2e8;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px var(--pad-x);
+      letter-spacing: 0.01em;
+    }
+    .announce a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: #f6f2e8;
+    }
+
+    /* ----------------------------- Site nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(241, 235, 224, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .nav__brand { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+    .nav__brand span { color: var(--ink-soft); font-weight: 500; }
+    .nav__links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-muted); }
+    .nav__links a:hover { color: var(--ink); }
+    .nav__links a.active { color: var(--ink); font-weight: 600; }
+
+    /* ----------------------------- Back link */
+    .backbar { max-width: var(--max-w); margin: 0 auto; padding: 22px var(--pad-x) 0; }
+    .backlink {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; color: var(--ink-muted);
+    }
+    .backlink::before { content: '←'; transition: transform 0.2s ease; }
+    .backlink:hover { color: var(--ink); }
+    .backlink:hover::before { transform: translateX(-3px); }
+
+    /* ----------------------------- Hero (two-column: cover image left, details right)
+       Background gradient sampled from the deem-cover.jpg so the image blends into
+       the page. Image sits on the left, text stack on the right. No paper texture,
+       no clouds — the purple ownership needs to feel unbroken. */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(120deg, #4718B8 0%, #5A22D2 42%, #6C2BD9 78%, #7C3AED 100%);
+      color: #ffffff;
+    }
+    .hero__inner {
+      position: relative; z-index: 2;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(36px, 6vh, 72px) var(--pad-x);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 56px);
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero__inner {
+        grid-template-columns: 1fr;
+        gap: clamp(24px, 5vh, 40px);
+        padding: clamp(28px, 5vh, 48px) var(--pad-x);
+      }
+    }
+
+    /* Cover cell: aspect-locked so we can crop images against a known boundary.
+       Both images are scaled 2x their previous displayed size; the bottom 1/4 of
+       each falls outside the cell and is clipped by overflow: hidden. */
+    .hero__cover {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      align-self: center;
+    }
+    .hero__cover-desktop {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200%;
+      max-width: none;
+      height: auto;
+      filter: drop-shadow(0 24px 40px rgba(12, 4, 40, 0.35));
+    }
+    .hero__cover-mobile {
+      position: absolute;
+      right: -4%;
+      bottom: -25%;
+      width: 52%;
+      max-width: none;
+      height: auto;
+      z-index: 2;
+      filter: drop-shadow(0 26px 40px rgba(12, 4, 40, 0.45));
+    }
+    @media (max-width: 900px) {
+      .hero__cover { aspect-ratio: 16 / 10; }
+      .hero__cover-mobile { width: 40%; right: -2%; bottom: -20%; }
+    }
+
+    .hero__text { max-width: 46ch; }
+    @media (max-width: 900px) {
+      .hero__text { max-width: none; text-align: left; }
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255, 255, 255, 0.72);
+      margin-bottom: 18px;
+    }
+    .eyebrow::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+      line-height: 1.08; letter-spacing: -0.028em; font-weight: 600;
+      margin: 0 0 18px;
+      color: #ffffff;
+    }
+    .hero h1 em {
+      font-style: italic; font-weight: 500;
+      color: rgba(255, 255, 255, 0.78);
+    }
+    .hero__sub {
+      font-size: clamp(0.98rem, 1.3vw, 1.1rem);
+      color: rgba(255, 255, 255, 0.82);
+      margin: 0 0 clamp(24px, 4vh, 32px);
+      line-height: 1.6;
+    }
+
+    /* Meta strip — glass card on the purple */
+    .hero__meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 22px;
+      padding: 20px 22px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .hero__meta .meta__item { display: flex; flex-direction: column; gap: 4px; }
+    .hero__meta .meta__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6); font-weight: 700;
+    }
+    .hero__meta .meta__value {
+      font-size: 13.5px; font-weight: 500; line-height: 1.45;
+      color: #ffffff;
+    }
+    @media (max-width: 480px) {
+      .hero__meta { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    /* ----------------------------- Case layout with left rail */
+    .case-shell {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(48px, 8vh, 84px) var(--pad-x);
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 64px);
+    }
+    @media (max-width: 900px) {
+      .case-shell { grid-template-columns: 1fr; }
+    }
+
+    /* Left rail — sticky mini TOC */
+    .rail {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      line-height: 1.4;
+    }
+    .rail a {
+      color: var(--ink-soft);
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .rail a:hover { color: var(--ink); }
+    .rail a.is-active { color: var(--ink); font-weight: 700; }
+    @media (max-width: 900px) {
+      .rail {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Main content column */
+    .main { max-width: var(--read-w); }
+    .section { margin-bottom: clamp(52px, 8vh, 84px); scroll-margin-top: 88px; }
+    .section:last-child { margin-bottom: 0; }
+
+    /* Badge — small uppercase tag */
+    .badge {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand-purple);
+      background: var(--brand-purple-soft);
+      padding: 5px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    /* Two-tone header — grey word + black word */
+    .two-tone {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      font-weight: 600;
+      color: var(--ink-soft);
+      margin: 0 0 24px;
+    }
+    .two-tone strong { color: var(--ink); font-weight: 600; }
+
+    /* Body copy inside main */
+    .main p { color: var(--ink-muted); font-size: 1.06rem; margin: 0 0 18px; }
+    .main p strong, .main li strong { color: var(--ink); font-weight: 600; }
+    .main p.lead { font-size: 1.14rem; color: var(--ink); }
+
+    /* Overview — four labelled rows */
+    .overview-rows { display: flex; flex-direction: column; gap: 22px; }
+    .ovrow {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 22px;
+      align-items: baseline;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .ovrow:first-child { padding-top: 0; border-top: none; }
+    .ovrow__label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-purple);
+      letter-spacing: 0.01em;
+    }
+    .ovrow__label::after { content: ' →'; opacity: 0.55; }
+    .ovrow__body { color: var(--ink-muted); font-size: 1.02rem; line-height: 1.55; }
+    .ovrow__body strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 620px) {
+      .ovrow { grid-template-columns: 1fr; gap: 6px; }
+    }
+
+    /* Friction cards */
+    .frictions { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 8px; }
+    .friction {
+      padding: 16px 18px;
+      background: var(--paper-deep);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink-muted);
+      font-size: 1rem;
+    }
+    .friction strong { color: var(--ink); font-weight: 600; }
+    .friction__num {
+      display: inline-block;
+      color: var(--brand-purple);
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    /* Intervention block — numbered, badge-led */
+    .interv {
+      margin: 32px 0;
+      padding: 24px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .interv__badge {
+      display: inline-block;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      background: rgba(31, 29, 26, 0.06);
+      padding: 4px 9px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .interv h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 0 0 12px;
+    }
+    .interv p { margin-bottom: 12px; font-size: 1rem; }
+    .interv .reflink { margin-top: 4px; }
+
+    /* Old-flow / new-flow mono strip */
+    .flow {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--ink-muted);
+      background: var(--paper-deep);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 14px 0;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .flow__label { color: var(--ink-soft); font-weight: 700; letter-spacing: 0.06em; }
+    .flow__old .flow__label { color: var(--ink-soft); }
+    .flow__new .flow__label { color: var(--brand-purple); }
+    .flow__hi { color: var(--brand-purple); font-weight: 600; }
+    .flow__old { display: block; }
+    .flow__new { display: block; margin-top: 4px; }
+
+    /* Design-directions callout */
+    .callout {
+      margin: 22px 0;
+      padding: 20px 24px;
+      background: var(--brand-purple-soft);
+      border-left: 3px solid var(--brand-purple);
+      border-radius: 0 12px 12px 0;
+    }
+    .callout p { margin: 0; color: var(--ink); font-size: 1.06rem; font-style: italic; }
+    .callout p + p { margin-top: 10px; font-style: normal; color: var(--ink-muted); font-size: 0.96rem; }
+
+    /* Figma reference link */
+    .reflink {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent); font-weight: 600; font-size: 0.94rem;
+    }
+    .reflink::after { content: '↗'; }
+
+    /* Impact — hero metric + supporting row */
+    .impact__hero {
+      margin: 20px 0 28px;
+      padding: 28px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-align: center;
+    }
+    .impact__hero-num {
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 600;
+      color: var(--brand-purple);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .impact__hero-label {
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-soft); font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .impact__hero-note { font-size: 0.98rem; color: var(--ink-muted); max-width: 46ch; margin: 0 auto; }
+
+    .impact__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat {
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+    .stat__num {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      color: var(--brand-purple);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat__label { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.4; }
+    @media (max-width: 620px) {
+      .impact__grid { grid-template-columns: 1fr; }
+    }
+
+    /* Honesty note */
+    .note {
+      margin: 20px 0 0;
+      padding: 14px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.35);
+      font-size: 0.94rem;
+      color: var(--ink-muted);
+    }
+    .note strong { color: var(--ink); }
+
+    /* ---- Figures & media embeds ---- */
+    .figure {
+      margin: 24px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--paper-deep);
+      border: 1px solid var(--line);
+    }
+    .figure img,
+    .figure video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .figure__caption {
+      padding: 12px 16px;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.4);
+    }
+    /* Wide figures break outside the reading measure to fill the main column */
+    .figure--wide {
+      margin-left: calc(-1 * clamp(0px, 3vw, 40px));
+      margin-right: calc(-1 * clamp(0px, 3vw, 40px));
+    }
+    @media (max-width: 900px) {
+      .figure--wide { margin-left: 0; margin-right: 0; }
+    }
+
+    /* Showcase gallery — stacked images at the end */
+    .showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 12px;
+    }
+
+    /* Reflection — themed labelled paragraphs */
+    .reflection { display: flex; flex-direction: column; gap: 18px; }
+    .refl-item h4 {
+      font-size: 1.02rem;
+      color: var(--ink);
+      font-weight: 700;
+      margin: 0 0 6px;
+      letter-spacing: -0.005em;
+    }
+    .refl-item p { margin: 0; color: var(--ink-muted); font-size: 1rem; }
+
+    /* ----------------------------- Final CTA */
+    .cta {
+      position: relative; text-align: center;
+      padding: clamp(70px, 11vh, 120px) 0; overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .cta__inner { position: relative; z-index: 1; max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .cta h2 {
+      font-size: clamp(1.7rem, 3.2vw, 2.5rem); letter-spacing: -0.03em;
+      line-height: 1.12; font-weight: 600; margin: 0 auto 14px; max-width: 20ch;
+    }
+    .cta p { color: var(--ink-muted); max-width: 44ch; margin: 0 auto 30px; font-size: 1.05rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 24px; background: var(--ink); color: var(--paper);
+      border-radius: 999px; font-weight: 600; font-size: 0.98rem;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: #2a2723; }
+    .btn::after { content: '→'; transition: transform 0.2s ease; }
+    .btn:hover::after { transform: translateX(3px); }
+
+    /* ----------------------------- Footer */
+    footer { border-top: 1px solid var(--line); padding: 36px var(--pad-x) 48px; }
+    .footer__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-muted);
+    }
+    .footer__inner a:hover { color: var(--ink); }
+    .footer__links { display: flex; gap: 22px; }
+
+    @media (max-width: 600px) {
+      .nav__links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top announce bar -->
+  <div class="announce">
+    Currently simplifying design @ FYERS · <a href="mailto:workwithjerry@gmail.com">Say hello</a>
+  </div>
+
+  <!-- Sticky nav -->
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="nav__brand">Jerry Jose <span>· Folio</span></div>
+      <nav class="nav__links">
+        <a href="landing.html#work" class="active">Work</a>
+        <a href="landing.html#tools">Tools</a>
+        <a href="landing.html#contact">Contact</a>
+        <a href="cover.html">Cover</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="backbar">
+    <a class="backlink" href="landing.html#work">Back to work</a>
+  </div>
+
+  <!-- Hero — cover image left, case-study details right -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__cover">
+        <img class="hero__cover-desktop" src="case-studies/deem/Deem%20web%20-%20Cover.png" alt="Deem web dashboard — card portfolio program, offers, bill payments." />
+        <img class="hero__cover-mobile" src="case-studies/deem/Deem%20mobile%20-%20Cover.png" alt="Deem mobile app — card insurance screen with Credit Shield Plus and Accident Shield." />
+      </div>
+      <div class="hero__text">
+        <p class="eyebrow">Case Study · Fintech · 2023</p>
+        <h1>Softening credit — until users stayed.</h1>
+        <p class="hero__sub">
+          How I helped rebuild Deem Finance's UAE lending app — from a <em>1.8-star</em> rating
+          to <em>4.0</em> — by softening a category that usually intimidates and turning credit
+          journeys into decisions users could actually make.
+        </p>
+
+        <div class="hero__meta">
+          <div class="meta__item"><span class="meta__label">Role</span><span class="meta__value">UI &amp; interaction lead</span></div>
+          <div class="meta__item"><span class="meta__label">Timeline</span><span class="meta__value">~4 months · 2023</span></div>
+          <div class="meta__item"><span class="meta__label">Tools</span><span class="meta__value">Figma, After Effects</span></div>
+          <div class="meta__item"><span class="meta__label">Team</span><span class="meta__value">PO, UX designer, me (UI) @ Thence</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= Case body ============= -->
+  <div class="case-shell">
+    <!-- Left rail — sticky mini TOC -->
+    <aside class="rail" aria-label="On this page">
+      <a href="#overview">Overview</a>
+      <a href="#problem">Problem</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#impact">Impact</a>
+      <a href="#reflection">Reflection</a>
+    </aside>
+
+    <div class="main">
+
+      <!-- ===== Overview — four labelled rows ===== -->
+      <section class="section" id="overview">
+        <div class="overview-rows">
+          <div class="ovrow">
+            <div class="ovrow__label">Business</div>
+            <div class="ovrow__body">
+              Deem Finance is a UAE bank whose lending arm runs on a mobile app —
+              <strong>credit cards, personal loans, repayments,</strong> and the identity
+              checks that gate all of it.
+            </div>
+          </div>
+          <div class="ovrow">
+            <div class="ovrow__label">Challenge</div>
+            <div class="ovrow__body">
+              Two problems on the table: a <strong>1.8-star app-store rating</strong>, and a
+              support line drowning in queries the app should have answered on its own.
+            </div>
+          </div>
+          <div class="ovrow">
+            <div class="ovrow__label">Solution</div>
+            <div class="ovrow__body">
+              A four-month rebuild that <strong>softened the visual language</strong>, turned
+              credit journeys into decisions, and <strong>moved routine support into the
+              product itself</strong>.
+            </div>
+          </div>
+          <div class="ovrow">
+            <div class="ovrow__label">Impact</div>
+            <div class="ovrow__body">
+              App-store rating <strong>1.8 → 4.0</strong>. Registered users <strong>10K → 50K</strong>.
+              Onboarding drop-off <strong>−60%</strong>. Credit disbursal <strong>+100%</strong>.
+              On-call queries <strong>−60% to −80%</strong> across the FAQ and Grievance modules.
+            </div>
+          </div>
+        </div>
+
+        <figure class="figure figure--wide">
+          <img src="case-studies/deem/D2.jpg" alt="Deem project highlights grid — seamless onboarding, card insurance, accessible colour palette, supplementary card, custom icons, and project highlights (ethnographic study, stakeholder workshop, brief to concept in under 2 months)." loading="lazy" />
+        </figure>
+      </section>
+
+      <!-- ===== Problem ===== -->
+      <section class="section" id="problem">
+        <span class="badge">Problem</span>
+        <h2 class="two-tone">The old app was flat, cold, <strong>and lazy</strong>.</h2>
+        <p>
+          Deem's app wasn't broken in a dramatic way. It was worse — it was <strong>ignorable</strong>.
+          Home was a stock hand-holding-a-card photo and one product row. The menu was a hamburger
+          drawer. Cards you owned looked the same visual weight as cards you could apply for. The
+          FAQ was walls of text with no categories — which is exactly why the support line rang all
+          day. A 1.8 rating isn't a bug report; it's <strong>users giving up quietly</strong>.
+        </p>
+        <div class="frictions">
+          <div class="friction"><span class="friction__num">01</span><strong>No hierarchy on home.</strong> Stock photo + one product row. Users landed and had no idea what to do first.</div>
+          <div class="friction"><span class="friction__num">02</span><strong>Walls of text in the FAQ.</strong> No categories, no search. Every routine question routed to the phone line.</div>
+          <div class="friction"><span class="friction__num">03</span><strong>Onboarding was manual and long.</strong> Every field typed by hand, every ID uploaded manually. Most users bailed halfway.</div>
+        </div>
+
+        <figure class="figure figure--wide">
+          <img src="case-studies/deem/Deem%20old%20screens.png" alt="Screens from the old Deem app — the state we inherited." loading="lazy" />
+        </figure>
+      </section>
+
+      <!-- ===== Strategy ===== -->
+      <section class="section" id="strategy">
+        <span class="badge">Strategy</span>
+        <h2 class="two-tone">Turning credit journeys <strong>into decisions</strong>.</h2>
+        <p>
+          The design bet was <strong>soft over sharp</strong>. Two visual directions went in front
+          of the client — Direction 1 stayed close to the existing UI, sharper corners, evolutionary.
+          Direction 2 broke further: soft, rounded, more human. I pushed for Direction 2.
+        </p>
+        <div class="callout">
+          <p>"Credit is already intimidating. If we want a 25-to-45 user, not a fintech geek, to actually apply — the surfaces need to stop looking like a bank statement. Trend gave us the license; the audience did the work."</p>
+          <p>The argument I built for the client. Direction 2 shipped.</p>
+        </div>
+        <figure class="figure figure--wide">
+          <img src="case-studies/deem/D7.jpg" alt="Visual inspiration board — wallet references alongside early Deem card and dashboard concept screens." loading="lazy" />
+        </figure>
+
+        <!-- Intervention 01 -->
+        <div class="interv">
+          <span class="interv__badge">Intervention 01</span>
+          <h3>Emirates ID auto-fetch onboarding</h3>
+          <p>
+            The old sign-up was a manual form. Users typed their name, ID number, address, DOB —
+            fields that were <em>already</em> printed on the Emirates ID sitting on their desk.
+            We rebuilt the flow around Intelligent Document Processing: scan the ID, auto-populate
+            the form, verify.
+          </p>
+          <div class="flow">
+            <span class="flow__old"><span class="flow__label">OLD:</span> Type name → type ID → type address → type DOB → upload docs → submit</span>
+            <span class="flow__new"><span class="flow__label">NEW:</span> <span class="flow__hi">Scan Emirates ID</span> → verify prefill → submit</span>
+          </div>
+          <p><strong>Steps halved, duration halved, drop-off down 60%, registered users grew from 10K to 50K.</strong></p>
+        </div>
+
+        <!-- Intervention 02 -->
+        <div class="interv">
+          <span class="interv__badge">Intervention 02</span>
+          <h3>Card selection as a decision funnel</h3>
+          <p>
+            The old app dumped every card into a flat list — apply now, apply now, apply now. Users
+            had to compare across rows with no framing. The two-bucket structure was the
+            <strong>UX designer's</strong> call: pick <em>type</em> (Miles for travellers vs Cash
+            for shoppers) → pick <em>tier</em> (Platinum → World). The rest — turning the card
+            visual into the button, surfacing minimum-income upfront so users don't apply for what
+            they can't get, sticky primary CTA, icon-led benefits — was where I lived.
+          </p>
+          <figure class="figure">
+            <img src="case-studies/deem/D4.jpg" alt="Card application flow — Start applying, high-rewarding card selection, Platinum Cash Up detail, approval confirmation, and card-insurance step." loading="lazy" />
+          </figure>
+        </div>
+
+        <!-- Intervention 03 -->
+        <div class="interv">
+          <span class="interv__badge">Intervention 03</span>
+          <h3>FAQ with narrowing-down IA</h3>
+          <p>
+            The old FAQ was a scroll of answers. The new one lets users pick a category —
+            <strong>Credit Cards, Loans, General</strong> — then jumps to the most-asked questions
+            pulled from actual support-line data. "Raise a ticket" only appears when the question
+            isn't listed. A structural choice, not a visual one — and the one that
+            <strong>cut on-call queries by 80%</strong>.
+          </p>
+        </div>
+
+        <!-- Intervention 04 -->
+        <div class="interv">
+          <span class="interv__badge">Intervention 04</span>
+          <h3>Cards Portfolio — a state machine, not a dashboard</h3>
+          <p>
+            The real work in the Cards Portfolio wasn't the hero screen — it was the
+            <strong>15+ states</strong> behind it: no cards, blocked, unactivated supplementary,
+            credit-limit nudge, minimum-payment-due, sensitive info hidden, and more. The UX
+            designer catalogued the states. My job was to build the visual system so
+            <em>no cards</em> and <em>credit-limit nudge</em> and <em>minimum payment due</em>
+            all felt like one product.
+          </p>
+          <figure class="figure">
+            <video src="case-studies/deem/Card_details_page_-_switching.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </figure>
+          <figure class="figure">
+            <video src="case-studies/deem/Upgrade_card_-_pulled_down.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ===== Impact ===== -->
+      <section class="section" id="impact">
+        <span class="badge">Impact</span>
+        <h2 class="two-tone">Measuring the return <strong>on trust rebuilt</strong>.</h2>
+        <div class="impact__hero">
+          <div class="impact__hero-label">App Store Rating</div>
+          <div class="impact__hero-num">1.8 → 4.0</div>
+          <p class="impact__hero-note">
+            The one number the client cared about at kickoff. The redesign was the primary
+            release in the window, so the lift credibly belongs to it.
+          </p>
+        </div>
+        <div class="impact__grid">
+          <div class="stat"><div class="stat__num">10K → 50K</div><div class="stat__label">registered users</div></div>
+          <div class="stat"><div class="stat__num">+100%</div><div class="stat__label">credit disbursal</div></div>
+          <div class="stat"><div class="stat__num">−60%</div><div class="stat__label">onboarding drop-off</div></div>
+          <div class="stat"><div class="stat__num">−80%</div><div class="stat__label">on-call queries (FAQ)</div></div>
+          <div class="stat"><div class="stat__num">−60–70%</div><div class="stat__label">on-call queries (Grievance)</div></div>
+          <div class="stat"><div class="stat__num">+50%</div><div class="stat__label">MAU (Spending Tracker)</div></div>
+        </div>
+        <div class="note">
+          <strong>Honest framing.</strong> All numbers above were measured post-launch and reported
+          by the Deem product team. I don't have clean pre-redesign baselines beyond the 1.8
+          rating, and no A/B split — the app was rebuilt end-to-end.
+        </div>
+
+        <div class="showcase">
+          <figure class="figure figure--wide">
+            <img src="case-studies/deem/D3.jpg" alt="Angled mockup grid of Deem app screens — OTP verification, card verification, PIN setup, credit card selection, benefits, Cards Portfolio, and support categorisation." loading="lazy" />
+          </figure>
+          <figure class="figure figure--wide">
+            <img src="case-studies/deem/D5.jpg" alt="Deem desktop web dashboard — bill payment, home screen with loan tracker, and the Cash Up card landing page." loading="lazy" />
+          </figure>
+          <figure class="figure figure--wide">
+            <img src="case-studies/deem/D6.jpg" alt="Deem card comparison table on desktop — Titanium / Platinum / World Cash Up side by side, with reward tiers by category." loading="lazy" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ===== Reflection ===== -->
+      <section class="section" id="reflection">
+        <span class="badge">Reflection</span>
+        <h2 class="two-tone">What Deem <strong>taught me</strong>.</h2>
+        <div class="reflection">
+          <div class="refl-item">
+            <h4>Soft was a trust argument dressed as a corner-radius argument.</h4>
+            <p>
+              "Direction 2 because trend" was the answer I gave the client first — and it wasn't
+              strong enough. The real reason was the audience: a 25-to-45 user for whom credit is
+              already anxiety-shaped. Every sharp edge on the screen was making that worse. The
+              lesson: taste is often just the audible layer of a much better argument sitting
+              underneath.
+            </p>
+          </div>
+          <div class="refl-item">
+            <h4>Mature product design lives in the edges.</h4>
+            <p>
+              The Cards Portfolio's real work was the 15+ states behind the hero screen. The UX
+              designer catalogued them, and my whole visual system had to make "no cards" feel
+              like the same product as "credit-limit nudge." Portfolios love hero shots. Real
+              products live in the empty states, the errors, and the "you don't qualify" copy.
+            </p>
+          </div>
+          <div class="refl-item">
+            <h4>Under-claim beats over-claim.</h4>
+            <p>
+              A 1.8-to-4.0 lift is a headline. It also has soft edges: no clean baseline for
+              onboarding, no A/B, no direct user interviews on my end. I'd rather name that
+              upfront than lose credibility on the third question in an interview. The numbers
+              are the client team's, measured post-launch — that's the whole story.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta__inner">
+      <h2>Got a product users have stopped trusting? Let's fix it together.</h2>
+      <p>I take on a small number of consulting engagements when the problem is interesting and the team is honest about the constraints.</p>
+      <a class="btn" href="mailto:workwithjerry@gmail.com">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer__inner">
+      <div>© 2026 Jerry Jose · made in Bengaluru</div>
+      <div class="footer__links">
+        <a href="landing.html">Folio</a>
+        <a href="cover.html">Cover page</a>
+        <a href="mailto:workwithjerry@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Highlight the rail link whose section is currently in view.
+    (function () {
+      const links = Array.from(document.querySelectorAll('.rail a'));
+      const map = new Map();
+      links.forEach(a => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) map.set(el, a);
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove('is-active'));
+            map.get(e.target)?.classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      map.forEach((_, el) => io.observe(el));
+    })();
+  </script>
+</body>
+</html>
