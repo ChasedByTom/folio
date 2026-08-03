@@ -156,38 +156,30 @@
       }
     }
 
-    /* Cover cell: aspect-locked so we can crop images against a known boundary.
-       Both images are scaled 2x their previous displayed size; the bottom 1/4 of
-       each falls outside the cell and is clipped by overflow: hidden. */
     .hero__cover {
       position: relative;
-      overflow: hidden;
-      aspect-ratio: 4 / 3;
-      align-self: center;
+      /* Extra bottom room so the mobile overlay can sit past the desktop's baseline
+         without clipping the surrounding cell. */
+      padding-bottom: 6%;
     }
     .hero__cover-desktop {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200%;
-      max-width: none;
+      display: block;
+      width: 100%;
       height: auto;
       filter: drop-shadow(0 24px 40px rgba(12, 4, 40, 0.35));
     }
     .hero__cover-mobile {
       position: absolute;
-      right: -4%;
-      bottom: -25%;
-      width: 52%;
-      max-width: none;
+      right: 6%;
+      bottom: 0;
+      width: 26%;
       height: auto;
       z-index: 2;
       filter: drop-shadow(0 26px 40px rgba(12, 4, 40, 0.45));
     }
     @media (max-width: 900px) {
-      .hero__cover { aspect-ratio: 16 / 10; }
-      .hero__cover-mobile { width: 40%; right: -2%; bottom: -20%; }
+      .hero__cover { padding-bottom: 10%; }
+      .hero__cover-mobile { width: 30%; right: 4%; }
     }
 
     .hero__text { max-width: 46ch; }
