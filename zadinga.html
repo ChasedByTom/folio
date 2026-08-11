@@ -126,84 +126,84 @@
     .backlink:hover { color: var(--ink); }
     .backlink:hover::before { transform: translateX(-3px); }
 
-    /* ----------------------------- Hero */
+    /* ----------------------------- Hero — two-column composite cover
+       Reusable pattern: left = image composite; right = eyebrow/title/subtitle/meta.
+       Full-bleed background is a gradient sampled from the base image so the
+       composite blends into the page. Zadinga base is light → ink text, glass meta. */
     .hero {
       position: relative;
-      overflow: hidden;
-      padding: clamp(48px, 9vh, 96px) 0 clamp(56px, 10vh, 108px);
-      text-align: center;
-      background: linear-gradient(to right, var(--sky-l) 0%, var(--sky-m) 50%, var(--sky-r) 100%);
+      /* Sampled from zadinga-screens-angled.png (white, pale-blue #eff7fe, green #e0e9c5) */
+      background: linear-gradient(120deg, #eff7fe 0%, #ffffff 52%, #e6eecb 100%);
+      border-bottom: 1px solid var(--line);
+      padding: clamp(40px, 7vh, 84px) 0 clamp(44px, 8vh, 92px);
     }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none; z-index: 1;
-      background-image: url('https://www.craft.do/_image/width=3840,quality=85,format=auto/_next/static/media/paper-texture.e3705234.png');
-      background-repeat: repeat;
-      background-size: 1192px 843px;
-      mix-blend-mode: multiply;
-      opacity: 0.35;
-    }
-    .hero__inner { position: relative; z-index: 2; }
-
-    .hero .cloud {
-      position: absolute; left: 100%; z-index: 1;
-      pointer-events: none; user-select: none; will-change: transform;
-      animation: cloud-drift 225s linear infinite;
-    }
-    @keyframes cloud-drift {
-      from { transform: translateX(0); }
-      to   { transform: translateX(calc(-100vw - 100%)); }
-    }
-    .hero .cloud--1 { top: 4%;  width: 560px; opacity: 0.90; animation-delay: 0s; }
-    .hero .cloud--2 { top: 40%; width: 620px; opacity: 0.82; animation-delay: -75s; }
-    .hero .cloud--3 { top: 20%; width: 480px; opacity: 0.72; animation-delay: -150s; }
-    @media (prefers-reduced-motion: reduce) {
-      .hero .cloud { animation: none; left: auto; transform: none; }
-      .hero .cloud--1 { top: 6%; left: -6%; }
-      .hero .cloud--2 { top: 44%; right: -4%; left: auto; }
-      .hero .cloud--3 { display: none; }
+    .hero__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      gap: clamp(28px, 5vw, 60px);
     }
 
+    /* Left: the images ARE the composition — no card chrome */
+    .hero__cover { position: relative; width: 100%; }
+    .hero__cover-desktop { width: 100%; height: auto; display: block; }
+    .hero__cover-mobile {
+      position: absolute; right: 6%; bottom: 0; width: 26%; height: auto;
+      filter: drop-shadow(0 18px 34px rgba(31, 29, 26, 0.22));
+    }
+
+    /* Right: text — ink on light bg */
+    .hero__text { min-width: 0; }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
-      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 22px;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 18px;
     }
     .eyebrow::before {
       content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--brand-green);
     }
-
     .hero h1 {
-      font-size: clamp(2.1rem, 5vw, 3.9rem);
-      line-height: 1.06; letter-spacing: -0.03em; font-weight: 600;
-      margin: 0 auto 20px; max-width: 20ch;
+      font-size: clamp(2rem, 3.8vw, 3.3rem);
+      line-height: 1.07; letter-spacing: -0.03em; font-weight: 600;
+      color: var(--ink); margin: 0 0 18px; max-width: 18ch;
     }
     .hero h1 em { font-style: italic; font-weight: 500; color: var(--ink-muted); }
     .hero__sub {
-      font-size: clamp(1.02rem, 1.5vw, 1.2rem);
-      color: var(--ink-muted); max-width: 46ch; margin: 0 auto; line-height: 1.55;
+      font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+      color: var(--ink-muted); max-width: 46ch; margin: 0 0 28px; line-height: 1.55;
     }
+    .hero__sub em { font-style: normal; font-weight: 600; color: var(--ink); }
 
-    /* ----------------------------- Project meta strip */
-    .meta {
-      background: var(--paper-deep);
-      border-bottom: 1px solid var(--line);
-    }
-    .meta__grid {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 26px var(--pad-x);
+    /* Meta strip — translucent glass card, hairline border, backdrop-blur */
+    .hero__meta {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 22px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px 18px;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(31, 29, 26, 0.06);
     }
-    .meta__item { display: flex; flex-direction: column; gap: 5px; }
+    .meta__item { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
     .meta__label {
       font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--ink-soft); font-weight: 600;
     }
-    .meta__value { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.45; }
-    @media (max-width: 760px) {
-      .meta__grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .meta__value { font-size: 13.5px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+
+    /* Mobile (<900px): stack, image on top, text below */
+    @media (max-width: 900px) {
+      .hero__inner { grid-template-columns: 1fr; gap: 28px; }
+      .hero h1 { max-width: 22ch; }
+    }
+    @media (max-width: 520px) {
+      .hero__meta { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ----------------------------- Case sections */
@@ -362,30 +362,27 @@
     <a class="backlink" href="landing.html#work">Back to work</a>
   </div>
 
-  <!-- Hero -->
+  <!-- Hero — two-column composite cover -->
   <section class="hero">
-    <img class="cloud cloud--1" src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png" alt="" aria-hidden="true" />
-    <img class="cloud cloud--2" src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png" alt="" aria-hidden="true" />
-    <img class="cloud cloud--3" src="https://www.craft.do/_image/width=1920,quality=85,format=auto/_next/static/media/cloud.33739c9c.png" alt="" aria-hidden="true" />
-
-    <div class="container hero__inner">
-      <p class="eyebrow">Case Study · Fintech · 2022</p>
-      <h1>Making color mean something in a retail super-app.</h1>
-      <p class="hero__sub">
-        How I rebuilt Zadinga's visual foundation — a theme and design system for
-        India's Kirana shop owners — by taking the brand color <em>away</em> from most of the UI.
-      </p>
-    </div>
-  </section>
-
-  <!-- Project meta strip -->
-  <section class="meta">
-    <div class="meta__grid">
-      <div class="meta__item"><span class="meta__label">Product</span><span class="meta__value">Zadinga — Kirana shop-management app</span></div>
-      <div class="meta__item"><span class="meta__label">Timeline</span><span class="meta__value">~1.5 months · late 2022</span></div>
-      <div class="meta__item"><span class="meta__label">My role</span><span class="meta__value">Design Guide — theme, design system, mentoring</span></div>
-      <div class="meta__item"><span class="meta__label">Team</span><span class="meta__value">Slim squad @ Thence (agency)</span></div>
-      <div class="meta__item"><span class="meta__label">Scope</span><span class="meta__value">Theme → design system → 5 core screens</span></div>
+    <div class="hero__inner">
+      <div class="hero__cover">
+        <img class="hero__cover-desktop" src="assets/zadinga-screens-angled.png" alt="A montage of Zadinga's redesigned app screens — order details, store setup, product entry, subscription plans, and profile." />
+      </div>
+      <div class="hero__text">
+        <p class="eyebrow">Case Study · Fintech · 2022</p>
+        <h1>Making color mean something in a retail super-app.</h1>
+        <p class="hero__sub">
+          I rebuilt Zadinga's visual foundation — a theme and design system for India's Kirana
+          shop owners — by taking the brand color away from most of the UI, and lifted app
+          reviews by <em>~35%</em>.
+        </p>
+        <div class="hero__meta">
+          <div class="meta__item"><span class="meta__label">Role</span><span class="meta__value">Design Guide</span></div>
+          <div class="meta__item"><span class="meta__label">Timeline</span><span class="meta__value">~1.5 months · 2022</span></div>
+          <div class="meta__item"><span class="meta__label">Tools</span><span class="meta__value">Figma</span></div>
+          <div class="meta__item"><span class="meta__label">Team</span><span class="meta__value">Slim squad @ Thence</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -464,10 +461,6 @@
         became unmistakable and screens read calmer — but the deliverable that outlasts the metric was the
         <strong>theme and design system</strong>, handed off so the team could extend it without me.
       </p>
-      <figure class="figure figure--wide">
-        <img src="assets/zadinga-screens-angled.png" alt="A perspective montage of Zadinga's redesigned app screens across the store owner's daily flow." loading="lazy" />
-        <figcaption>The system in the wild — across the store owner's daily loop.</figcaption>
-      </figure>
     </div>
   </section>
 
