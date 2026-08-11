@@ -303,6 +303,27 @@
     .btn::after { content: '→'; transition: transform 0.2s ease; }
     .btn:hover::after { transform: translateX(3px); }
 
+    /* ----------------------------- Figures (case-study imagery) */
+    .figure { margin: 30px 0 6px; }
+    .figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 60px rgba(31, 29, 26, 0.07);
+      background: var(--card-bg);
+    }
+    .figure figcaption {
+      margin-top: 12px;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+    /* Full-bleed-ish figure that breaks past the reading column for wide grids */
+    .figure--wide { margin-left: calc((var(--read-w) - min(940px, 92vw)) / 2); width: min(940px, 92vw); }
+    @media (max-width: 780px) { .figure--wide { margin-left: 0; width: 100%; } }
+
     /* ----------------------------- Footer */
     footer { border-top: 1px solid var(--line); padding: 36px var(--pad-x) 48px; }
     .footer__inner {
@@ -382,6 +403,10 @@
         and mentor the juniors carrying it forward. I owned the visual direction, the system, and five foundational
         screens — and built the client deck that justified the direction.
       </p>
+      <figure class="figure">
+        <img src="assets/zadinga-hero.png" alt="Zadinga — an e-commerce platform for small Indian businesses to set up an online store, billing and stock management, shown on two phones." loading="lazy" />
+        <figcaption>Zadinga — set up an online store, billing, and stock management from a phone.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -406,6 +431,10 @@
         <p>"If every button is green, green stops meaning anything. Reserve the brand color for identity and key moments, and use a neutral for routine actions — so hierarchy and the brand both stay strong."</p>
         <p>— the argument I built into the client deck. It won over a client strict about protecting the green.</p>
       </div>
+      <figure class="figure figure--wide">
+        <img src="assets/zadinga-elements.png" alt="Zadinga's refreshed visual elements: dark-grey primary CTAs, reserved-green accents, redesigned input fields and subscription cards." loading="lazy" />
+        <figcaption>The decision, made visible: dark-grey primary actions (Add Product, Accept Order), green reserved for accents — plus reworked input fields, CTAs, and subscription cards.</figcaption>
+      </figure>
       <a class="reflink" href="https://www.figma.com/design/7bYx9tVT9CV2homnShY71i/UI-Dev-File---For-claude?node-id=7020-20941" target="_blank" rel="noopener">See the pre-redesign UI in Figma</a>
     </div>
   </section>
@@ -421,6 +450,10 @@
         actions, a <strong>spacing grid</strong> to kill the clutter, and duplicate components collapsed into a single
         documented set.
       </p>
+      <figure class="figure figure--wide">
+        <img src="assets/zadinga-screens-grid.png" alt="A grid of redesigned Zadinga screens: order details, store setup, add product, subscription plans, and profile." loading="lazy" />
+        <figcaption>The redesigned screens — consistent hierarchy, breathing room, and one documented component set.</figcaption>
+      </figure>
       <div class="stats">
         <div class="stat"><div class="stat__num">~35%</div><div class="stat__label">more app reviews after the redesign (reported by the product owner)</div></div>
         <div class="stat"><div class="stat__num">5</div><div class="stat__label">screens covering 70–80% of the app's components</div></div>
@@ -431,6 +464,10 @@
         became unmistakable and screens read calmer — but the deliverable that outlasts the metric was the
         <strong>theme and design system</strong>, handed off so the team could extend it without me.
       </p>
+      <figure class="figure figure--wide">
+        <img src="assets/zadinga-screens-angled.png" alt="A perspective montage of Zadinga's redesigned app screens across the store owner's daily flow." loading="lazy" />
+        <figcaption>The system in the wild — across the store owner's daily loop.</figcaption>
+      </figure>
     </div>
   </section>
 
