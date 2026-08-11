@@ -274,35 +274,6 @@
     .stat__label { font-size: 0.86rem; color: var(--ink-muted); line-height: 1.4; }
     @media (max-width: 620px) { .stats { grid-template-columns: 1fr; } }
 
-    /* Figma reference link */
-    .reflink {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 6px; color: var(--accent); font-weight: 600; font-size: 0.96rem;
-    }
-    .reflink::after { content: '↗'; }
-
-    /* ----------------------------- Final CTA */
-    .cta {
-      position: relative; text-align: center;
-      padding: clamp(70px, 11vh, 120px) 0; overflow: hidden;
-      border-top: 1px solid var(--line);
-    }
-    .cta__inner { position: relative; z-index: 1; max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
-    .cta h2 {
-      font-size: clamp(1.7rem, 3.2vw, 2.5rem); letter-spacing: -0.03em;
-      line-height: 1.12; font-weight: 600; margin: 0 auto 14px; max-width: 20ch;
-    }
-    .cta p { color: var(--ink-muted); max-width: 44ch; margin: 0 auto 30px; font-size: 1.05rem; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 24px; background: var(--ink); color: var(--paper);
-      border-radius: 999px; font-weight: 600; font-size: 0.98rem;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-    .btn:hover { transform: translateY(-1px); background: #2a2723; }
-    .btn::after { content: '→'; transition: transform 0.2s ease; }
-    .btn:hover::after { transform: translateX(3px); }
-
     /* ----------------------------- Figures (case-study imagery) */
     .figure { margin: 30px 0 6px; }
     .figure img {
@@ -432,7 +403,6 @@
         <img src="assets/zadinga-elements.png" alt="Zadinga's refreshed visual elements: dark-grey primary CTAs, reserved-green accents, redesigned input fields and subscription cards." loading="lazy" />
         <figcaption>The decision, made visible: dark-grey primary actions (Add Product, Accept Order), green reserved for accents — plus reworked input fields, CTAs, and subscription cards.</figcaption>
       </figure>
-      <a class="reflink" href="https://www.figma.com/design/7bYx9tVT9CV2homnShY71i/UI-Dev-File---For-claude?node-id=7020-20941" target="_blank" rel="noopener">See the pre-redesign UI in Figma</a>
     </div>
   </section>
 
@@ -482,15 +452,6 @@
         it's the <em>argument</em>. My biggest contribution wasn't the dark-grey button; it was defending it with a
         principle clear enough that a brand-protective client, whom I never spoke to directly, still said yes.
       </p>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <div class="cta__inner">
-      <h2>Got something quietly broken? Let's fix it together.</h2>
-      <p>I take on a small number of consulting engagements when the problem is interesting and the team is honest about the constraints.</p>
-      <a class="btn" href="mailto:workwithjerry@gmail.com">Get in touch</a>
     </div>
   </section>
 
