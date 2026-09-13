@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Takreem: designing a UAE app for tipping frontline staff directly, across customer, staff, and business-owner modules. A case study by Jerry Jose." />
+  <title>Takreem · Case Study · Jerry Jose</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===========================================================
+       Takreem case study, reuses the folio design system
+       (warm paper, Source Serif 4 display + Inter body).
+       Takreem's coin-gold is the single reserved accent, a nod
+       to a product built around tipping and recognition.
+       =========================================================== */
+
+    :root {
+      --paper:        #faf8f4;
+      --paper-deep:   #f5efe3;
+      --ink:          #1f1d1a;
+      --ink-muted:    #5b574f;
+      --ink-soft:     #8a857a;
+      --line:         rgba(31, 29, 26, 0.10);
+      --line-strong:  rgba(31, 29, 26, 0.18);
+      --brand-gold:   #a9791b;         /* Takreem's reserved coin-gold */
+      --brand-gold-soft: rgba(169, 121, 27, 0.10);
+      --card-bg:      rgba(255, 255, 255, 0.55);
+      --max-w:        1180px;
+      --read-w:       720px;
+      --pad-x:        clamp(20px, 5vw, 60px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background-color: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    .hero h1,
+    .case__head h2,
+    .cta h2 {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+    .hero h1 em,
+    .cta h2 em { font-style: italic; font-weight: 400; }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    /* ----------------------------- Top announce bar */
+    .announce {
+      width: 100%;
+      background: rgba(31, 29, 26, 0.92);
+      color: #f6f2e8;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px var(--pad-x);
+      letter-spacing: 0.01em;
+    }
+    .announce a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: #f6f2e8;
+    }
+
+    /* ----------------------------- Site nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(241, 235, 224, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .nav__brand { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+    .nav__brand span { color: var(--ink-soft); font-weight: 500; }
+    .nav__links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-muted); }
+    .nav__links a:hover { color: var(--ink); }
+    .nav__links a.active { color: var(--ink); font-weight: 600; }
+
+    /* ----------------------------- Back link */
+    .backbar { max-width: var(--max-w); margin: 0 auto; padding: 22px var(--pad-x) 0; }
+    .backlink {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; color: var(--ink-muted);
+    }
+    .backlink::before { content: '←'; transition: transform 0.2s ease; }
+    .backlink:hover { color: var(--ink); }
+    .backlink:hover::before { transform: translateX(-3px); }
+
+    /* ----------------------------- Hero: two-column composite cover */
+    .hero {
+      position: relative;
+      /* Sampled from the app: warm coin-gold + cream */
+      background: linear-gradient(125deg, #fbf1d6 0%, #ffffff 55%, #f4e3ba 100%);
+      border-bottom: 1px solid var(--line);
+      padding: clamp(40px, 7vh, 84px) 0 clamp(44px, 8vh, 92px);
+    }
+    .hero__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: center;
+      gap: clamp(28px, 5vw, 60px);
+    }
+
+    .hero__cover { position: relative; width: 100%; }
+    .hero__cover-desktop { width: 100%; height: auto; display: block; }
+
+    .hero__text { min-width: 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 18px;
+    }
+    .eyebrow::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--brand-gold);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 3.8vw, 3.3rem);
+      line-height: 1.07; letter-spacing: -0.03em; font-weight: 600;
+      color: var(--ink); margin: 0 0 18px; max-width: 16ch;
+    }
+    .hero h1 em { font-style: italic; font-weight: 500; color: var(--ink-muted); }
+    .hero__sub {
+      font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+      color: var(--ink-muted); max-width: 48ch; margin: 0 0 28px; line-height: 1.55;
+    }
+    .hero__sub em { font-style: normal; font-weight: 600; color: var(--ink); }
+
+    .hero__meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px 18px;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(31, 29, 26, 0.06);
+    }
+    .meta__item { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+    .meta__label {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-soft); font-weight: 600;
+    }
+    .meta__value { font-size: 13.5px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+
+    @media (max-width: 900px) {
+      .hero__inner { grid-template-columns: 1fr; gap: 28px; }
+      .hero h1 { max-width: 22ch; }
+    }
+    @media (max-width: 520px) {
+      .hero__meta { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ----------------------------- Case sections */
+    .case { padding: clamp(52px, 8vh, 84px) 0; }
+    .case--divider { border-top: 1px solid var(--line); }
+    .case--alt { background: var(--paper-deep); }
+    .case__inner { max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
+
+    .case__head { margin: 0 0 26px; }
+    .case__num {
+      display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--brand-gold); margin-bottom: 12px;
+    }
+    .case__head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      letter-spacing: -0.025em; line-height: 1.12; font-weight: 600; margin: 0;
+    }
+
+    .case p { color: var(--ink-muted); font-size: 1.06rem; margin: 0 0 18px; }
+    .case p strong, .case li strong { color: var(--ink); font-weight: 600; }
+    .case ul { margin: 0 0 18px; padding-left: 0; list-style: none; }
+    .case li {
+      position: relative; padding-left: 26px; margin-bottom: 12px;
+      color: var(--ink-muted); font-size: 1.06rem;
+    }
+    .case li::before {
+      content: ''; position: absolute; left: 4px; top: 11px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--brand-gold); opacity: 0.6;
+    }
+
+    .case__lead { font-size: 1.14rem; color: var(--ink); }
+
+    /* Friction cards */
+    .frictions { display: grid; gap: 14px; margin: 24px 0 6px; }
+    .friction {
+      display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start;
+      padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--card-bg);
+    }
+    .friction__num {
+      font-family: 'Source Serif 4', Georgia, serif; font-weight: 600;
+      font-size: 1.05rem; color: var(--brand-gold); line-height: 1.5;
+    }
+    .friction p { margin: 4px 0 0; font-size: 0.99rem; }
+    .friction strong { display: block; margin-bottom: 2px; }
+
+    /* Pull-quote / key decision callout */
+    .callout {
+      margin: 26px 0; padding: 22px 26px;
+      background: var(--brand-gold-soft);
+      border-left: 3px solid var(--brand-gold);
+      border-radius: 0 12px 12px 0;
+    }
+    .callout p { margin: 0; color: var(--ink); font-size: 1.08rem; font-style: italic; }
+    .callout p:not(:last-child) { margin-bottom: 10px; }
+
+    /* Honesty / aside note */
+    .note {
+      margin: 24px 0; padding: 16px 20px;
+      border: 1px dashed var(--line-strong); border-radius: 12px;
+      background: rgba(255,255,255,0.35);
+      font-size: 0.98rem; color: var(--ink-muted);
+    }
+    .note strong { color: var(--ink); }
+
+    /* Impact stat band */
+    .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin: 8px 0 24px;
+    }
+    .stat {
+      padding: 22px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--card-bg); text-align: center;
+    }
+    .stat__num {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600;
+      color: var(--brand-gold); line-height: 1; margin-bottom: 8px;
+    }
+    .stat__label { font-size: 0.86rem; color: var(--ink-muted); line-height: 1.4; }
+    @media (max-width: 620px) { .stats { grid-template-columns: 1fr; } }
+
+    /* ----------------------------- Figures */
+    .figure { margin: 30px 0 6px; }
+    .figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 60px rgba(31, 29, 26, 0.07);
+      background: var(--card-bg);
+    }
+    .figure figcaption {
+      margin-top: 12px;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+    .figure--wide { margin-left: calc((var(--read-w) - min(940px, 92vw)) / 2); width: min(940px, 92vw); }
+    @media (max-width: 780px) { .figure--wide { margin-left: 0; width: 100%; } }
+
+    /* Bare figure for transparent phone composites (shadows baked into PNG) */
+    .figure--phone { text-align: center; }
+    .figure--phone img {
+      border: none; box-shadow: none; background: transparent; border-radius: 0;
+      width: auto; max-width: 100%; max-height: 640px; margin: 0 auto;
+    }
+
+    /* ----------------------------- Footer */
+    footer { border-top: 1px solid var(--line); padding: 36px var(--pad-x) 48px; }
+    .footer__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-muted);
+    }
+    .footer__inner a:hover { color: var(--ink); }
+    .footer__links { display: flex; gap: 22px; }
+
+    @media (max-width: 600px) {
+      .nav__links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top announce bar -->
+  <div class="announce">
+    Currently simplifying design @ FYERS · <a href="mailto:workwithjerry@gmail.com">Say hello</a>
+  </div>
+
+  <!-- Sticky nav -->
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="nav__brand">Jerry Jose <span>· Folio</span></div>
+      <nav class="nav__links">
+        <a href="landing.html#work" class="active">Work</a>
+        <a href="landing.html#tools">Tools</a>
+        <a href="landing.html#contact">Contact</a>
+        <a href="cover.html">Cover</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="backbar">
+    <a class="backlink" href="landing.html#work">Back to work</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__cover">
+        <img class="hero__cover-desktop" src="assets/Takreem_6.jpg" alt="The Takreem wordmark beside the tip entry screen (with its 'You are Tipping · Skip & Review instead' toggle) and the map-based discovery home." />
+      </div>
+      <div class="hero__text">
+        <p class="eyebrow">Case Study · Consumer App · UAE</p>
+        <h1>Getting the tip to the person who <em>earned</em> it.</h1>
+        <p class="hero__sub">
+          Takreem is a UAE app for tipping frontline staff <em>directly</em>, wrapped in map-based
+          discovery and loyalty. As the sole designer, I turned a founder's kitchen-sink spec into one
+          coherent product across three sides: <em>customer, staff, and business owner</em>.
+        </p>
+        <div class="hero__meta">
+          <div class="meta__item"><span class="meta__label">Role</span><span class="meta__value">Sole designer · IA, flows, UI</span></div>
+          <div class="meta__item"><span class="meta__label">Timeline</span><span class="meta__value">~2–3 months</span></div>
+          <div class="meta__item"><span class="meta__label">Tools</span><span class="meta__value">Figma</span></div>
+          <div class="meta__item"><span class="meta__label">Team</span><span class="meta__value">Solo · freelance</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01. Overview -->
+  <section class="case">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">01 · Overview</span><h2>A tip that reaches a person, not a bill</h2></div>
+      <p class="case__lead">
+        Takreem began as one founder's conviction: a tip should reach the employee who actually served
+        you, not disappear into the bill, and people should be able to find good local spots the way
+        they'd browse a map. No cash, no awkward card machine: scan a QR at the table, tip the person by
+        name, and optionally leave a review.
+      </p>
+      <p>
+        I joined as an independent designer and owned the product end-to-end on the design side:
+        <strong>information architecture, every user flow, and the full visual design</strong>, across
+        three modules: the <strong>customer</strong> who tips, the <strong>staff</strong> who receive, and
+        the <strong>business owner</strong> who manages it. I delivered the whole thing as
+        <strong>static, screen-to-screen flow maps</strong> (arrows, not a clickable prototype) that an
+        external dev team built. The shipped app looks as designed. I also designed the
+        <strong>coin</strong>, the smiley mark that became the product's signature.
+      </p>
+      <figure class="figure figure--wide">
+        <img src="assets/Takreem_2.jpg" alt="Project highlights: easy business discovery with reviews, a simple tipping flow, a staff dashboard, and an employer dashboard, beside the map-based discovery view." loading="lazy" />
+        <figcaption>The product at a glance: discovery, tipping, and the staff- and employer-side dashboards that make it a three-sided system.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02. Problem -->
+  <section class="case case--divider case--alt">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">02 · Problem</span><h2>A wishlist, not a problem statement</h2></div>
+      <p>
+        The founder didn't hand me a problem to solve. He handed me a <strong>fully pre-specified
+        spreadsheet</strong>. Every field, tab, and feature already decided: signup, login, reset, a
+        landing feed, map discovery with a Snapchat-style heatmap of tipping activity, boosted listings,
+        badges, a history tab, an AI chatbot. The works. It was a <strong>kitchen sink</strong>, and
+        everything in it was labelled must-have.
+      </p>
+      <p>
+        Two things made this hard to <em>design</em>, not just draw, and both are why the spec couldn't
+        just be executed as written:
+      </p>
+      <div class="frictions">
+        <div class="friction">
+          <span class="friction__num">01</span>
+          <p><strong>Three users, one app.</strong> A ten-second walk-in tipper, a floor employee checking what they'd earned, and an owner watching several locations have opposite needs, so the IA had to hold all three without collapsing into a menu of everything.</p>
+        </div>
+        <div class="friction">
+          <span class="friction__num">02</span>
+          <p><strong>Everything marked "must-have."</strong> With no research to arbitrate, the spec front-loaded every feature at once. Priority had to be argued, not assumed.</p>
+        </div>
+        <div class="friction">
+          <span class="friction__num">03</span>
+          <p><strong>Money up front.</strong> The core action is a payment from a stranger in seconds. Any friction or doubt in that moment, and the tip simply doesn't happen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. Decision -->
+  <section class="case case--divider">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">03 · Decision</span><h2>Interrogating the spec, inside the client's own doc</h2></div>
+      <p>
+        I didn't push back in a separate deck. I answered inside the client's spreadsheet, in its own
+        <strong>"Doubts for clarifications"</strong> column, so every challenge sat right next to the
+        requirement it questioned. The clearest example was the <strong>History tab</strong>, speced as a
+        primary destination.
+      </p>
+      <div class="callout">
+        <p>"Why does History need to be a primary tab? As a customer, how often will I actually go back to look at my past tips and reviews?"</p>
+        <p>My note in the client's spec. They conceded it didn't have to be upfront. History moved to the third nav slot; the map and the tip took the front.</p>
+      </div>
+      <p>
+        That set the pattern for the whole product: <strong>lead with the act of recognition, demote the
+        record of it.</strong> The most-loaded decision was the tip screen itself, which I made
+        <strong>tip-first, review-as-fallback</strong>: a single toggle: <em>You are Tipping · Skip &amp;
+        Review instead.</em> The product's promise is money reaching a person, so the money stays the
+        headline; a review is the graceful path for someone who won't pay. The tradeoff is real: I chose
+        to lead with the higher-friction ask, but leading with the free review would have quietly turned a
+        tipping app into a reviews app.
+      </p>
+      <figure class="figure figure--wide">
+        <img src="assets/Takreem_3.jpg" alt="The green 'Tipping Successful' screen showing the amount paid to a named staff member and loyalty points earned, alongside staff earnings and the reviews feed." loading="lazy" />
+        <figcaption>The payoff of leading with the tip: money reaching a named person, loyalty points earned, and the recognition landing against that staff member.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 04. The system -->
+  <section class="case case--divider case--alt">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">04 · The system</span><h2>Three modules, one continuous loop</h2></div>
+      <p>
+        Underneath the feature list is a single loop, and mapping it is what made three modules feel like
+        one product: the <strong>customer</strong> gives recognition (a tip, a review, or both) → the
+        <strong>staff</strong> member receives it by name, with earnings and badges → the
+        <strong>business owner</strong> manages locations and staff, and showcases the ratings that pull the
+        next customer in. Every screen had to know which side of that loop it served.
+      </p>
+      <ul>
+        <li><strong>Customer</strong>: scan-to-tip, map discovery, business profiles, loyalty, and a deliberately-secondary history.</li>
+        <li><strong>Staff</strong>: split into first-time vs. returning: claim your profile, see tips and reviews land against your name, track earnings and recognition.</li>
+        <li><strong>Business owner</strong>: onboarding and verification, adding locations, managing staff, and the public rating showcase.</li>
+      </ul>
+      <p>
+        For discovery, I kept the founder's "heatmap" idea but refused to let it run the map. It became an
+        <strong>opt-in chip</strong>, a layer you switch on, so the default map stays a legible set of
+        rated places, and the heat is there for anyone who wants to see where activity is concentrated.
+        Kept the vision; contained the chaos.
+      </p>
+      <p>
+        Loyalty solved a quieter problem: reviewing is <em>altruistic</em>: it helps strangers, not you.
+        So the payoff moment (<em>"+2 loyalty points added · add a review to earn more"</em>) gives the
+        customer a selfish reason to close the loop, right when they're already feeling generous.
+      </p>
+      <figure class="figure figure--wide">
+        <img src="assets/Takreem_4.jpg" alt="Loyalty screens: refer-to-earn and keep-reviewing cards, a star-rating review, redeemable points, and a ticket." loading="lazy" />
+        <figcaption>Loyalty as the reason to close the loop: points earned for reviewing, redeemable against a real transaction.</figcaption>
+      </figure>
+      <figure class="figure figure--wide">
+        <img src="assets/Takreem_5.jpg" alt="The Trending home with boosted listings, the redeem-points screen, and the tip-withdrawal flow with its early-withdrawal fee." loading="lazy" />
+        <figcaption>The customer home (with boosted listings) and the staff-side tip withdrawal, where early withdrawal carries a transparent fee.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 05. Outcome -->
+  <section class="case case--divider">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">05 · Outcome</span><h2>Shipped as designed, and what I won't claim</h2></div>
+      <p>
+        In roughly <strong>two to three months, solo</strong>, Takreem went from a spreadsheet to a
+        dev-ready design for a full three-sided product, and it <strong>shipped, and it's live</strong>.
+        It was built by an external team working only from my <strong>static flow maps</strong>, and the
+        app matches the design. Getting a hand-off that faithful without an interactive prototype is a
+        craft win I'm genuinely proud of.
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">3</div><div class="stat__label">user modules (customer, staff, business owner) designed as one system</div></div>
+        <div class="stat"><div class="stat__num">~2–3<span style="font-size:1.2rem;"> mo</span></div><div class="stat__label">solo, from kitchen-sink spec to dev-ready flows</div></div>
+        <div class="stat"><div class="stat__num">Live</div><div class="stat__label">shipped by an external dev team, faithful to the design</div></div>
+      </div>
+      <div class="note">
+        What I <strong>won't</strong> claim: I have no access to performance data, so there are no adoption
+        or engagement numbers here. The "<strong>2.5× reviews / 20% referrals</strong>" on takreem.ae today
+        belong to a <strong>later, B2B reputation version</strong> of the product, redesigned by another
+        agency after my involvement, not to my work. The consumer tipping app in this case study is where
+        Takreem started.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer__inner">
+      <div>© 2026 Jerry Jose · made in Bengaluru</div>
+      <div class="footer__links">
+        <a href="landing.html">Folio</a>
+        <a href="cover.html">Cover page</a>
+        <a href="mailto:workwithjerry@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
