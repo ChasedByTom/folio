@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Motor Insurance App, a one-month UI concept exploration for a vehicle super-app. A study by Jerry Jose." />
+  <title>Motor Insurance App, UI Exploration · Jerry Jose</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --paper:        #faf8f4;
+      --paper-deep:   #f5efe3;
+      --ink:          #1f1d1a;
+      --ink-muted:    #5b574f;
+      --ink-soft:     #8a857a;
+      --line:         rgba(31, 29, 26, 0.10);
+      --line-strong:  rgba(31, 29, 26, 0.18);
+      --brand:        #3d55e0;          /* reserved accent, sampled from the concept CTAs */
+      --brand-soft:   rgba(61, 85, 224, 0.10);
+      --card-bg:      rgba(255, 255, 255, 0.55);
+      --max-w:        1180px;
+      --read-w:       720px;
+      --pad-x:        clamp(20px, 5vw, 60px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background-color: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    .hero h1,
+    .case__head h2,
+    .cta h2 {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+    .hero h1 em,
+    .cta h2 em { font-style: italic; font-weight: 400; }
+
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; max-width: 100%; height: auto; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    /* Announce bar */
+    .announce {
+      width: 100%;
+      background: rgba(31, 29, 26, 0.92);
+      color: #f6f2e8;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px var(--pad-x);
+      letter-spacing: 0.01em;
+    }
+    .announce a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: #f6f2e8;
+    }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(241, 235, 224, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; padding: 16px var(--pad-x);
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .nav__brand { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+    .nav__brand span { color: var(--ink-soft); font-weight: 500; }
+    .nav__links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-muted); }
+    .nav__links a:hover { color: var(--ink); }
+    .nav__links a.active { color: var(--ink); font-weight: 600; }
+
+    /* Back link */
+    .backbar { max-width: var(--max-w); margin: 0 auto; padding: 22px var(--pad-x) 0; }
+    .backlink {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; color: var(--ink-muted);
+    }
+    .backlink::before { content: '←'; transition: transform 0.2s ease; }
+    .backlink:hover { color: var(--ink); }
+    .backlink:hover::before { transform: translateX(-3px); }
+
+    /* Hero — dark, sampled from the cover image */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #12222c 0%, #1e3a4a 55%, #0f2530 100%);
+      color: #eef4f7;
+      border-bottom: 1px solid var(--line);
+      padding: clamp(40px, 7vh, 84px) 0 clamp(44px, 8vh, 92px);
+    }
+    .hero__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x);
+      display: grid; grid-template-columns: 1.05fr 0.95fr;
+      align-items: center; gap: clamp(28px, 5vw, 60px);
+    }
+    .hero__cover { position: relative; width: 100%; }
+    .hero__cover-desktop {
+      width: 78%; height: auto; display: block;
+      margin: 0 auto;
+      border-radius: 22px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+    .hero__text { min-width: 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #cfd8dd; margin-bottom: 18px;
+    }
+    .eyebrow::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--brand);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 3.8vw, 3.3rem);
+      line-height: 1.07; letter-spacing: -0.03em; font-weight: 600;
+      color: #f6faff; margin: 0 0 18px; max-width: 20ch;
+    }
+    .hero h1 em { font-style: italic; font-weight: 500; color: #a7b6bf; }
+    .hero__sub {
+      font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+      color: #c3cfd5; max-width: 46ch; margin: 0 0 28px; line-height: 1.55;
+    }
+    .hero__sub em { font-style: normal; font-weight: 600; color: #eef4f7; }
+
+    .hero__meta {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px 18px; padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .meta__item { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+    .meta__label {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #94a4ac; font-weight: 600;
+    }
+    .meta__value { font-size: 13.5px; font-weight: 500; color: #eef4f7; line-height: 1.4; }
+
+    @media (max-width: 900px) {
+      .hero__inner { grid-template-columns: 1fr; gap: 28px; }
+      .hero h1 { max-width: 22ch; }
+    }
+    @media (max-width: 520px) {
+      .hero__meta { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Case sections */
+    .case { padding: clamp(52px, 8vh, 84px) 0; }
+    .case--divider { border-top: 1px solid var(--line); }
+    .case--alt { background: var(--paper-deep); }
+    .case__inner { max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
+
+    .case__head { margin: 0 0 26px; }
+    .case__num {
+      display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--brand); margin-bottom: 12px;
+    }
+    .case__head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      letter-spacing: -0.025em; line-height: 1.12; font-weight: 600; margin: 0;
+    }
+
+    .case p { color: var(--ink-muted); font-size: 1.06rem; margin: 0 0 18px; }
+    .case p strong { color: var(--ink); font-weight: 600; }
+    .case__lead { font-size: 1.14rem; color: var(--ink); }
+
+    /* Honest framing note */
+    .note {
+      margin: 24px 0 0; padding: 16px 20px;
+      border: 1px dashed var(--line-strong); border-radius: 12px;
+      background: rgba(255,255,255,0.35);
+      font-size: 0.98rem; color: var(--ink-muted);
+    }
+    .note strong { color: var(--ink); }
+
+    /* Explorations gallery — wider than the reading measure */
+    .explore { padding: clamp(52px, 8vh, 84px) 0; border-top: 1px solid var(--line); }
+    .explore__inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .explore__head { max-width: var(--read-w); margin: 0 auto 32px; padding: 0 var(--pad-x); }
+    .explore__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .concept--feature { grid-column: 1 / -1; }
+    .concept--feature .concept__frame { aspect-ratio: 16 / 10; }
+    .concept--feature .concept__title { font-size: 1.2rem; }
+    @media (max-width: 620px) {
+      .explore__grid { grid-template-columns: 1fr; }
+      .concept--feature .concept__frame { aspect-ratio: 9 / 16; }
+    }
+
+    .concept {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .concept__frame {
+      background: var(--paper-deep);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+    }
+    .concept__frame img, .concept__frame video {
+      max-height: 100%; width: auto; max-width: 100%;
+      border-radius: 10px;
+    }
+    .concept__label {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--brand);
+    }
+    .concept__title { font-size: 1rem; font-weight: 600; color: var(--ink); margin: 0; }
+    .concept__desc { font-size: 0.92rem; color: var(--ink-muted); margin: 0; line-height: 1.5; }
+
+    /* CTA */
+    .cta { border-top: 1px solid var(--line); padding: clamp(52px, 8vh, 84px) var(--pad-x); text-align: center; }
+    .cta h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 12px; }
+    .cta p { color: var(--ink-muted); margin: 0 0 22px; }
+    .cta a.pill {
+      display: inline-block;
+      background: var(--ink); color: var(--paper);
+      padding: 12px 22px; border-radius: 999px;
+      font-size: 14px; font-weight: 600;
+    }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--line); padding: 36px var(--pad-x) 48px; }
+    .footer__inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-muted);
+    }
+    .footer__inner a:hover { color: var(--ink); }
+    .footer__links { display: flex; gap: 22px; }
+
+    @media (max-width: 600px) { .nav__links { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="announce">
+    Currently simplifying design @ FYERS · <a href="mailto:workwithjerry@gmail.com">Say hello</a>
+  </div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="nav__brand">Jerry Jose <span>· Folio</span></div>
+      <nav class="nav__links">
+        <a href="landing.html#work" class="active">Work</a>
+        <a href="landing.html#tools">Tools</a>
+        <a href="landing.html#contact">Contact</a>
+        <a href="cover.html">Cover</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="backbar">
+    <a class="backlink" href="landing.html#work">Back to work</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__cover">
+        <video class="hero__cover-desktop" src="assets/motor/video-a_1_1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="hero__text">
+        <p class="eyebrow">UI Exploration · Fintech · 2023</p>
+        <h1>A vehicle super-app, landed on a <em>cinematic garage</em>.</h1>
+        <p class="hero__sub">
+          A two-week UI exercise for a motor-insurance app that wanted to be a one-stop
+          shop, insurance, challans, PUC, documents, garages. I explored a few visual
+          directions and landed on the <em>immersive 3D</em> route as the one worth taking
+          forward.
+        </p>
+        <div class="hero__meta">
+          <div class="meta__item"><span class="meta__label">Role</span><span class="meta__value">Conceptualisation</span></div>
+          <div class="meta__item"><span class="meta__label">Timeline</span><span class="meta__value">~2 weeks · 2024</span></div>
+          <div class="meta__item"><span class="meta__label">Tools</span><span class="meta__value">Figma · Blender · After Effects</span></div>
+          <div class="meta__item"><span class="meta__label">Scope</span><span class="meta__value">Pure UI exercise</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="case">
+    <div class="case__inner">
+      <div class="case__head"><span class="case__num">01, Overview</span><h2>A pure UI exercise</h2></div>
+      <p class="case__lead">
+        The brief was to imagine a seamless mobile experience for a motor-insurance app that
+        also handled challans, PUC certificates, document storage, and a vehicle vault, all in
+        one place.
+      </p>
+      <p>
+        I used two weeks to explore a handful of visual languages for the home screen and land
+        on one worth taking forward. The <strong>immersive 3D direction</strong>, above, is where I
+        settled: your vehicle takes the stage, the utility stacks below. The rest sit here as
+        the range that got me there.
+      </p>
+      <div class="note">
+        <strong>Honest framing:</strong> this was purely a UI exercise, no user research, no shipped
+        product, no live metrics. The value was in the range explored and the direction it produced.
+      </div>
+    </div>
+  </section>
+
+  <!-- Explorations -->
+  <section class="explore">
+    <div class="explore__head">
+      <span class="case__num">02, Explorations</span>
+      <h2 style="font-family:'Source Serif 4',Georgia,serif; font-weight:600; margin:0; font-size:clamp(1.6rem,3vw,2.3rem); letter-spacing:-0.025em;">Three directions, one feature set</h2>
+    </div>
+    <div class="explore__inner">
+      <div class="explore__grid">
+
+        <!-- Concept 3 — features the row -->
+        <div class="concept concept--feature">
+          <div class="concept__frame">
+            <video src="assets/motor/Screen_Recording_2024-03-10_at_1.18.18_AM.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <span class="concept__label">Concept 03 · Motion prototype</span>
+          <p class="concept__title">The closest sibling to the final direction.</p>
+          <p class="concept__desc">
+            A motion pass that treats the vehicle as the stage and lets the rest of the app
+            reveal beneath it. This is the study that convinced me the immersive route in the
+            hero was the one worth taking forward, everything below sits alongside it as the
+            range that got me there.
+          </p>
+        </div>
+
+        <!-- Concept 02B — Illustrative (both variants clubbed) -->
+        <div class="concept">
+          <div class="concept__frame">
+            <img src="assets/motor/Android_Large_-_430.png" alt="Concept 2B, illustrative layout with a stylised bike on a light backdrop and a soft-white content sheet below." loading="lazy" />
+          </div>
+          <span class="concept__label">Concept 02B · Illustrative</span>
+          <p class="concept__title">Illustration on top, sheet below.</p>
+          <p class="concept__desc">
+            Splits the screen into a light illustrative header and a soft-white sheet holding
+            the modules. Warmer and friendlier than the immersive route, more personality than
+            the utility one. Explored across two layout variants that shared the same DNA.
+          </p>
+        </div>
+
+        <!-- Concept 02A — Utility, back seat -->
+        <div class="concept">
+          <div class="concept__frame">
+            <img src="assets/motor/Android_Large_-_434.png" alt="Concept 2A, white card-based utility layout with insurance status, renewal gauge, and cashless garages." loading="lazy" />
+          </div>
+          <span class="concept__label">Concept 02A · Utility</span>
+          <p class="concept__title">Cards, gauges, and cashless garages.</p>
+          <p class="concept__desc">
+            A familiar utility layout, renewal as a gauge, challans as a card, digilocker as
+            a stack. Scannable, closer to a banking-app mental model. Also tried in dark mode.
+            Kept as a control point; the immersive route said more.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer__inner">
+      <div>© 2026 Jerry Jose · made in Bengaluru</div>
+      <div class="footer__links">
+        <a href="landing.html">Folio</a>
+        <a href="cover.html">Cover page</a>
+        <a href="mailto:workwithjerry@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
