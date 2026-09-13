@@ -218,7 +218,7 @@
       // Returns [0,1] with soft atmospheric edges. Identical shape, always.
       function density(px, py, cx, cy) {
         const lx = px - cx, ly = py - cy;
-        // Bbox reject — keeps the per-frame cost low; most grid points are outside.
+        // Bbox reject, keeps the per-frame cost low; most grid points are outside.
         if (lx < -CLOUD_HALF_W || lx > CLOUD_HALF_W) return 0;
         if (ly < -CLOUD_TOP    || ly > CLOUD_BOT)    return 0;
         let f = 0;

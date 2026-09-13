@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Zadinga — rebuilding the visual foundation of a retail super-app. A case study by Jerry Jose." />
-  <title>Zadinga — Case Study · Jerry Jose</title>
+  <meta name="description" content="Zadinga, rebuilding the visual foundation of a retail super-app. A case study by Jerry Jose." />
+  <title>Zadinga, Case Study · Jerry Jose</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,9 +15,9 @@
 
   <style>
     /* ===========================================================
-       Zadinga case study — reuses the index.html design system
+       Zadinga case study, reuses the index.html design system
        (warm paper, sky hero, Source Serif 4 display + Inter body).
-       Zadinga's own brand green appears only as a reserved accent —
+       Zadinga's own brand green appears only as a reserved accent ,
        a small nod to the case study's core decision.
        =========================================================== */
 
@@ -126,7 +126,7 @@
     .backlink:hover { color: var(--ink); }
     .backlink:hover::before { transform: translateX(-3px); }
 
-    /* ----------------------------- Hero — two-column composite cover
+    /* ----------------------------- Hero, two-column composite cover
        Reusable pattern: left = image composite; right = eyebrow/title/subtitle/meta.
        Full-bleed background is a gradient sampled from the base image so the
        composite blends into the page. Zadinga base is light → ink text, glass meta. */
@@ -147,7 +147,7 @@
       gap: clamp(28px, 5vw, 60px);
     }
 
-    /* Left: the images ARE the composition — no card chrome */
+    /* Left: the images ARE the composition, no card chrome */
     .hero__cover { position: relative; width: 100%; }
     .hero__cover-desktop { width: 100%; height: auto; display: block; }
     .hero__cover-mobile {
@@ -155,7 +155,7 @@
       filter: drop-shadow(0 18px 34px rgba(31, 29, 26, 0.22));
     }
 
-    /* Right: text — ink on light bg */
+    /* Right: text, ink on light bg */
     .hero__text { min-width: 0; }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -177,7 +177,7 @@
     }
     .hero__sub em { font-style: normal; font-weight: 600; color: var(--ink); }
 
-    /* Meta strip — translucent glass card, hairline border, backdrop-blur */
+    /* Meta strip, translucent glass card, hairline border, backdrop-blur */
     .hero__meta {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -333,7 +333,7 @@
     <a class="backlink" href="landing.html#work">Back to work</a>
   </div>
 
-  <!-- Hero — two-column composite cover -->
+  <!-- Hero, two-column composite cover -->
   <section class="hero">
     <div class="hero__inner">
       <div class="hero__cover">
@@ -343,8 +343,8 @@
         <p class="eyebrow">Case Study · Fintech · 2022</p>
         <h1>Making color mean something in a retail super-app.</h1>
         <p class="hero__sub">
-          I rebuilt Zadinga's visual foundation — a theme and design system for India's Kirana
-          shop owners — by taking the brand color away from most of the UI, and lifted app
+          I rebuilt Zadinga's visual foundation, a theme and design system for India's Kirana
+          shop owners, by taking the brand color away from most of the UI, and lifted app
           reviews by <em>~35%</em>.
         </p>
         <div class="hero__meta">
@@ -360,20 +360,20 @@
   <!-- 1. Overview -->
   <section class="case">
     <div class="case__inner">
-      <div class="case__head"><span class="case__num">01 — Overview</span><h2>A retail app with super-app ambitions</h2></div>
+      <div class="case__head"><span class="case__num">01, Overview</span><h2>A retail app with super-app ambitions</h2></div>
       <p class="case__lead">
-        Zadinga is a mobile shop-management app for India's Kirana (neighborhood grocery) owners — they digitize
+        Zadinga is a mobile shop-management app for India's Kirana (neighborhood grocery) owners, they digitize
         their inventory and fulfill online and offline orders, accepting or rejecting each based on live stock.
       </p>
       <p>
-        I joined an in-flight project at <strong>Thence</strong> as <strong>Design Guide</strong> — the craft and
+        I joined an in-flight project at <strong>Thence</strong> as <strong>Design Guide</strong>, the craft and
         visual-system lead. My brief: set a new <strong>theme</strong>, codify it into a <strong>design system</strong>,
         and mentor the juniors carrying it forward. I owned the visual direction, the system, and five foundational
-        screens — and built the client deck that justified the direction.
+        screens, and built the client deck that justified the direction.
       </p>
       <figure class="figure">
-        <img src="assets/zadinga-hero.png" alt="Zadinga — an e-commerce platform for small Indian businesses to set up an online store, billing and stock management, shown on two phones." loading="lazy" />
-        <figcaption>Zadinga — set up an online store, billing, and stock management from a phone.</figcaption>
+        <img src="assets/zadinga-hero.png" alt="Zadinga, an e-commerce platform for small Indian businesses to set up an online store, billing and stock management, shown on two phones." loading="lazy" />
+        <figcaption>Zadinga, set up an online store, billing, and stock management from a phone.</figcaption>
       </figure>
     </div>
   </section>
@@ -381,27 +381,27 @@
   <!-- 2. Problem & Decision -->
   <section class="case case--divider case--alt">
     <div class="case__inner">
-      <div class="case__head"><span class="case__num">02 — Problem &amp; decision</span><h2>Color everywhere, meaning nowhere</h2></div>
+      <div class="case__head"><span class="case__num">02, Problem &amp; decision</span><h2>Color everywhere, meaning nowhere</h2></div>
       <p>
-        The app had color <strong>without a system</strong> — a dull grey and the brand green, reused everywhere. When
+        The app had color <strong>without a system</strong>, a dull grey and the brand green, reused everywhere. When
         every button is green, color stops signaling priority: hierarchy collapses, primary actions don't stand out,
         and duplicate components pile up. For a product with super-app ambitions, you can't scale an interface with no
         foundation beneath it.
       </p>
       <p>
         I audited the existing UI for inconsistencies and benchmarked <strong>Swiggy</strong> and <strong>Dunzo</strong>
-        for how mature apps use color with restraint. The insight: the problem wasn't a lack of color — it was a lack of
+        for how mature apps use color with restraint. The insight: the problem wasn't a lack of color, it was a lack of
         <strong>meaning</strong> assigned to it. So I made a counterintuitive call: <strong>reserve the brand green</strong>
         for identity and key moments, and drive routine primary actions with a <strong>neutral dark-grey gradient</strong>.
-        I kept the green so the rebrand still felt like Zadinga — I just stopped spending it on everything.
+        I kept the green so the rebrand still felt like Zadinga, I just stopped spending it on everything.
       </p>
       <div class="callout">
-        <p>"If every button is green, green stops meaning anything. Reserve the brand color for identity and key moments, and use a neutral for routine actions — so hierarchy and the brand both stay strong."</p>
-        <p>— the argument I built into the client deck. It won over a client strict about protecting the green.</p>
+        <p>"If every button is green, green stops meaning anything. Reserve the brand color for identity and key moments, and use a neutral for routine actions, so hierarchy and the brand both stay strong."</p>
+        <p>, the argument I built into the client deck. It won over a client strict about protecting the green.</p>
       </div>
       <figure class="figure figure--wide">
         <img src="assets/zadinga-elements.png" alt="Zadinga's refreshed visual elements: dark-grey primary CTAs, reserved-green accents, redesigned input fields and subscription cards." loading="lazy" />
-        <figcaption>The decision, made visible: dark-grey primary actions (Add Product, Accept Order), green reserved for accents — plus reworked input fields, CTAs, and subscription cards.</figcaption>
+        <figcaption>The decision, made visible: dark-grey primary actions (Add Product, Accept Order), green reserved for accents, plus reworked input fields, CTAs, and subscription cards.</figcaption>
       </figure>
     </div>
   </section>
@@ -409,17 +409,17 @@
   <!-- 3. Solution & Impact -->
   <section class="case case--divider">
     <div class="case__inner">
-      <div class="case__head"><span class="case__num">03 — Solution &amp; impact</span><h2>A system where color carries signal</h2></div>
+      <div class="case__head"><span class="case__num">03, Solution &amp; impact</span><h2>A system where color carries signal</h2></div>
       <p>
-        I applied the new theme to the five screens — <strong>Home, Order Summary, Profile, Plan Details, and a
-        text-heavy internal form</strong> — chosen deliberately: together they hold <strong>70–80% of the app's unique
+        I applied the new theme to the five screens, <strong>Home, Order Summary, Profile, Plan Details, and a
+        text-heavy internal form</strong>, chosen deliberately: together they hold <strong>70–80% of the app's unique
         components</strong>, so redesigning them bootstrapped the whole system. Reserved green, dark-grey primary
         actions, a <strong>spacing grid</strong> to kill the clutter, and duplicate components collapsed into a single
         documented set.
       </p>
       <figure class="figure figure--wide">
         <img src="assets/zadinga-screens-grid.png" alt="A grid of redesigned Zadinga screens: order details, store setup, add product, subscription plans, and profile." loading="lazy" />
-        <figcaption>The redesigned screens — consistent hierarchy, breathing room, and one documented component set.</figcaption>
+        <figcaption>The redesigned screens, consistent hierarchy, breathing room, and one documented component set.</figcaption>
       </figure>
       <div class="stats">
         <div class="stat"><div class="stat__num">~35%</div><div class="stat__label">more app reviews after the redesign (reported by the product owner)</div></div>
@@ -428,12 +428,12 @@
       </div>
       <p>
         The redesign was the primary release in that window, so the ~35% lift is credibly its own. Primary actions
-        became unmistakable and screens read calmer — but the deliverable that outlasts the metric was the
+        became unmistakable and screens read calmer, but the deliverable that outlasts the metric was the
         <strong>theme and design system</strong>, handed off so the team could extend it without me.
       </p>
       <figure class="figure figure--wide">
         <img src="assets/zadinga-screens-angled.png" alt="A perspective montage of Zadinga's redesigned app screens across the store owner's daily flow." loading="lazy" />
-        <figcaption>The system in the wild — across the store owner's daily loop.</figcaption>
+        <figcaption>The system in the wild, across the store owner's daily loop.</figcaption>
       </figure>
     </div>
   </section>
@@ -441,14 +441,14 @@
   <!-- 4. Reflection -->
   <section class="case case--divider case--alt">
     <div class="case__inner">
-      <div class="case__head"><span class="case__num">04 — Reflection</span><h2>What I'd do differently</h2></div>
+      <div class="case__head"><span class="case__num">04, Reflection</span><h2>What I'd do differently</h2></div>
       <p>
-        <strong>I'd close the evidence loop</strong> — baseline the rating before shipping and validate with even a
+        <strong>I'd close the evidence loop</strong>, baseline the rating before shipping and validate with even a
         lightweight round of Kirana-owner feedback, rather than leaning only on an audit and competitor benchmarks.
         A "35% more reviews" headline lands harder with a before-number.
       </p>
       <p>
-        The lasting lesson: good design is often subtraction, and the most senior thing on a project isn't the pixels —
+        The lasting lesson: good design is often subtraction, and the most senior thing on a project isn't the pixels ,
         it's the <em>argument</em>. My biggest contribution wasn't the dark-grey button; it was defending it with a
         principle clear enough that a brand-protective client, whom I never spoke to directly, still said yes.
       </p>
