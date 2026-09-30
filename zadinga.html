@@ -292,7 +292,7 @@
       text-align: center;
     }
     /* Full-bleed-ish figure that breaks past the reading column for wide grids */
-    .figure--wide { margin-left: calc((var(--read-w) - min(940px, 92vw)) / 2); width: min(940px, 92vw); }
+    .figure--wide { margin-left: calc(50% - min(940px, 92vw) / 2); width: min(940px, 92vw); } /* centred on the column, whatever its padding */
     @media (max-width: 780px) { .figure--wide { margin-left: 0; width: 100%; } }
 
     /* ----------------------------- Footer */
@@ -305,9 +305,42 @@
     .footer__inner a:hover { color: var(--ink); }
     .footer__links { display: flex; gap: 22px; }
 
-    @media (max-width: 600px) {
-      .nav__links { display: none; }
+    /* Tap-to-enlarge hint, phones only */
+    .figure__zoom {
+      display: none; margin-top: 6px;
+      font-size: 0.8rem; font-weight: 500; color: var(--brand-green); text-align: center;
     }
+
+    /* ----------------------------- Phones */
+    @media (max-width: 600px) {
+      /* Keep nav usable: drop the "· Folio" suffix, tighten the links */
+      .nav__inner { gap: 12px; padding: 14px var(--pad-x); }
+      .nav__brand { font-size: 16px; white-space: nowrap; }
+      .nav__brand span { display: none; }
+      .nav__links { gap: 16px; font-size: 13px; }
+      .nav__links a { padding: 6px 0; } /* taller tap target */
+
+      .announce { font-size: 12px; padding: 8px var(--pad-x); }
+      .announce a { white-space: nowrap; }
+      .backbar { padding-top: 16px; }
+
+      .hero__meta { padding: 16px; gap: 14px 16px; }
+      .callout { padding: 18px 20px; }
+      .callout p { font-size: 1.02rem; }
+
+      /* Wide screen grids: bleed edge-to-edge so the UI stays legible */
+      .figure--wide {
+        margin-left: calc(-1 * var(--pad-x));
+        width: calc(100% + 2 * var(--pad-x));
+      }
+      .figure--wide img { border-radius: 0; border-left: 0; border-right: 0; }
+      .figure--wide figcaption { padding: 0 var(--pad-x); }
+      .figure__zoom { display: block; }
+    }
+    @media (max-width: 360px) {
+      .nav__links { gap: 12px; }
+    }
+
   </style>
 </head>
 <body>
@@ -400,7 +433,8 @@
         <p>, the argument I built into the client deck. It won over a client strict about protecting the green.</p>
       </div>
       <figure class="figure figure--wide">
-        <img src="assets/zadinga-elements.png" alt="Zadinga's refreshed visual elements: dark-grey primary CTAs, reserved-green accents, redesigned input fields and subscription cards." loading="lazy" />
+        <a href="assets/zadinga-elements.png" target="_blank" rel="noopener"><img src="assets/zadinga-elements.png" alt="Zadinga's refreshed visual elements: dark-grey primary CTAs, reserved-green accents, redesigned input fields and subscription cards." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
         <figcaption>The decision, made visible: dark-grey primary actions (Add Product, Accept Order), green reserved for accents, plus reworked input fields, CTAs, and subscription cards.</figcaption>
       </figure>
     </div>
@@ -418,7 +452,8 @@
         documented set.
       </p>
       <figure class="figure figure--wide">
-        <img src="assets/zadinga-screens-grid.png" alt="A grid of redesigned Zadinga screens: order details, store setup, add product, subscription plans, and profile." loading="lazy" />
+        <a href="assets/zadinga-screens-grid.png" target="_blank" rel="noopener"><img src="assets/zadinga-screens-grid.png" alt="A grid of redesigned Zadinga screens: order details, store setup, add product, subscription plans, and profile." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
         <figcaption>The redesigned screens, consistent hierarchy, breathing room, and one documented component set.</figcaption>
       </figure>
       <div class="stats">
@@ -432,7 +467,8 @@
         <strong>theme and design system</strong>, handed off so the team could extend it without me.
       </p>
       <figure class="figure figure--wide">
-        <img src="assets/zadinga-screens-angled.png" alt="A perspective montage of Zadinga's redesigned app screens across the store owner's daily flow." loading="lazy" />
+        <a href="assets/zadinga-screens-angled.png" target="_blank" rel="noopener"><img src="assets/zadinga-screens-angled.png" alt="A perspective montage of Zadinga's redesigned app screens across the store owner's daily flow." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
         <figcaption>The system in the wild, across the store owner's daily loop.</figcaption>
       </figure>
     </div>

@@ -287,7 +287,7 @@
       color: var(--ink-soft);
       text-align: center;
     }
-    .figure--wide { margin-left: calc((var(--read-w) - min(940px, 92vw)) / 2); width: min(940px, 92vw); }
+    .figure--wide { margin-left: calc(50% - min(940px, 92vw) / 2); width: min(940px, 92vw); } /* centred on the column, whatever its padding */
     @media (max-width: 780px) { .figure--wide { margin-left: 0; width: 100%; } }
 
     /* Bare figure for transparent phone composites (shadows baked into PNG) */
@@ -307,8 +307,39 @@
     .footer__inner a:hover { color: var(--ink); }
     .footer__links { display: flex; gap: 22px; }
 
+    /* Tap-to-enlarge hint, phones only */
+    .figure__zoom {
+      display: none; margin-top: 6px;
+      font-size: 0.8rem; font-weight: 500; color: var(--brand-gold); text-align: center;
+    }
+
+    /* ----------------------------- Phones */
     @media (max-width: 600px) {
-      .nav__links { display: none; }
+      /* Keep nav usable: drop the "· Folio" suffix, tighten the links */
+      .nav__inner { gap: 12px; padding: 14px var(--pad-x); }
+      .nav__brand { font-size: 16px; white-space: nowrap; }
+      .nav__brand span { display: none; }
+      .nav__links { gap: 16px; font-size: 13px; }
+      .nav__links a { padding: 6px 0; } /* taller tap target */
+
+      .announce { font-size: 12px; padding: 8px var(--pad-x); }
+      .announce a { white-space: nowrap; }
+      .backbar { padding-top: 16px; }
+
+      .hero__meta { padding: 16px; gap: 14px 16px; }
+      .friction { padding: 16px; gap: 12px; }
+
+      /* Wide figures: bleed edge-to-edge so the screens stay legible */
+      .figure--wide {
+        margin-left: calc(-1 * var(--pad-x));
+        width: calc(100% + 2 * var(--pad-x));
+      }
+      .figure--wide img { border-radius: 0; border-left: 0; border-right: 0; }
+      .figure--wide figcaption { padding: 0 var(--pad-x); }
+      .figure__zoom { display: block; }
+    }
+    @media (max-width: 360px) {
+      .nav__links { gap: 12px; }
     }
   </style>
 </head>
@@ -379,7 +410,8 @@
         <strong>coin</strong>, the smiley mark that became the product's signature.
       </p>
       <figure class="figure figure--wide">
-        <img src="assets/Takreem_2.jpg" alt="Project highlights: easy business discovery with reviews, a simple tipping flow, a staff dashboard, and an employer dashboard, beside the map-based discovery view." loading="lazy" />
+        <a href="assets/Takreem_2.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_2.jpg" alt="Project highlights: easy business discovery with reviews, a simple tipping flow, a staff dashboard, and an employer dashboard, beside the map-based discovery view." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
         <figcaption>The product at a glance: discovery, tipping, and the staff- and employer-side dashboards that make it a three-sided system.</figcaption>
       </figure>
     </div>
@@ -441,7 +473,8 @@
         tipping app into a reviews app.
       </p>
       <figure class="figure figure--wide">
-        <img src="assets/Takreem_3.jpg" alt="The green 'Tipping Successful' screen showing the amount paid to a named staff member and loyalty points earned, alongside staff earnings and the reviews feed." loading="lazy" />
+        <a href="assets/Takreem_3.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_3.jpg" alt="The green 'Tipping Successful' screen showing the amount paid to a named staff member and loyalty points earned, alongside staff earnings and the reviews feed." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
         <figcaption>The payoff of leading with the tip: money reaching a named person, loyalty points earned, and the recognition landing against that staff member.</figcaption>
       </figure>
     </div>
@@ -475,11 +508,13 @@
         customer a selfish reason to close the loop, right when they're already feeling generous.
       </p>
       <figure class="figure figure--wide">
-        <img src="assets/Takreem_4.jpg" alt="Loyalty screens: refer-to-earn and keep-reviewing cards, a star-rating review, redeemable points, and a ticket." loading="lazy" />
+        <a href="assets/Takreem_4.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_4.jpg" alt="Loyalty screens: refer-to-earn and keep-reviewing cards, a star-rating review, redeemable points, and a ticket." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
         <figcaption>Loyalty as the reason to close the loop: points earned for reviewing, redeemable against a real transaction.</figcaption>
       </figure>
       <figure class="figure figure--wide">
-        <img src="assets/Takreem_5.jpg" alt="The Trending home with boosted listings, the redeem-points screen, and the tip-withdrawal flow with its early-withdrawal fee." loading="lazy" />
+        <a href="assets/Takreem_5.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_5.jpg" alt="The Trending home with boosted listings, the redeem-points screen, and the tip-withdrawal flow with its early-withdrawal fee." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
         <figcaption>The customer home (with boosted listings) and the staff-side tip withdrawal, where early withdrawal carries a transparent fee.</figcaption>
       </figure>
     </div>

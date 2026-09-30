@@ -250,7 +250,8 @@
       gap: clamp(28px, 5vw, 64px);
     }
     @media (max-width: 900px) {
-      .case-shell { grid-template-columns: 1fr; }
+      /* minmax(0, …) so nowrap flow strips scroll inside their box instead of widening the page */
+      .case-shell { grid-template-columns: minmax(0, 1fr); }
     }
 
     /* Left rail, sticky mini TOC */
@@ -284,7 +285,7 @@
     }
 
     /* Main content column */
-    .main { max-width: var(--read-w); }
+    .main { max-width: var(--read-w); min-width: 0; }
     .section { margin-bottom: clamp(52px, 8vh, 84px); scroll-margin-top: 88px; }
     .section:last-child { margin-bottom: 0; }
 
@@ -526,17 +527,30 @@
       margin-top: 12px;
     }
 
-    /* Video pair, two card-interaction demos side by side, 70% of column width */
+    /* Card-interaction demos: 3-up grid on desktop, swipeable row on phones */
     .video-pair {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
-      width: 70%;
       margin: 20px 0;
     }
     .video-pair .figure { margin: 0; }
+    .swipe-hint { display: none; }
     @media (max-width: 620px) {
-      .video-pair { width: 100%; grid-template-columns: 1fr; }
+      .video-pair {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 12px;
+        margin-right: -18px;       /* let the row run to the card edge */
+        padding-right: 18px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .video-pair .figure { flex: 0 0 62%; scroll-snap-align: start; }
+      .main .swipe-hint {
+        display: block; margin: -8px 0 0;
+        font-size: 0.8rem; font-weight: 500; color: var(--brand-purple);
+      }
     }
 
     /* Reflection, themed labelled paragraphs */
@@ -582,8 +596,26 @@
     .footer__inner a:hover { color: var(--ink); }
     .footer__links { display: flex; gap: 22px; }
 
+    /* ----------------------------- Phones */
     @media (max-width: 600px) {
-      .nav__links { display: none; }
+      /* Keep nav usable: drop the "· Folio" suffix, tighten the links */
+      .nav__inner { gap: 12px; padding: 14px var(--pad-x); }
+      .nav__brand { font-size: 16px; white-space: nowrap; }
+      .nav__brand span { display: none; }
+      .nav__links { gap: 16px; font-size: 13px; }
+      .nav__links a { padding: 6px 0; } /* taller tap target */
+
+      .announce { font-size: 12px; padding: 8px var(--pad-x); }
+      .announce a { white-space: nowrap; }
+      .backbar { padding-top: 16px; }
+
+      .interv { padding: 20px 18px; }
+      .flow { white-space: normal; line-height: 1.7; }
+      .flow__new { margin-top: 10px; }
+      .friction { padding: 14px 16px; }
+    }
+    @media (max-width: 360px) {
+      .nav__links { gap: 12px; }
     }
   </style>
 </head>
@@ -783,7 +815,17 @@
             <figure class="figure">
               <video src="case-studies/deem/Upgrade_card_-_pulled_down.mp4" autoplay muted loop playsinline preload="metadata"></video>
             </figure>
+            <figure class="figure">
+              <video src="case-studies/deem/Card_details_page_-_collapse.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            </figure>
+            <figure class="figure">
+              <video src="case-studies/deem/Card_portfolio_-_dashboard.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            </figure>
+            <figure class="figure">
+              <video src="case-studies/deem/Card_portfolio_-_card_stack.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            </figure>
           </div>
+          <p class="swipe-hint">Swipe for more →</p>
         </div>
       </section>
 
