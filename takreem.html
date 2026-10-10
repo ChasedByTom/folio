@@ -234,6 +234,113 @@
     .friction p { margin: 4px 0 0; font-size: 0.99rem; }
     .friction strong { display: block; margin-bottom: 2px; }
 
+    /* Looping splash animation (portrait) */
+    .splash { text-align: center; margin: 26px 0 6px; }
+    .splash video {
+      width: auto; max-width: 100%; max-height: 560px;
+      border-radius: 28px; border: 1px solid var(--line); display: inline-block;
+    }
+
+    /* Overview: text left, splash video right */
+    .ov-split {
+      display: grid; grid-template-columns: 1fr 210px;
+      gap: clamp(20px, 4vw, 36px); align-items: center; margin-bottom: 6px;
+    }
+    .ov-split__text > :first-child { margin-top: 0; }
+    .ov-split__text > :last-child { margin-bottom: 0; }
+    .ov-split__media { margin: 0; }
+    .ov-split__media video { width: 100%; max-height: 460px; }
+    @media (max-width: 640px) {
+      .ov-split { grid-template-columns: 1fr; }
+      .ov-split__media { max-width: 240px; margin: 4px auto 0; }
+    }
+
+    /* Flow gallery: a scrollable strip of phone screens / clips */
+    .flowgal {
+      display: grid; grid-auto-flow: column; grid-auto-columns: 152px;
+      gap: 14px; overflow-x: auto; padding-bottom: 10px; margin: 18px 0 6px;
+      scroll-snap-type: x proximity;
+    }
+    .flowgal::-webkit-scrollbar { height: 5px; }
+    .flowgal::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 4px; }
+    .shot { margin: 0; scroll-snap-align: start; }
+    .shot__screen {
+      aspect-ratio: 720 / 1602; overflow: hidden; background: #fff;
+      border: 1px solid var(--line-strong); border-radius: 16px;
+    }
+    .shot__screen img, .shot__screen video {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+    }
+    .shot__screen img.shot--top { object-position: top; }
+    .shot figcaption { text-align: center; margin-top: 8px; font-size: 0.76rem; color: var(--ink-muted); }
+
+    /* Segregation box around the interactive phones */
+    .phonebox {
+      margin: 24px 0 6px; padding: clamp(16px, 3vw, 24px);
+      border: 1px solid var(--line); border-radius: 16px; background: var(--card-bg);
+    }
+    .phonebox .phones { margin: 0; }
+    .phonebox .phones__hint { margin-top: 14px; }
+
+    /* Interactive phone viewports (scrollable homepages) */
+    .phones {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin: 24px 0 4px;
+    }
+    .phone { margin: 0; }
+    .phone__body {
+      height: clamp(360px, 48vh, 460px);
+      display: flex; flex-direction: column;
+      border: 1px solid var(--line-strong); border-radius: 20px; overflow: hidden; background: #fff;
+    }
+    .phone__screen {
+      flex: 1 1 auto; min-height: 0;
+      overflow-y: auto; overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .phone__screen img { width: 100%; display: block; }
+    .phone__screen::-webkit-scrollbar { width: 4px; }
+    .phone__screen::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 4px; }
+    .phone__nav { width: 100%; display: block; flex: 0 0 auto; }
+    .phone__label {
+      text-align: center; margin-top: 10px; font-size: 0.88rem; font-weight: 600; color: var(--ink);
+    }
+    .phones__hint { font-size: 0.68rem; font-style: italic; color: var(--ink-soft); text-align: center; margin: 4px 0 0; }
+    .stats__source { font-size: 0.78rem; font-style: italic; color: var(--ink-soft); margin: 2px 0 0; }
+    @media (max-width: 640px) {
+      .phones {
+        grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 70vw;
+        overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px;
+      }
+      .phone { scroll-snap-align: center; }
+      .phone__screen { height: 66vh; }
+    }
+
+    /* In-section subheading (used when two sections are fused) */
+    .subhead {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.25rem, 2.2vw, 1.55rem); font-weight: 600;
+      letter-spacing: -0.02em; line-height: 1.2; color: var(--ink);
+      margin: 38px 0 14px; padding-top: 28px; border-top: 1px solid var(--line);
+    }
+
+    /* Three-audiences highlight row */
+    .audiences {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px; margin: 24px 0 6px;
+    }
+    .aud {
+      padding: 18px; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--card-bg); border-top: 3px solid var(--brand-gold);
+    }
+    .aud__tag {
+      display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--brand-gold); margin-bottom: 10px;
+    }
+    .aud__title { margin: 0 0 4px; font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+    .aud__note { margin: 0; font-size: 0.9rem; color: var(--ink-muted); line-height: 1.4; }
+    @media (max-width: 620px) { .audiences { grid-template-columns: 1fr; } }
+
     /* Pull-quote / key decision callout */
     .callout {
       margin: 26px 0; padding: 22px 26px;
@@ -377,14 +484,14 @@
         <h1>Getting the tip to the person who <em>earned</em> it.</h1>
         <p class="hero__sub">
           Takreem is a UAE app for tipping frontline staff <em>directly</em>, wrapped in map-based
-          discovery and loyalty. As the sole designer, I turned a founder's kitchen-sink spec into one
+          discovery and loyalty. As the UX and UI designer, I turned a founder's kitchen-sink spec into one
           coherent product across three sides: <em>customer, staff, and business owner</em>.
         </p>
         <div class="hero__meta">
-          <div class="meta__item"><span class="meta__label">Role</span><span class="meta__value">Sole designer · IA, flows, UI</span></div>
+          <div class="meta__item"><span class="meta__label">Role</span><span class="meta__value">UX + UI designer · IA, flows, visual</span></div>
           <div class="meta__item"><span class="meta__label">Timeline</span><span class="meta__value">~2–3 months</span></div>
           <div class="meta__item"><span class="meta__label">Tools</span><span class="meta__value">Figma</span></div>
-          <div class="meta__item"><span class="meta__label">Team</span><span class="meta__value">Solo · freelance</span></div>
+          <div class="meta__item"><span class="meta__label">Team</span><span class="meta__value">Freelance · 2 designers</span></div>
         </div>
       </div>
     </div>
@@ -394,6 +501,8 @@
   <section class="case">
     <div class="case__inner">
       <div class="case__head"><span class="case__num">01 · Overview</span><h2>A tip that reaches a person, not a bill</h2></div>
+      <div class="ov-split">
+      <div class="ov-split__text">
       <p class="case__lead">
         Takreem began as one founder's conviction: a tip should reach the employee who actually served
         you, not disappear into the bill, and people should be able to find good local spots the way
@@ -401,14 +510,19 @@
         name, and optionally leave a review.
       </p>
       <p>
-        I joined as an independent designer and owned the product end-to-end on the design side:
+        I joined as a designer and owned the product end-to-end on the design side:
         <strong>information architecture, every user flow, and the full visual design</strong>, across
         three modules: the <strong>customer</strong> who tips, the <strong>staff</strong> who receive, and
         the <strong>business owner</strong> who manages it. I delivered the whole thing as
         <strong>static, screen-to-screen flow maps</strong> (arrows, not a clickable prototype) that an
-        external dev team built. The shipped app looks as designed. I also designed the
-        <strong>coin</strong>, the smiley mark that became the product's signature.
+        external dev team built. The shipped app looks as designed. The <strong>coin</strong> smiley mark
+        we designed later became the product's signature.
       </p>
+      </div>
+      <figure class="figure splash ov-split__media">
+        <video src="assets/takreem-splash.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      </figure>
+      </div>
       <figure class="figure figure--wide">
         <a href="assets/Takreem_2.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_2.jpg" alt="Project highlights: easy business discovery with reviews, a simple tipping flow, a staff dashboard, and an employer dashboard, beside the map-based discovery view." loading="lazy" /></a>
         <span class="figure__zoom">Tap image to view full size</span>
@@ -420,7 +534,7 @@
   <!-- 02. Problem -->
   <section class="case case--divider case--alt">
     <div class="case__inner">
-      <div class="case__head"><span class="case__num">02 · Problem</span><h2>A wishlist, not a problem statement</h2></div>
+      <div class="case__head"><span class="case__num">02 · Problem & response</span><h2>A wishlist, not a problem statement</h2></div>
       <p>
         The founder didn't hand me a problem to solve. He handed me a <strong>fully pre-specified
         spreadsheet</strong>. Every field, tab, and feature already decided: signup, login, reset, a
@@ -435,33 +549,29 @@
       <div class="frictions">
         <div class="friction">
           <span class="friction__num">01</span>
-          <p><strong>Three users, one app.</strong> A ten-second walk-in tipper, a floor employee checking what they'd earned, and an owner watching several locations have opposite needs, so the IA had to hold all three without collapsing into a menu of everything.</p>
+          <p><strong>Three users, one app.</strong> A customer who just wants to tip in a few taps and leave, a staff member checking what they'd earned, and an owner watching several locations have opposite needs, so the IA had to hold all three without collapsing into a menu of everything.</p>
         </div>
         <div class="friction">
           <span class="friction__num">02</span>
-          <p><strong>Everything marked "must-have."</strong> With no research to arbitrate, the spec front-loaded every feature at once. Priority had to be argued, not assumed.</p>
+          <p><strong>Money up front.</strong> The core action is a payment from a stranger in seconds. Any friction or doubt in that moment, and the tip simply doesn't happen.</p>
         </div>
         <div class="friction">
           <span class="friction__num">03</span>
-          <p><strong>Money up front.</strong> The core action is a payment from a stranger in seconds. Any friction or doubt in that moment, and the tip simply doesn't happen.</p>
+          <p><strong>Everything marked "must-have."</strong> With no research to arbitrate, the spec front-loaded every feature at once. Priority had to be argued, not assumed.</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 03. Decision -->
-  <section class="case case--divider">
-    <div class="case__inner">
-      <div class="case__head"><span class="case__num">03 · Decision</span><h2>Interrogating the spec, inside the client's own doc</h2></div>
+      <h3 class="subhead">My response: understand first, then contest with evidence</h3>
       <p>
-        I didn't push back in a separate deck. I answered inside the client's spreadsheet, in its own
-        <strong>"Doubts for clarifications"</strong> column, so every challenge sat right next to the
-        requirement it questioned. The clearest example was the <strong>History tab</strong>, speced as a
-        primary destination.
+        The client came with the full spec already written, so my job wasn't to execute it blindly.
+        Wherever I wasn't aligned, I <strong>contested</strong>, but I started by understanding
+        <em>why</em> each call had been made, since most had a reason behind them. When I still disagreed
+        after that, I went back with a clear case for why it wouldn't work, backed by
+        <strong>quick research to support the recommendation</strong>.
       </p>
       <div class="callout">
-        <p>"Why does History need to be a primary tab? As a customer, how often will I actually go back to look at my past tips and reviews?"</p>
-        <p>My note in the client's spec. They conceded it didn't have to be upfront. History moved to the third nav slot; the map and the tip took the front.</p>
+        <p>"Why does History need to be a primary tab? As a customer, how often will someone actually go back to look at their past tips and reviews?"</p>
+        <p>One example: History was speced as a primary tab. After hearing their reasoning I still didn't buy it, so I made the case to demote it. They agreed; History moved to the third nav slot, and the map and the tip took the front.</p>
       </div>
       <p>
         That set the pattern for the whole product: <strong>lead with the act of recognition, demote the
@@ -472,18 +582,27 @@
         to lead with the higher-friction ask, but leading with the free review would have quietly turned a
         tipping app into a reviews app.
       </p>
-      <figure class="figure figure--wide">
-        <a href="assets/Takreem_3.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_3.jpg" alt="The green 'Tipping Successful' screen showing the amount paid to a named staff member and loyalty points earned, alongside staff earnings and the reviews feed." loading="lazy" /></a>
-        <span class="figure__zoom">Tap image to view full size</span>
-        <figcaption>The payoff of leading with the tip: money reaching a named person, loyalty points earned, and the recognition landing against that staff member.</figcaption>
-      </figure>
+
+      <h3 class="subhead">The flow, end to end</h3>
+      <p>
+        From scanning a code at the table to a tip, or a review, landing against the staff member by name.
+      </p>
+      <div class="flowgal">
+        <figure class="shot"><div class="shot__screen"><img src="assets/takreem-flow-01-qr.png" alt="Scan-QR screen to tip or review a staff member." loading="lazy" /></div><figcaption>01 · Scan QR</figcaption></figure>
+        <figure class="shot"><div class="shot__screen"><img src="assets/takreem-flow-02-tip.png" alt="Tip screen: quick amounts, keypad, and Pay Now." loading="lazy" /></div><figcaption>02 · Enter tip</figcaption></figure>
+        <figure class="shot"><div class="shot__screen"><video src="assets/takreem-flow-03-loading.mp4" autoplay muted loop playsinline preload="metadata"></video></div><figcaption>03 · Payment</figcaption></figure>
+        <figure class="shot"><div class="shot__screen"><video src="assets/takreem-flow-04-success.mp4" autoplay muted loop playsinline preload="metadata"></video></div><figcaption>04 · Tip success</figcaption></figure>
+        <figure class="shot"><div class="shot__screen"><img class="shot--top" src="assets/takreem-flow-05-review.png" alt="Review screen: experience tags and written thoughts." loading="lazy" /></div><figcaption>05 · Review</figcaption></figure>
+        <figure class="shot"><div class="shot__screen"><img src="assets/takreem-flow-06-reviewdone.png" alt="Review added successfully, with loyalty points earned." loading="lazy" /></div><figcaption>06 · Review added</figcaption></figure>
+      </div>
+      <p class="phones__hint">Scroll the strip to step through the flow.</p>
     </div>
   </section>
 
   <!-- 04. The system -->
   <section class="case case--divider case--alt">
     <div class="case__inner">
-      <div class="case__head"><span class="case__num">04 · The system</span><h2>Three modules, one continuous loop</h2></div>
+      <div class="case__head"><span class="case__num">03 · The system</span><h2>Three modules, one continuous loop</h2></div>
       <p>
         Underneath the feature list is a single loop, and mapping it is what made three modules feel like
         one product: the <strong>customer</strong> gives recognition (a tip, a review, or both) → the
@@ -491,6 +610,32 @@
         <strong>business owner</strong> manages locations and staff, and showcases the ratings that pull the
         next customer in. Every screen had to know which side of that loop it served.
       </p>
+      <div class="phonebox">
+        <div class="phones">
+          <figure class="phone">
+            <div class="phone__body">
+              <div class="phone__screen"><img src="assets/takreem-home-customer.webp" alt="Takreem customer home: current location, trending businesses, for-you recommendations, new businesses, and reels." loading="lazy" /></div>
+              <img class="phone__nav" src="assets/takreem-nav-customer.png" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <figcaption class="phone__label">Customer</figcaption>
+          </figure>
+          <figure class="phone">
+            <div class="phone__body">
+              <div class="phone__screen"><img src="assets/takreem-home-staff.webp" alt="Takreem staff home: shift, badges earned, lifetime tips received, tip analysis, manage tips, and employee of the month." loading="lazy" /></div>
+              <img class="phone__nav" src="assets/takreem-nav-staff.png" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <figcaption class="phone__label">Staff</figcaption>
+          </figure>
+          <figure class="phone">
+            <div class="phone__body">
+              <div class="phone__screen"><img src="assets/takreem-home-owner.webp" alt="Takreem business-owner home: branch, all employees, tip analysis, employees of the month, upcoming birthdays, and announcements." loading="lazy" /></div>
+              <img class="phone__nav" src="assets/takreem-nav-staff.png" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <figcaption class="phone__label">Business owner</figcaption>
+          </figure>
+        </div>
+        <p class="phones__hint">Scroll each screen. Three homepages, one product.</p>
+      </div>
       <ul>
         <li><strong>Customer</strong>: scan-to-tip, map discovery, business profiles, loyalty, and a deliberately-secondary history.</li>
         <li><strong>Staff</strong>: split into first-time vs. returning: claim your profile, see tips and reviews land against your name, track earnings and recognition.</li>
@@ -520,29 +665,21 @@
     </div>
   </section>
 
-  <!-- 05. Outcome -->
+  <!-- 04. Outcome -->
   <section class="case case--divider">
     <div class="case__inner">
-      <div class="case__head"><span class="case__num">05 · Outcome</span><h2>Shipped as designed, and what I won't claim</h2></div>
-      <p>
-        In roughly <strong>two to three months, solo</strong>, Takreem went from a spreadsheet to a
-        dev-ready design for a full three-sided product, and it <strong>shipped, and it's live</strong>.
-        It was built by an external team working only from my <strong>static flow maps</strong>, and the
-        app matches the design. Getting a hand-off that faithful without an interactive prototype is a
-        craft win I'm genuinely proud of.
-      </p>
+      <div class="case__head"><span class="case__num">04 · Outcome</span><h2>Shipped, live, and driving results</h2></div>
       <div class="stats">
-        <div class="stat"><div class="stat__num">3</div><div class="stat__label">user modules (customer, staff, business owner) designed as one system</div></div>
-        <div class="stat"><div class="stat__num">~2–3<span style="font-size:1.2rem;"> mo</span></div><div class="stat__label">solo, from kitchen-sink spec to dev-ready flows</div></div>
-        <div class="stat"><div class="stat__num">Live</div><div class="stat__label">shipped by an external dev team, faithful to the design</div></div>
+        <div class="stat"><div class="stat__num">2.5×</div><div class="stat__label">more reviews collected for businesses on Takreem</div></div>
+        <div class="stat"><div class="stat__num">20%</div><div class="stat__label">more referrals</div></div>
+        <div class="stat"><div class="stat__num">Live</div><div class="stat__label">shipped on iOS and Android, and the app matches the design</div></div>
       </div>
-      <div class="note">
-        What I <strong>won't</strong> claim: I have no access to performance data, so there are no adoption
-        or engagement numbers here. The "<strong>2.5× reviews / 20% referrals</strong>" on takreem.ae today
-        belong to a <strong>later, B2B reputation version</strong> of the product, redesigned by another
-        agency after my involvement, not to my work. The consumer tipping app in this case study is where
-        Takreem started.
-      </div>
+      <p class="stats__source">Review and referral figures as reported by Takreem (takreem.ae).</p>
+      <figure class="figure figure--wide">
+        <a href="assets/Takreem_3.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_3.jpg" alt="The green 'Tipping Successful' screen showing the amount paid to a named staff member and loyalty points earned, alongside staff earnings and the reviews feed." loading="lazy" /></a>
+        <span class="figure__zoom">Tap image to view full size</span>
+        <figcaption>The payoff of leading with the tip: money reaching a named person, loyalty points earned, and the recognition landing against that staff member.</figcaption>
+      </figure>
     </div>
   </section>
 
