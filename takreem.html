@@ -138,8 +138,12 @@
       gap: clamp(28px, 5vw, 60px);
     }
 
-    .hero__cover { position: relative; width: 100%; }
+    .hero__cover { position: relative; width: 100%; text-align: center; }
     .hero__cover-desktop { width: 100%; height: auto; display: block; }
+    .hero__video {
+      width: auto; max-width: 100%; max-height: 460px; display: inline-block;
+      border-radius: 30px; border: 1px solid var(--line);
+    }
 
     .hero__text { min-width: 0; }
     .eyebrow {
@@ -477,7 +481,7 @@
   <section class="hero">
     <div class="hero__inner">
       <div class="hero__cover">
-        <img class="hero__cover-desktop" src="assets/Takreem_6.jpg" alt="The Takreem wordmark beside the tip entry screen (with its 'You are Tipping · Skip & Review instead' toggle) and the map-based discovery home." />
+        <video class="hero__video" src="assets/takreem-splash.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Takreem splash animation"></video>
       </div>
       <div class="hero__text">
         <p class="eyebrow">Case Study · Consumer App · UAE</p>
@@ -501,8 +505,6 @@
   <section class="case">
     <div class="case__inner">
       <div class="case__head"><span class="case__num">01 · Overview</span><h2>A tip that reaches a person, not a bill</h2></div>
-      <div class="ov-split">
-      <div class="ov-split__text">
       <p class="case__lead">
         Takreem began as one founder's conviction: a tip should reach the employee who actually served
         you, not disappear into the bill, and people should be able to find good local spots the way
@@ -518,11 +520,6 @@
         external dev team built. The shipped app looks as designed. The <strong>coin</strong> smiley mark
         we designed later became the product's signature.
       </p>
-      </div>
-      <figure class="figure splash ov-split__media">
-        <video src="assets/takreem-splash.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      </figure>
-      </div>
       <figure class="figure figure--wide">
         <a href="assets/Takreem_2.jpg" target="_blank" rel="noopener"><img src="assets/Takreem_2.jpg" alt="Project highlights: easy business discovery with reviews, a simple tipping flow, a staff dashboard, and an employer dashboard, beside the map-based discovery view." loading="lazy" /></a>
         <span class="figure__zoom">Tap image to view full size</span>
