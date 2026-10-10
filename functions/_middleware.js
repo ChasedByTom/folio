@@ -8,7 +8,6 @@ const PROTECTED = new Set([
   '/zadinga', '/zadinga.html',
   '/deem', '/deem.html',
   '/motor', '/motor.html',
-  '/takreem', '/takreem.html',
 ]);
 
 const COOKIE = 'cbt_gate';
