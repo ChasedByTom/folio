@@ -615,11 +615,37 @@
 
     /* Low-res source crops (from slides): keep them at native-ish size */
     .figure--narrow { max-width: 460px; margin-left: auto; margin-right: auto; }
-    /* UI iteration gallery: 2-up, single column on phones */
-    .iter-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 20px 0; }
-    .iter-grid .figure { margin: 0; }
-    .iter-grid .figure__caption { padding: 8px 12px; font-size: 0.8rem; }
-    @media (max-width: 620px) { .iter-grid { grid-template-columns: minmax(0, 1fr); } }
+    /* UI iteration slideshow: one compact preview, arrows on the stage, thumbnail strip */
+    .slideshow { max-width: 520px; margin: 20px auto; }
+    .slideshow__stage {
+      position: relative; border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--line); background: #2b2b2b; aspect-ratio: 1512 / 982;
+    }
+    .slideshow__img { width: 100%; height: 100%; object-fit: contain; }
+    .slideshow__img[hidden] { display: none; }
+    .slideshow__arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 34px; height: 34px; border-radius: 999px; border: none;
+      background: rgba(255, 255, 255, 0.88); color: var(--ink); font-size: 0.95rem;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .slideshow__arrow--prev { left: 10px; }
+    .slideshow__arrow--next { right: 10px; }
+    .slideshow__arrow:hover { background: var(--brand-violet); color: #fff; }
+    .slideshow__arrow:focus-visible, .slideshow__thumb:focus-visible { outline: 2px solid var(--brand-violet); outline-offset: 2px; }
+    .slideshow__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+    .slideshow__thumbs { display: flex; gap: 6px; }
+    .slideshow__thumb {
+      width: 52px; aspect-ratio: 1512 / 982; padding: 0; border-radius: 6px; overflow: hidden;
+      border: 1px solid var(--line); background: #2b2b2b; cursor: pointer; opacity: 0.55;
+      transition: opacity 0.15s ease, border-color 0.15s ease;
+    }
+    .slideshow__thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .slideshow__thumb:hover { opacity: 0.85; }
+    .slideshow__thumb.is-active { opacity: 1; border: 2px solid var(--brand-violet); }
+    .slideshow__count { font-size: 0.8rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+    @media (max-width: 480px) { .slideshow__thumb { width: 40px; } }
     /* Cover has its own charcoal backdrop: no shadow, so it melts into the hero */
     .hero__cover { padding-bottom: 0; }
     .hero .hero__cover-desktop { filter: none; }
@@ -834,13 +860,28 @@
             treatments and placements of the controls, before landing on Orion's violet with
             floating panels around the model.
           </p>
-          <div class="iter-grid">
-            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-1.png" alt="Greyscale Orion layout: a burger model on a grid floor, Reset, Save and View in 3D buttons, and Onload and Slot Configuration panels." loading="lazy" /><figcaption class="figure__caption">Iteration 1</figcaption></figure>
-            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-2.webp" alt="Orion with teal accents: a leather chair, configuration panels, a materials-added card and an opacity slider at 69%." loading="lazy" /><figcaption class="figure__caption">Iteration 2</figcaption></figure>
-            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-3.png" alt="Orion with a violet 3D and Room toggle above a chair, a lighting dial on the left and floating configuration and frame panels." loading="lazy" /><figcaption class="figure__caption">Iteration 3</figcaption></figure>
-            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-4.webp" alt="Orion with orange accents: a leather chair with configuration, texture material and opacity panels." loading="lazy" /><figcaption class="figure__caption">Iteration 4</figcaption></figure>
-            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-5.webp" alt="Orion with violet accents and a top bar showing the product SKU, collaborators and Preview in AR, around an antique desk model." loading="lazy" /><figcaption class="figure__caption">Iteration 5</figcaption></figure>
-            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-6.webp" alt="Orion with floating violet panels, a materials-added card beside an antique desk, and save and Preview in AR controls at the bottom." loading="lazy" /><figcaption class="figure__caption">Iteration 6</figcaption></figure>
+          <div class="slideshow" id="iterShow">
+            <div class="slideshow__stage">
+              <img class="slideshow__img" src="case-studies/avataar/orion-ui-iter-1.png" alt="Greyscale Orion layout: a burger model on a grid floor, Reset, Save and View in 3D buttons, and Onload and Slot Configuration panels." loading="lazy" />
+              <img class="slideshow__img" src="case-studies/avataar/orion-ui-iter-2.webp" alt="Orion with teal accents: a leather chair, configuration panels, a materials-added card and an opacity slider at 69%." loading="lazy" hidden />
+              <img class="slideshow__img" src="case-studies/avataar/orion-ui-iter-3.png" alt="Orion with a violet 3D and Room toggle above a chair, a lighting dial on the left and floating configuration and frame panels." loading="lazy" hidden />
+              <img class="slideshow__img" src="case-studies/avataar/orion-ui-iter-4.webp" alt="Orion with orange accents: a leather chair with configuration, texture material and opacity panels." loading="lazy" hidden />
+              <img class="slideshow__img" src="case-studies/avataar/orion-ui-iter-5.webp" alt="Orion with violet accents and a top bar showing the product SKU, collaborators and Preview in AR, around an antique desk model." loading="lazy" hidden />
+              <img class="slideshow__img" src="case-studies/avataar/orion-ui-iter-6.webp" alt="Orion with floating violet panels, a materials-added card beside an antique desk, and save and Preview in AR controls at the bottom." loading="lazy" hidden />
+              <button class="slideshow__arrow slideshow__arrow--prev" type="button" aria-label="Previous iteration">←</button>
+              <button class="slideshow__arrow slideshow__arrow--next" type="button" aria-label="Next iteration">→</button>
+            </div>
+            <div class="slideshow__bar">
+              <div class="slideshow__thumbs">
+                <button class="slideshow__thumb is-active" type="button" aria-label="Show iteration 1" aria-current="true"><img src="case-studies/avataar/orion-ui-iter-1.png" alt="" loading="lazy" /></button>
+                <button class="slideshow__thumb" type="button" aria-label="Show iteration 2"><img src="case-studies/avataar/orion-ui-iter-2.webp" alt="" loading="lazy" /></button>
+                <button class="slideshow__thumb" type="button" aria-label="Show iteration 3"><img src="case-studies/avataar/orion-ui-iter-3.png" alt="" loading="lazy" /></button>
+                <button class="slideshow__thumb" type="button" aria-label="Show iteration 4"><img src="case-studies/avataar/orion-ui-iter-4.webp" alt="" loading="lazy" /></button>
+                <button class="slideshow__thumb" type="button" aria-label="Show iteration 5"><img src="case-studies/avataar/orion-ui-iter-5.webp" alt="" loading="lazy" /></button>
+                <button class="slideshow__thumb" type="button" aria-label="Show iteration 6"><img src="case-studies/avataar/orion-ui-iter-6.webp" alt="" loading="lazy" /></button>
+              </div>
+              <span class="slideshow__count" aria-live="polite">Iteration 1 of 6</span>
+            </div>
           </div>
           <p>
             The last layer was the icons. I drew a custom set for Orion in Figma: <strong>product
@@ -985,6 +1026,32 @@
   </footer>
 
   <script>
+    // UI iteration slideshow: arrows and thumbnails swap the single preview.
+    (function () {
+      const root = document.getElementById('iterShow');
+      if (!root) return;
+      const slides = Array.from(root.querySelectorAll('.slideshow__img'));
+      const thumbs = Array.from(root.querySelectorAll('.slideshow__thumb'));
+      const count = root.querySelector('.slideshow__count');
+      let i = 0;
+      const show = (n) => {
+        i = (n + slides.length) % slides.length;
+        slides.forEach((s, k) => { s.hidden = k !== i; });
+        thumbs.forEach((t, k) => {
+          t.classList.toggle('is-active', k === i);
+          if (k === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current');
+        });
+        count.textContent = 'Iteration ' + (i + 1) + ' of ' + slides.length;
+      };
+      root.querySelector('.slideshow__arrow--prev').addEventListener('click', () => show(i - 1));
+      root.querySelector('.slideshow__arrow--next').addEventListener('click', () => show(i + 1));
+      thumbs.forEach((t, k) => t.addEventListener('click', () => show(k)));
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') show(i - 1);
+        if (e.key === 'ArrowRight') show(i + 1);
+      });
+    })();
+
     // Highlight the rail link whose section is currently in view.
     (function () {
       const links = Array.from(document.querySelectorAll('.rail a'));
