@@ -615,6 +615,11 @@
 
     /* Low-res source crops (from slides): keep them at native-ish size */
     .figure--narrow { max-width: 460px; margin-left: auto; margin-right: auto; }
+    /* UI iteration gallery: 2-up, single column on phones */
+    .iter-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 20px 0; }
+    .iter-grid .figure { margin: 0; }
+    .iter-grid .figure__caption { padding: 8px 12px; font-size: 0.8rem; }
+    @media (max-width: 620px) { .iter-grid { grid-template-columns: minmax(0, 1fr); } }
     /* Cover has its own charcoal backdrop: no shadow, so it melts into the hero */
     .hero__cover { padding-bottom: 0; }
     .hero .hero__cover-desktop { filter: none; }
@@ -822,14 +827,28 @@
         <!-- Intervention 04 -->
         <div class="interv">
           <span class="interv__badge">Intervention 04</span>
-          <h3>Give a 3D tool its own isometric icons.</h3>
+          <h3>Elevating the UI experience.</h3>
           <p>
-            I drew a custom icon set for Orion in Figma: <strong>product requirements, product
-            details, files, feedback, settings, modelling, texturing and animation</strong>, each
-            one a small isometric object in Orion's violet. When we discussed the software's UI, I
-            argued for originality over a stock icon library, and the product owners backed it.
-            Isometric illustration was rare in tools like this, and that flair helped lift what
-            Orion offered.
+            With the structure settled, I took the interface through several visual rounds. It
+            started as a greyscale layout and moved through different accent colours, panel
+            treatments and placements of the controls, before landing on Orion's violet with
+            floating panels around the model.
+          </p>
+          <div class="iter-grid">
+            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-1.png" alt="Greyscale Orion layout: a burger model on a grid floor, Reset, Save and View in 3D buttons, and Onload and Slot Configuration panels." loading="lazy" /><figcaption class="figure__caption">Iteration 1</figcaption></figure>
+            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-2.webp" alt="Orion with teal accents: a leather chair, configuration panels, a materials-added card and an opacity slider at 69%." loading="lazy" /><figcaption class="figure__caption">Iteration 2</figcaption></figure>
+            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-3.png" alt="Orion with a violet 3D and Room toggle above a chair, a lighting dial on the left and floating configuration and frame panels." loading="lazy" /><figcaption class="figure__caption">Iteration 3</figcaption></figure>
+            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-4.webp" alt="Orion with orange accents: a leather chair with configuration, texture material and opacity panels." loading="lazy" /><figcaption class="figure__caption">Iteration 4</figcaption></figure>
+            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-5.webp" alt="Orion with violet accents and a top bar showing the product SKU, collaborators and Preview in AR, around an antique desk model." loading="lazy" /><figcaption class="figure__caption">Iteration 5</figcaption></figure>
+            <figure class="figure"><img src="case-studies/avataar/orion-ui-iter-6.webp" alt="Orion with floating violet panels, a materials-added card beside an antique desk, and save and Preview in AR controls at the bottom." loading="lazy" /><figcaption class="figure__caption">Iteration 6</figcaption></figure>
+          </div>
+          <p>
+            The last layer was the icons. I drew a custom set for Orion in Figma: <strong>product
+            requirements, product details, files, feedback, settings, modelling, texturing and
+            animation</strong>, each one a small isometric object in Orion's violet. When we
+            discussed the software's UI, I argued for originality over a stock icon library, and
+            the product owners backed it. Isometric illustration was rare in tools like this, and
+            that flair helped lift what Orion offered.
           </p>
           <figure class="figure">
             <img src="case-studies/avataar/orion-icons.png" alt="Eight custom isometric violet icons: an open box for product requirements, documents with a magnifier for product details, folders for files, a paper plane for feedback, a nut and cube for settings, stacked blocks for modelling, a layered slab for texturing, and overlapping spheres for animation." loading="lazy" />
