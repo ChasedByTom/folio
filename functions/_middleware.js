@@ -12,11 +12,11 @@ const PROTECTED = new Set([
 ]);
 
 const COOKIE = 'cbt_gate';
-const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
+const MAX_AGE = 60 * 60 * 24; // 1 day
 
 // Derive an opaque cookie token from the password. Can't be forged without it.
 async function tokenFor(password) {
-  const data = new TextEncoder().encode('cbt-gate:v1:' + password);
+  const data = new TextEncoder().encode('cbt-gate:v2:' + password);
   const digest = await crypto.subtle.digest('SHA-256', data);
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
