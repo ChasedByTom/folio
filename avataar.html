@@ -649,6 +649,12 @@
     /* Cover has its own charcoal backdrop: no shadow, so it melts into the hero */
     .hero__cover { padding-bottom: 0; }
     .hero .hero__cover-desktop { filter: none; }
+    /* Hero image at 1.5x: wider container, image column takes the larger share */
+    .hero__inner { max-width: 1400px; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); }
+    @media (max-width: 1100px) {
+      .hero__inner { grid-template-columns: minmax(0, 1fr); }
+      .hero__text { max-width: 60ch; }
+    }
   </style>
 </head>
 <body>
