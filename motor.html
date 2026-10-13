@@ -32,6 +32,7 @@
 
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -43,7 +44,7 @@
     }
 
     .hero h1,
-    .case__head h2,
+    .two-tone,
     .cta h2 {
       font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
       font-weight: 500;
@@ -107,7 +108,7 @@
     .backlink:hover { color: var(--ink); }
     .backlink:hover::before { transform: translateX(-3px); }
 
-    /* Hero — dark, sampled from the cover image */
+    /* Hero, dark, sampled from the cover image */
     .hero {
       position: relative;
       background: linear-gradient(135deg, #12222c 0%, #1e3a4a 55%, #0f2530 100%);
@@ -149,7 +150,7 @@
     .hero__sub em { font-style: normal; font-weight: 600; color: #eef4f7; }
 
     .hero__meta {
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px 18px; padding: 18px 20px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.14);
@@ -169,90 +170,187 @@
       .hero h1 { max-width: 22ch; }
     }
     @media (max-width: 520px) {
-      .hero__meta { grid-template-columns: repeat(2, 1fr); }
+      .hero__meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 380px) {
+      .hero__meta { grid-template-columns: minmax(0, 1fr); }
     }
 
-    /* Case sections */
-    .case { padding: clamp(52px, 8vh, 84px) 0; }
-    .case--divider { border-top: 1px solid var(--line); }
-    .case--alt { background: var(--paper-deep); }
-    .case__inner { max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
-
-    .case__head { margin: 0 0 26px; }
-    .case__num {
-      display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--brand); margin-bottom: 12px;
+    /* ----------------------------- Case layout with left rail */
+    .case-shell {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(48px, 8vh, 84px) var(--pad-x);
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 64px);
     }
-    .case__head h2 {
+    @media (max-width: 900px) {
+      .case-shell { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* Left rail, sticky mini TOC */
+    .rail {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      line-height: 1.4;
+    }
+    .rail a {
+      color: var(--ink-soft);
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .rail a:hover { color: var(--ink); }
+    .rail a.is-active { color: var(--ink); font-weight: 700; }
+    @media (max-width: 900px) {
+      .rail {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Main content column */
+    .main { max-width: var(--read-w); min-width: 0; }
+    .section { margin-bottom: clamp(52px, 8vh, 84px); scroll-margin-top: 88px; }
+    .section:last-child { margin-bottom: 0; }
+
+    /* Badge, small uppercase tag */
+    .badge {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand);
+      background: var(--brand-soft);
+      padding: 5px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    /* Two-tone header, grey word + black word */
+    .two-tone {
       font-size: clamp(1.6rem, 3vw, 2.3rem);
-      letter-spacing: -0.025em; line-height: 1.12; font-weight: 600; margin: 0;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      font-weight: 600;
+      color: var(--ink-soft);
+      margin: 0 0 24px;
+    }
+    .two-tone strong { color: var(--ink); font-weight: 600; }
+
+    /* Body copy inside main */
+    .main p { color: var(--ink-muted); font-size: 1.06rem; margin: 0 0 18px; }
+    .main p strong, .main li strong { color: var(--ink); font-weight: 600; }
+    .main p.lead { font-size: 1.14rem; color: var(--ink); }
+
+    /* Overview, four labelled rows */
+    .overview-rows { display: flex; flex-direction: column; gap: 22px; }
+    .ovrow {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 22px;
+      align-items: baseline;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .ovrow:first-child { padding-top: 0; border-top: none; }
+    .ovrow__label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand);
+      letter-spacing: 0.01em;
+    }
+    .ovrow__label::after { content: ' →'; opacity: 0.55; }
+    .ovrow__body { color: var(--ink-muted); font-size: 1.02rem; line-height: 1.55; }
+    .ovrow__body strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 620px) {
+      .ovrow { grid-template-columns: 1fr; gap: 6px; }
     }
 
-    .case p { color: var(--ink-muted); font-size: 1.06rem; margin: 0 0 18px; }
-    .case p strong { color: var(--ink); font-weight: 600; }
-    .case__lead { font-size: 1.14rem; color: var(--ink); }
-
-    /* Honest framing note */
+    /* Honesty note */
     .note {
-      margin: 24px 0 0; padding: 16px 20px;
-      border: 1px dashed var(--line-strong); border-radius: 12px;
+      margin: 20px 0 0;
+      padding: 14px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: 12px;
       background: rgba(255,255,255,0.35);
-      font-size: 0.98rem; color: var(--ink-muted);
+      font-size: 0.94rem;
+      color: var(--ink-muted);
     }
     .note strong { color: var(--ink); }
 
-    /* Explorations gallery — wider than the reading measure */
-    .explore { padding: clamp(52px, 8vh, 84px) 0; border-top: 1px solid var(--line); }
-    .explore__inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
-    .explore__head { max-width: var(--read-w); margin: 0 auto 32px; padding: 0 var(--pad-x); }
+    /* Explorations, concept cards inside the main column.
+       Frames keep each recording's native aspect ratio (contain, never crop). */
     .explore__grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      margin-top: 8px;
     }
+    .concept { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
     .concept--feature { grid-column: 1 / -1; }
-    .concept--feature .concept__frame { aspect-ratio: 16 / 10; }
-    .concept--feature .concept__title { font-size: 1.2rem; }
-    @media (max-width: 620px) {
-      .explore__grid { grid-template-columns: 1fr; }
-      .concept--feature .concept__frame { aspect-ratio: 9 / 16; }
-    }
-
-    .concept {
-      display: flex; flex-direction: column; gap: 12px;
-    }
     .concept__frame {
       background: var(--paper-deep);
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 22px;
+      border-radius: 12px;
+      padding: 20px;
       display: flex; align-items: center; justify-content: center;
-      aspect-ratio: 9 / 16;
-      overflow: hidden;
     }
     .concept__frame img, .concept__frame video {
-      max-height: 100%; width: auto; max-width: 100%;
+      display: block;
+      width: auto; height: auto;
+      max-width: 100%;
+      max-height: 620px;
+      object-fit: contain;
       border-radius: 10px;
     }
+    .concept--feature .concept__frame { padding: 24px; }
     .concept__label {
       font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--brand);
+      margin-top: 4px;
     }
-    .concept__title { font-size: 1rem; font-weight: 600; color: var(--ink); margin: 0; }
-    .concept__desc { font-size: 0.92rem; color: var(--ink-muted); margin: 0; line-height: 1.5; }
-
-    /* CTA */
-    .cta { border-top: 1px solid var(--line); padding: clamp(52px, 8vh, 84px) var(--pad-x); text-align: center; }
-    .cta h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 12px; }
-    .cta p { color: var(--ink-muted); margin: 0 0 22px; }
-    .cta a.pill {
-      display: inline-block;
-      background: var(--ink); color: var(--paper);
-      padding: 12px 22px; border-radius: 999px;
-      font-size: 14px; font-weight: 600;
+    .main .concept__title { font-size: 1rem; font-weight: 600; color: var(--ink); margin: 0; }
+    .main .concept__desc { font-size: 0.94rem; color: var(--ink-muted); margin: 0; line-height: 1.55; }
+    .main .concept--feature .concept__title { font-size: 1.2rem; }
+    @media (max-width: 620px) {
+      .explore__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+      .concept__frame, .concept--feature .concept__frame { padding: 16px; }
+      .concept__frame img, .concept__frame video { max-height: 560px; }
     }
 
-    /* Footer */
+    /* ----------------------------- Final CTA */
+    .cta {
+      position: relative; text-align: center;
+      padding: clamp(70px, 11vh, 120px) 0; overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .cta__inner { position: relative; z-index: 1; max-width: var(--read-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .cta h2 {
+      font-size: clamp(1.7rem, 3.2vw, 2.5rem); letter-spacing: -0.03em;
+      line-height: 1.12; font-weight: 600; margin: 0 auto 14px; max-width: 20ch;
+    }
+    .cta p { color: var(--ink-muted); max-width: 44ch; margin: 0 auto 30px; font-size: 1.05rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 24px; background: var(--ink); color: var(--paper);
+      border-radius: 999px; font-weight: 600; font-size: 0.98rem;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: #2a2723; }
+    .btn::after { content: '→'; transition: transform 0.2s ease; }
+    .btn:hover::after { transform: translateX(3px); }
+
+    /* ----------------------------- Footer */
     footer { border-top: 1px solid var(--line); padding: 36px var(--pad-x) 48px; }
     .footer__inner {
       max-width: var(--max-w); margin: 0 auto;
@@ -260,9 +358,9 @@
       flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-muted);
     }
     .footer__inner a:hover { color: var(--ink); }
-    .footer__links { display: flex; gap: 22px; }
+    .footer__links { display: flex; flex-wrap: wrap; gap: 14px 22px; }
 
-    /* Phones */
+    /* ----------------------------- Phones */
     @media (max-width: 600px) {
       /* Keep nav usable: drop the "· Folio" suffix, tighten the links */
       .nav__inner { gap: 12px; padding: 14px var(--pad-x); }
@@ -274,9 +372,6 @@
       .announce { font-size: 12px; padding: 8px var(--pad-x); }
       .announce a { white-space: nowrap; }
       .backbar { padding-top: 16px; }
-
-      .explore__grid { gap: 40px; }
-      .concept__frame { padding: 16px; }
     }
     @media (max-width: 360px) {
       .nav__links { gap: 12px; }
@@ -293,7 +388,7 @@
       <div class="nav__brand">Jerry Jose <span>· Folio</span></div>
       <nav class="nav__links">
         <a href="landing.html#work" class="active">Work</a>
-        <a href="landing.html#tools">Tools</a>
+        <a href="career.html">Career</a>
         <a href="landing.html#contact">Contact</a>
         <a href="cover.html">Cover</a>
       </nav>
@@ -329,83 +424,115 @@
     </div>
   </section>
 
-  <!-- Overview -->
-  <section class="case">
-    <div class="case__inner">
-      <div class="case__head"><span class="case__num">01, Overview</span><h2>A pure UI exercise</h2></div>
-      <p class="case__lead">
-        The brief was to imagine a seamless mobile experience for a motor-insurance app that
-        also handled challans, PUC certificates, document storage, and a vehicle vault, all in
-        one place.
-      </p>
-      <p>
-        I used two weeks to explore a handful of visual languages for the home screen and land
-        on one worth taking forward. The <strong>immersive 3D direction</strong>, above, is where I
-        settled: your vehicle takes the stage, the utility stacks below. The rest sit here as
-        the range that got me there.
-      </p>
-      <div class="note">
-        <strong>Honest framing:</strong> this was purely a UI exercise, no user research, no shipped
-        product, no live metrics. The value was in the range explored and the direction it produced.
-      </div>
-    </div>
-  </section>
+  <!-- ============= Case body ============= -->
+  <div class="case-shell">
+    <!-- Left rail, sticky mini TOC -->
+    <aside class="rail" aria-label="On this page">
+      <a href="#overview">Overview</a>
+      <a href="#explorations">Explorations</a>
+    </aside>
 
-  <!-- Explorations -->
-  <section class="explore">
-    <div class="explore__head">
-      <span class="case__num">02, Explorations</span>
-      <h2 style="font-family:'Source Serif 4',Georgia,serif; font-weight:600; margin:0; font-size:clamp(1.6rem,3vw,2.3rem); letter-spacing:-0.025em;">Three directions, one feature set</h2>
-    </div>
-    <div class="explore__inner">
-      <div class="explore__grid">
+    <div class="main">
 
-        <!-- Concept 3 — features the row -->
-        <div class="concept concept--feature">
-          <div class="concept__frame">
-            <video src="assets/motor/Screen_Recording_2024-03-10_at_1.18.18_AM.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <!-- ===== Overview, four labelled rows ===== -->
+      <section class="section" id="overview">
+        <div class="overview-rows">
+          <div class="ovrow">
+            <div class="ovrow__label">Business</div>
+            <div class="ovrow__body">
+              A motor-insurance app that wanted to be a <strong>one-stop shop</strong>:
+              insurance, challans, PUC, documents, garages.
+            </div>
           </div>
-          <span class="concept__label">Concept 03 · Motion prototype</span>
-          <p class="concept__title">The closest sibling to the final direction.</p>
-          <p class="concept__desc">
-            A motion pass that treats the vehicle as the stage and lets the rest of the app
-            reveal beneath it. This is the study that convinced me the immersive route in the
-            hero was the one worth taking forward, everything below sits alongside it as the
-            range that got me there.
-          </p>
+          <div class="ovrow">
+            <div class="ovrow__label">Challenge</div>
+            <div class="ovrow__body">
+              The brief was to imagine a <strong>seamless mobile experience</strong> for a motor-insurance app that
+              also handled challans, PUC certificates, document storage, and a vehicle vault, all in
+              one place.
+            </div>
+          </div>
+          <div class="ovrow">
+            <div class="ovrow__label">Solution</div>
+            <div class="ovrow__body">
+              I used two weeks to explore a handful of visual languages for the home screen and land
+              on one worth taking forward. The <strong>immersive 3D direction</strong>, above, is where I
+              settled: your vehicle takes the stage, the utility stacks below. The rest sit here as
+              the range that got me there.
+            </div>
+          </div>
+          <div class="ovrow">
+            <div class="ovrow__label">Impact</div>
+            <div class="ovrow__body">
+              No shipped product, no live metrics. What it produced: <strong>three concept
+              directions</strong> on one feature set, and the <strong>immersive 3D route</strong> as the
+              one worth taking forward.
+            </div>
+          </div>
         </div>
 
-        <!-- Concept 02B — Illustrative (both variants clubbed) -->
-        <div class="concept">
-          <div class="concept__frame">
-            <img src="assets/motor/Android_Large_-_430.png" alt="Concept 2B, illustrative layout with a stylised bike on a light backdrop and a soft-white content sheet below." loading="lazy" />
-          </div>
-          <span class="concept__label">Concept 02B · Illustrative</span>
-          <p class="concept__title">Illustration on top, sheet below.</p>
-          <p class="concept__desc">
-            Splits the screen into a light illustrative header and a soft-white sheet holding
-            the modules. Warmer and friendlier than the immersive route, more personality than
-            the utility one. Explored across two layout variants that shared the same DNA.
-          </p>
+        <div class="note">
+          <strong>Honest framing:</strong> this was purely a UI exercise, no user research, no shipped
+          product, no live metrics. The value was in the range explored and the direction it produced.
         </div>
+      </section>
 
-        <!-- Concept 02A — Utility, back seat -->
-        <div class="concept">
-          <div class="concept__frame">
-            <img src="assets/motor/Android_Large_-_434.png" alt="Concept 2A, white card-based utility layout with insurance status, renewal gauge, and cashless garages." loading="lazy" />
+      <!-- ===== Explorations ===== -->
+      <section class="section" id="explorations">
+        <span class="badge">Explorations</span>
+        <h2 class="two-tone">Three directions, <strong>one feature set</strong>.</h2>
+
+        <div class="explore__grid">
+
+          <!-- Concept 3, features the row -->
+          <div class="concept concept--feature">
+            <div class="concept__frame">
+              <video src="assets/motor/Screen_Recording_2024-03-10_at_1.18.18_AM.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <span class="concept__label">Concept 03 · Motion prototype</span>
+            <p class="concept__title">The closest sibling to the final direction.</p>
+            <p class="concept__desc">
+              A motion pass that treats the vehicle as the stage and lets the rest of the app
+              reveal beneath it. This is the study that convinced me the immersive route in the
+              hero was the one worth taking forward, everything below sits alongside it as the
+              range that got me there.
+            </p>
           </div>
-          <span class="concept__label">Concept 02A · Utility</span>
-          <p class="concept__title">Cards, gauges, and cashless garages.</p>
-          <p class="concept__desc">
-            A familiar utility layout, renewal as a gauge, challans as a card, digilocker as
-            a stack. Scannable, closer to a banking-app mental model. Also tried in dark mode.
-            Kept as a control point; the immersive route said more.
-          </p>
-        </div>
 
-      </div>
+          <!-- Concept 02B, Illustrative (both variants clubbed) -->
+          <div class="concept">
+            <div class="concept__frame">
+              <img src="assets/motor/Android_Large_-_430.png" alt="Concept 2B, illustrative layout with a stylised bike on a light backdrop and a soft-white content sheet below." loading="lazy" />
+            </div>
+            <span class="concept__label">Concept 02B · Illustrative</span>
+            <p class="concept__title">Illustration on top, sheet below.</p>
+            <p class="concept__desc">
+              Splits the screen into a light illustrative header and a soft-white sheet holding
+              the modules. Warmer and friendlier than the immersive route, more personality than
+              the utility one. Explored across two layout variants that shared the same DNA.
+            </p>
+          </div>
+
+          <!-- Concept 02A, Utility, back seat -->
+          <div class="concept">
+            <div class="concept__frame">
+              <img src="assets/motor/Android_Large_-_434.png" alt="Concept 2A, white card-based utility layout with insurance status, renewal gauge, and cashless garages." loading="lazy" />
+            </div>
+            <span class="concept__label">Concept 02A · Utility</span>
+            <p class="concept__title">Cards, gauges, and cashless garages.</p>
+            <p class="concept__desc">
+              A familiar utility layout, renewal as a gauge, challans as a card, digilocker as
+              a stack. Scannable, closer to a banking-app mental model. Also tried in dark mode.
+              Kept as a control point; the immersive route said more.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
     </div>
-  </section>
+  </div>
+
 
   <!-- Footer -->
   <footer>
@@ -413,11 +540,34 @@
       <div>© 2026 Jerry Jose · made in Bengaluru</div>
       <div class="footer__links">
         <a href="landing.html">Folio</a>
+        <a href="career.html">Career</a>
         <a href="cover.html">Cover page</a>
         <a href="mailto:workwithjerry@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Highlight the rail link whose section is currently in view.
+    (function () {
+      const links = Array.from(document.querySelectorAll('.rail a'));
+      const map = new Map();
+      links.forEach(a => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) map.set(el, a);
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove('is-active'));
+            map.get(e.target)?.classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      map.forEach((_, el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>

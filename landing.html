@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Jerry Jose, a portfolio in the spirit of craft.do/imagine." />
-  <title>Jerry Jose, Imagine</title>
+  <title>Jerry Jose · Portfolio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,17 +53,15 @@
 
     /* Display headlines use Source Serif 4 (a free, editorial-feeling serif
        that's an honest stand-in for the commercial face Craft uses in their
-       hero). Body / nav / chips / cards stay on Inter. */
+       hero). Body / nav / cards stay on Inter. */
     .hero h1,
     .section__head h2,
-    .showcase__copy h3,
     .cta h2 {
       font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
       font-weight: 500;
       letter-spacing: -0.015em;
     }
     .hero h1 em,
-    .showcase__copy h3 em,
     .cta h2 em {
       font-style: italic;
       font-weight: 400;
@@ -232,39 +230,9 @@
       font-size: clamp(1.05rem, 1.6vw, 1.25rem);
       color: var(--ink-muted);
       max-width: 38ch;
-      margin: 0 auto 44px;
+      margin: 0 auto;
       line-height: 1.55;
     }
-
-    /* Integration row, small monogram chips standing in for tool icons */
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      max-width: 740px;
-      margin: 0 auto;
-    }
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      background: rgba(255, 255, 255, 0.65);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-      backdrop-filter: blur(4px);
-    }
-    .chip .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--tint-blue);
-    }
-    .chip .dot.pink { background: var(--tint-pink); }
-    .chip .dot.ink { background: var(--ink); }
 
     /* ----------------------------- Section primitives */
     .section {
@@ -289,55 +257,6 @@
       font-size: 1.05rem;
       color: var(--ink-muted);
       margin: 0;
-    }
-
-    /* ----------------------------- Showcase: 2-column */
-    .showcase {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: clamp(36px, 5vw, 72px);
-      align-items: center;
-    }
-    .showcase__media {
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      background: var(--card-bg);
-      border: 1px solid var(--line);
-      box-shadow: 0 20px 60px rgba(31, 29, 26, 0.06);
-      aspect-ratio: 4 / 3;
-    }
-    .showcase__media img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .showcase__copy h3 {
-      font-size: clamp(1.6rem, 2.8vw, 2.1rem);
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      font-weight: 700;
-      margin: 0 0 18px;
-    }
-    .showcase__copy p {
-      color: var(--ink-muted);
-      font-size: 1.04rem;
-      margin: 0 0 14px;
-      max-width: 46ch;
-    }
-    .showcase__copy .more {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 16px;
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .showcase__copy .more::after { content: '→'; transition: transform 0.2s ease; }
-    .showcase__copy .more:hover::after { transform: translateX(3px); }
-
-    @media (max-width: 800px) {
-      .showcase { grid-template-columns: 1fr; }
     }
 
     /* ----------------------------- Card grid placeholder ribbon */
@@ -404,56 +323,6 @@
     .work-card:hover .work-card__more::after { transform: translateX(3px); }
     @media (max-width: 700px) { .work-grid { grid-template-columns: 1fr; } }
 
-    /* ----------------------------- Integration guides, icon-style grid */
-    .guides__group {
-      margin-top: 56px;
-    }
-    .guides__group h3 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--ink-soft);
-      font-weight: 600;
-      text-align: center;
-      margin: 0 0 28px;
-    }
-    .icon-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 12px;
-      max-width: 980px;
-      margin: 0 auto;
-    }
-    .icon-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      background: var(--card-bg);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--ink);
-      transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-    .icon-card:hover {
-      border-color: var(--line-strong);
-      transform: translateY(-1px);
-    }
-    .icon-card .glyph {
-      flex: none;
-      width: 28px; height: 28px;
-      border-radius: 8px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: 12px;
-      color: var(--ink-muted);
-    }
-
     /* ----------------------------- Final CTA */
     .cta {
       position: relative;
@@ -503,6 +372,128 @@
     .btn::after { content: '→'; transition: transform 0.2s ease; }
     .btn:hover::after { transform: translateX(3px); }
 
+    /* ----------------------------- Recommendations */
+    .inline-link { color: var(--accent); border-bottom: 1px solid rgba(42, 76, 220, 0.3); }
+    .inline-link:hover { border-color: var(--accent); }
+    .recs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(20px, 3vw, 28px);
+      align-items: start;
+    }
+    .rec {
+      margin: 0;
+      display: flex; flex-direction: column;
+      padding: 28px 28px 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card-bg);
+      position: relative;
+    }
+    .rec::before {
+      content: '“';
+      position: absolute; top: 6px; right: 22px;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 4.5rem; line-height: 1; color: var(--line-strong);
+      pointer-events: none;
+    }
+    .rec__text { margin: 0; position: relative; }
+    .rec__text p { margin: 0 0 12px; font-size: 0.98rem; line-height: 1.6; color: var(--ink-muted); }
+    .rec__text p:first-child {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.14rem; line-height: 1.45; color: var(--ink); font-weight: 500;
+      padding-right: 36px;
+    }
+    .rec__text p:last-child { margin-bottom: 0; }
+    /* Collapsed state: show the opening, fade out the rest */
+    .rec__text.is-clamped {
+      max-height: 15.5em; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent);
+              mask-image: linear-gradient(to bottom, #000 65%, transparent);
+    }
+    .rec__more {
+      align-self: flex-start; margin-top: 10px; padding: 4px 0;
+      background: none; border: 0; cursor: pointer;
+      font: inherit; font-size: 0.9rem; font-weight: 600; color: var(--accent);
+    }
+    .rec__more::after { content: ' ↓'; }
+    .rec__more[aria-expanded="true"]::after { content: ' ↑'; }
+    .rec__who {
+      display: flex; align-items: center; gap: 14px;
+      margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line);
+    }
+    .rec__avatar {
+      flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; background: var(--paper-deep);
+      border: 1px solid var(--line);
+    }
+    .rec__meta { display: flex; flex-direction: column; min-width: 0; line-height: 1.35; }
+    .rec__name { font-weight: 700; font-size: 0.98rem; color: var(--ink); }
+    .rec__role { font-size: 0.86rem; color: var(--ink-muted); }
+    .rec__rel { font-size: 0.8rem; color: var(--ink-soft); margin-top: 2px; }
+    @media (max-width: 760px) {
+      .recs { grid-template-columns: minmax(0, 1fr); }
+      .rec { padding: 22px 20px 20px; }
+    }
+
+    /* ----------------------------- Personal creative work */
+    /* Staggered columns so covers of different proportions pack without gaps */
+    .folders { column-count: 3; column-gap: clamp(20px, 3vw, 32px); }
+    .folder {
+      display: flex; flex-direction: column; gap: 14px; width: 100%;
+      break-inside: avoid; margin: 0 0 clamp(24px, 3.5vw, 40px);
+      padding: 0; border: 0; background: none; text-align: left; cursor: zoom-in;
+      font: inherit; color: inherit;
+    }
+    .folder__cover {
+      display: block; border-radius: 16px; overflow: hidden; background: #161412;
+      box-shadow: 0 1px 0 var(--line), 0 18px 44px rgba(31, 29, 26, 0.10);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    /* Covers keep the asset's own proportions: never cropped or stretched */
+    .folder__cover img,
+    .folder__cover video { display: block; width: 100%; height: auto; }
+    .folder:hover .folder__cover { transform: translateY(-4px); box-shadow: 0 1px 0 var(--line), 0 28px 60px rgba(31, 29, 26, 0.16); }
+    .folder:focus-visible { outline: none; }
+    .folder:focus-visible .folder__cover { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .folder__meta { display: flex; flex-direction: column; gap: 2px; }
+    .folder__title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.3rem; font-weight: 600; letter-spacing: -0.015em; color: var(--ink);
+    }
+    .folder__count { font-size: 0.88rem; color: var(--ink-soft); }
+    @media (max-width: 900px) { .folders { column-count: 2; } }
+    @media (max-width: 560px) { .folders { column-count: 1; } }
+
+    .viewer {
+      width: 100vw; height: 100vh; max-width: none; max-height: none;
+      margin: 0; padding: 0; border: 0; background: transparent;
+    }
+    .viewer[open] { display: grid; place-items: center; }
+    .viewer [hidden] { display: none; }
+    .viewer::backdrop { background: rgba(20, 18, 16, 0.92); }
+    /* Full-resolution original, never scaled above its natural size */
+    .viewer__img,
+    .viewer__video {
+      max-width: 92vw; max-height: 88vh; width: auto; height: auto;
+      border-radius: 12px; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .viewer__btn {
+      position: fixed; width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.1);
+      color: #fff; font-size: 1.1rem; cursor: pointer;
+      display: grid; place-items: center;
+    }
+    .viewer__btn:hover { background: rgba(255,255,255,0.22); }
+    .viewer__close { top: 18px; right: 18px; }
+    .viewer__prev { left: 18px; top: 50%; transform: translateY(-50%); }
+    .viewer__next { right: 18px; top: 50%; transform: translateY(-50%); }
+    @media (max-width: 600px) {
+      .viewer__prev, .viewer__next { top: auto; bottom: 24px; transform: none; }
+      .viewer__prev { left: calc(50% - 56px); }
+      .viewer__next { right: calc(50% - 56px); }
+    }
+
     /* ----------------------------- Footer */
     footer {
       border-top: 1px solid var(--line);
@@ -542,7 +533,6 @@
       <nav class="nav__links">
         <a href="#work">Work</a>
         <a href="career.html">Career</a>
-        <a href="#tools">Tools</a>
         <a href="#contact">Contact</a>
         <a href="cover.html">Cover</a>
       </nav>
@@ -578,50 +568,11 @@
         waiting for you.
       </p>
 
-      <div class="chips" aria-label="Tools I work with">
-        <span class="chip"><span class="dot ink"></span>Figma</span>
-        <span class="chip"><span class="dot"></span>FigJam</span>
-        <span class="chip"><span class="dot pink"></span>Notion</span>
-        <span class="chip"><span class="dot"></span>Linear</span>
-        <span class="chip"><span class="dot ink"></span>Framer</span>
-        <span class="chip"><span class="dot pink"></span>Pitch</span>
-        <span class="chip"><span class="dot"></span>Webflow</span>
-        <span class="chip"><span class="dot ink"></span>Slack</span>
-      </div>
     </div>
   </section>
 
-  <!-- Personal showcase (2-col: image + copy) -->
+  <!-- Projects -->
   <section class="section section--divider" id="work">
-    <div class="container">
-      <div class="showcase">
-        <div class="showcase__media">
-          <img
-            src="https://www.craft.do/_image/width=2048,quality=85,format=auto/_next/static/media/personal-blog-doc-preview.d78ceaf4.png"
-            alt="Preview of recent work"
-          />
-        </div>
-        <div class="showcase__copy">
-          <p class="eyebrow">Currently shipping</p>
-          <h3>Building the calmest trading interface I can think of.</h3>
-          <p>
-            At FYERS I work on the surfaces millions of traders touch every
-            day, order tickets, charts, portfolios. The goal isn't to look
-            clever. It's to read fast, decide faster, and never get in your
-            way at the worst possible moment.
-          </p>
-          <p>
-            Most of the win is restraint: fewer affordances, clearer hierarchy,
-            sturdier defaults. The interesting work is in the boring parts.
-          </p>
-          <a href="https://fyers.in" target="_blank" rel="noopener" class="more">See what FYERS does</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Card-grid sections deferred (placeholder per scope decision) -->
-  <section class="section section--divider">
     <div class="container">
       <div class="section__head">
         <h2>Projects I've worked on</h2>
@@ -663,41 +614,275 @@
     </div>
   </section>
 
-  <!-- Integration guides, icon-style grid -->
-  <section class="section section--divider" id="tools">
+  <!-- Recommendations (from LinkedIn) -->
+  <section class="section section--divider" id="kind-words">
     <div class="container">
       <div class="section__head">
-        <h2>Or follow along on your favorite platform</h2>
-        <p>The same work, wherever you usually live online.</p>
+        <h2>A few kind words from people I worked with</h2>
+        <p>Recommendations from managers and teammates at FYERS and Thence, as written on <a class="inline-link" href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/details/recommendations/" target="_blank" rel="noopener">LinkedIn</a>.</p>
       </div>
-
-      <div class="guides__group">
-        <h3>Design &amp; thinking</h3>
-        <div class="icon-grid">
-          <a class="icon-card" href="#"><span class="glyph">F</span>Figma</a>
-          <a class="icon-card" href="#"><span class="glyph">FJ</span>FigJam</a>
-          <a class="icon-card" href="#"><span class="glyph">N</span>Notion</a>
-          <a class="icon-card" href="#"><span class="glyph">L</span>Linear</a>
-          <a class="icon-card" href="#"><span class="glyph">M</span>Miro</a>
-          <a class="icon-card" href="#"><span class="glyph">P</span>Pitch</a>
-          <a class="icon-card" href="#"><span class="glyph">A</span>Arc</a>
-          <a class="icon-card" href="#"><span class="glyph">R</span>Raycast</a>
-        </div>
-      </div>
-
-      <div class="guides__group">
-        <h3>Words &amp; images</h3>
-        <div class="icon-grid">
-          <a class="icon-card" href="https://chasedbytom.notion.site" target="_blank" rel="noopener"><span class="glyph">N</span>Old Folio (Notion)</a>
-          <a class="icon-card" href="https://www.linkedin.com/in/jerry-jose-03bb6a1a5/" target="_blank" rel="noopener"><span class="glyph">in</span>LinkedIn</a>
-          <a class="icon-card" href="mailto:workwithjerry@gmail.com"><span class="glyph">@</span>Email</a>
-          <a class="icon-card" href="https://open.spotify.com/user/23ens7pvd14tf86pszus61ns8" target="_blank" rel="noopener"><span class="glyph">♪</span>Spotify</a>
-          <a class="icon-card" href="#"><span class="glyph">G</span>GitHub</a>
-          <a class="icon-card" href="#"><span class="glyph">X</span>X / Twitter</a>
-        </div>
+      <div class="recs">
+        <figure class="rec">
+          <blockquote class="rec__text" id="rec-5">
+            <p>I still remember Jerry from the time I hired him into the design team at FYERS. He came with a fantastic portfolio and a credible body of work: soft-spoken, warm, and incredibly talented. Oh boy, didn't he ask a lot of questions?</p>
+            <p>And I mean that as one of the highest compliments I can give a designer.</p>
+            <p>Jerry doesn't jump into solutions. He wants to understand the problem, the intent behind it, and the things that haven't been said yet. Over the years, I learned that I could give him an idea that wasn't fully formed, and he would ask the right questions, fill in the gaps I had missed, and bring clarity to it.</p>
+            <p>When I later moved from Design to set up the Innovation Lab, I had the difficult choice of picking a few people from a team that was very close to me. Jerry was one of the people I chose. I chose him because I knew I could trust him with something from ideation all the way to execution.</p>
+            <p>That trust was never misplaced. Jerry commits and delivers. He doesn't need repeated follow-ups or someone constantly looking over his shoulder. And the work arrives with thought, clarity, and exceptional visual craft.</p>
+            <p>FYERS Academy is a good example. Jerry played an immense role in visualizing and building the experience. I also watched him evolve from designing experiences in Figma to embracing AI and using it to turn ideas directly into working applications. When someone with his level of visual design ability and creativity learns to wield technology like that, the possibilities become genuinely exciting.</p>
+            <p>But I would be leaving out an important part of Jerry if I spoke only about his work. He genuinely cares about the people around him. Our daily conversations in the Innovation Lab were often filled with ideas, questions, debates, and laughter, and his care for his teammates was always evident. It was never performative. That's simply who he is.</p>
+            <p>Jerry is one of those people you would want on your team: a fantastic designer, a curious mind, a dependable colleague, and, more importantly, a wonderful human being.</p>
+            <p>I wish him nothing but the very best for what comes next. And selfishly, I hope our paths cross again and we get to build something together someday.</p>
+          </blockquote>
+          <button class="rec__more" type="button" aria-expanded="false" aria-controls="rec-5" hidden>Read more</button>
+          <figcaption class="rec__who">
+            <img class="rec__avatar" src="assets/recs/bipin.jpg" alt="" width="52" height="52" loading="lazy" />
+            <span class="rec__meta">
+              <span class="rec__name">Bipin Domy Thomas</span>
+              <span class="rec__role">Design &amp; Experience Leader · Chief Experience &amp; Innovation Officer</span>
+              <span class="rec__rel">Managed Jerry directly · <time datetime="2026-10-08">Oct 8, 2026</time></span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote class="rec__text" id="rec-4">
+            <p>Jerry is someone who understands that good design is as much about judgement as it is about craft.</p>
+            <p>What I’ve enjoyed seeing is how quickly he’s moved from Figma to Claude Design and Claude Code, without losing the creative thinking along the way.</p>
+            <p>He’s not precious about tools or process. He’s willing to rethink how things get done, experiment and move forward. But importantly, he knows what to keep, what to question and when something is good enough to put into the world.</p>
+            <p>That balance of curiosity, creativity and sound judgement is what makes Jerry someone I’d happily work with again.</p>
+          </blockquote>
+          <button class="rec__more" type="button" aria-expanded="false" aria-controls="rec-4" hidden>Read more</button>
+          <figcaption class="rec__who">
+            <img class="rec__avatar" src="assets/recs/kichu.jpg" alt="" width="52" height="52" loading="lazy" />
+            <span class="rec__meta">
+              <span class="rec__name">Kichu J Thomas</span>
+              <span class="rec__role">Senior Manager, Product Design at FYERS</span>
+              <span class="rec__rel">Managed Jerry directly · <time datetime="2026-10-08">Oct 8, 2026</time></span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote class="rec__text" id="rec-0">
+            <p>Jerry and I worked side by side on the product team, and it was a genuine pleasure to have him as a teammate.</p>
+            <p>Jerry has excellent visual design skills, and his work always stood out for its polish. What impressed me just as much was the interest he showed in understanding our design system. He took the time to learn it properly and used components thoughtfully, which kept his work consistent with the rest of the product.</p>
+            <p>He is also very good at prototyping. The working prototypes he built in Figma made ideas easy to understand and test, well before anything went into development.</p>
+            <p>Jerry is one of the best teammates anyone could ask for, strong in both product design and visual design. I recommend him wholeheartedly to any design team.</p>
+          </blockquote>
+          <button class="rec__more" type="button" aria-expanded="false" aria-controls="rec-0" hidden>Read more</button>
+          <figcaption class="rec__who">
+            <img class="rec__avatar" src="assets/recs/jayasooryan.jpg" alt="" width="52" height="52" loading="lazy" />
+            <span class="rec__meta">
+              <span class="rec__name">Jayasooryan S</span>
+              <span class="rec__role">Product Design Manager at FYERS</span>
+              <span class="rec__rel">Was senior to Jerry but didn&#x27;t manage him directly · <time datetime="2026-10-12">Oct 12, 2026</time></span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote class="rec__text" id="rec-1">
+            <p>I had the pleasure of working with Jerry for four years at Thence, and he is easily one of the most creative designers I’ve worked with. He’s deeply dedicated to his craft, full of bold ideas, and, more importantly, has the skill to bring even his wildest ones to life.</p>
+            <p>Jerry is equally strong in UX as he is in UI. He thinks through the problem as carefully as he designs the final screens. He never shies from collaborating with people, and he stays calm under pressure. No matter how tight the deadline or how complex the brief, he never makes a goal feel out of reach.</p>
+            <p>What really sets him apart is how he works with clients. He explains his thinking with clarity and conviction, and I’ve seen clients specifically ask for Jerry on their projects because of the trust they have in him and his work. It's nice to see his craft being recognised.</p>
+            <p>He’s also endlessly curious and always finds ways to learn and grow beyond his day job. It’s been great to see him grow into the brilliant designer and artist he's become over the years I've known him. He doesn't stop amazing me with his craft.</p>
+            <p>Any team would be lucky to have Jerry.</p>
+          </blockquote>
+          <button class="rec__more" type="button" aria-expanded="false" aria-controls="rec-1" hidden>Read more</button>
+          <figcaption class="rec__who">
+            <img class="rec__avatar" src="assets/recs/rhea.jpg" alt="" width="52" height="52" loading="lazy" />
+            <span class="rec__meta">
+              <span class="rec__name">Rhea Thampy</span>
+              <span class="rec__role">Product Designer · Fintech, AI Platforms, Enterprise SaaS</span>
+              <span class="rec__rel">Worked with Jerry on the same team · <time datetime="2026-10-10">Oct 10, 2026</time></span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote class="rec__text" id="rec-2">
+            <p>I first met Jerry on his interview day at Fyers, and I still remember how impressed I was with his portfolio and the way he approached his work. It didn't take much thought to move him to the next round with the managers. I could see that he was talented, curious, and had the kind of creative mind that would fit right in with the team.</p>
+            <p>Although we didn't get the chance to work together immediately after he joined, I eventually had the opportunity to work with him, and he was every bit as curious and creative as I'd expected. Jerry always wanted to learn more, explore new ideas, and find ways to make things better. He often thought outside the box and brought fresh perspectives to the table, so his being part of the Innovation Lab never came as a surprise to me!</p>
+            <p>Working with Jerry over the past year and a half has been a genuinely great experience. He is patient, approachable, and always willing to listen, think things through, and help you find a solution. He never makes a problem feel bigger than it is, and he has a way of looking at challenges from a different angle and adding his own creative twist. He is also someone who is always there for his colleagues, ready to share ideas or lend a helping hand.</p>
+            <p>One thing I’ve always enjoyed about Jerry is how curious he is about the world around him. Our conversations would often leave me thinking, “Wait, how do you even know all this?” 😂 He keeps himself updated on so many different things, and there was almost always something new I could learn from him. His combination of creativity, intellectual curiosity, and willingness to explore ideas is what makes him stand out.</p>
+            <p>I feel fortunate to have worked with Jerry and to have learned from such a creative and inquisitive mind. I’d happily work with him again, and I’m excited to see all the new ideas and possibilities he brings to whatever he takes on next!</p>
+          </blockquote>
+          <button class="rec__more" type="button" aria-expanded="false" aria-controls="rec-2" hidden>Read more</button>
+          <figcaption class="rec__who">
+            <img class="rec__avatar" src="assets/recs/nikita.jpg" alt="" width="52" height="52" loading="lazy" />
+            <span class="rec__meta">
+              <span class="rec__name">Nikita Joseph</span>
+              <span class="rec__role">Senior Product Designer · Simplifying Design @FYERS</span>
+              <span class="rec__rel">Worked with Jerry on the same team · <time datetime="2026-10-09">Oct 9, 2026</time></span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote class="rec__text" id="rec-3">
+            <p>Jerry is exactly the type of person you imagine when you think of a design thinker. His brain functions at a very holistic level - he thinks in five directions before coming up with a design concept, which is almost always extremely unique.</p>
+            <p>I worked with him on multiple projects where we collectively explored different domains, different ideas, UI design concepts, language, etc., and he would always come extra prepared. He’s brilliant at design, research, conceptualization, and, most importantly, user experience.</p>
+            <p>One of the most memorable projects has to be the Augmented Reality product, where end users of the product could capture physical objects, which would later help customers on an e-commerce platform visualize those objects in their environment. The client and I were equally impressed and pleasantly surprised by the thought that went into the design - extremely intuitive yet simple.</p>
+            <p>I saw him get promoted three times during my tenure, all thanks to his exceptional work on client-facing projects. He quickly adapts his narrative to position his concepts for the relevant stakeholder and is able to think from both the user and business points of view.</p>
+            <p>I would hire Jerry in a heartbeat - he’s exactly the kind of leader who can lead, direct, design, and accelerate any work he takes on.</p>
+          </blockquote>
+          <button class="rec__more" type="button" aria-expanded="false" aria-controls="rec-3" hidden>Read more</button>
+          <figcaption class="rec__who">
+            <img class="rec__avatar" src="assets/recs/parastish.jpg" alt="" width="52" height="52" loading="lazy" />
+            <span class="rec__meta">
+              <span class="rec__name">Parastish Singh</span>
+              <span class="rec__role">Digital Commerce Lead @Thoucentric</span>
+              <span class="rec__rel">Worked with Jerry on the same team · <time datetime="2026-10-08">Oct 8, 2026</time></span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote class="rec__text" id="rec-6">
+            <p>I had the pleasure of working closely with Jerry Jose during our time together at Thence, particularly during the UIX Hackathon, our internal company competition. Jerry’s contributions were instrumental to our success, and his outstanding qualities as a designer and colleague shone through.</p>
+            <p>Jerry is a highly creative individual who consistently brings fresh, innovative ideas to the table. His open-minded attitude makes him a fantastic collaborator—he’s always eager to explore new perspectives and incorporate feedback into his designs. This willingness to embrace different viewpoints not only enriches his work but also fosters a positive and inclusive team environment.</p>
+            <p>What truly sets Jerry apart is his deep empathy in design. He has an exceptional ability to understand user needs and translate them into intuitive, impactful experiences. His designs are not just aesthetically pleasing but also user-centric, ensuring that the end product is both functional and enjoyable to use.</p>
+            <p>Working with Jerry has been a rewarding experience, and I’ve seen firsthand how his creativity, open-mindedness, and empathy contribute to exceptional design outcomes. I highly recommend Jerry to any team looking for a talented and dedicated UI/UX designer.</p>
+          </blockquote>
+          <button class="rec__more" type="button" aria-expanded="false" aria-controls="rec-6" hidden>Read more</button>
+          <figcaption class="rec__who">
+            <img class="rec__avatar" src="assets/recs/kritarth.jpg" alt="" width="52" height="52" loading="lazy" />
+            <span class="rec__meta">
+              <span class="rec__name">Kritarth Salunkhe</span>
+              <span class="rec__role">Senior UI/UX Designer</span>
+              <span class="rec__rel">Worked with Jerry on the same team · <time datetime="2024-08-18">Aug 18, 2024</time></span>
+            </span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
+
+  <!-- Personal creative work -->
+  <section class="section section--divider" id="creative">
+    <div class="container">
+      <div class="section__head">
+        <h2>Outside the day job</h2>
+      </div>
+
+      <div class="folders">
+        <button class="folder" type="button" data-gallery="assets/creative/19-days-of-type/cover-square.png|assets/creative/19-days-of-type/cover.jpg|assets/creative/19-days-of-type/type-01.png|assets/creative/19-days-of-type/type-02.png|assets/creative/19-days-of-type/type-03.png|assets/creative/19-days-of-type/type-04.png|assets/creative/19-days-of-type/type-05.png|assets/creative/19-days-of-type/type-06.png|assets/creative/19-days-of-type/type-07.png|assets/creative/19-days-of-type/type-08.png" aria-label="Open 19 days of type">
+          <span class="folder__cover">
+            <img src="assets/creative/19-days-of-type/cover-square.png" alt="19 days of type" width="1990" height="1990" loading="lazy" decoding="async" />
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">19 days of type</span>
+            <span class="folder__count">Type design · 8 pieces</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/creative/glow-ball-trails/glow-ball-trails.mp4" aria-label="Open Glow ball trails">
+          <span class="folder__cover">
+            <video src="assets/creative/glow-ball-trails/glow-ball-trails.mp4" width="1920" height="1080" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">Glow ball trails</span>
+            <span class="folder__count">Motion · Animation</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/creative/aavesham-knife/soda-opener.mp4" aria-label="Open Aavesham knife">
+          <span class="folder__cover">
+            <video src="assets/creative/aavesham-knife/soda-opener.mp4" width="1280" height="2274" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">Aavesham knife</span>
+            <span class="folder__count">Pixel art · Animation</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/creative/low-fire/low-fire.mp4" aria-label="Open Low fire">
+          <span class="folder__cover">
+            <video src="assets/creative/low-fire/low-fire.mp4" width="1080" height="1080" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">Low fire</span>
+            <span class="folder__count">Motion · Animation</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/creative/picocad-snack/snack-pack.mp4" aria-label="Open Snack pack">
+          <span class="folder__cover">
+            <video src="assets/creative/picocad-snack/snack-pack.mp4" width="384" height="384" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">Snack pack</span>
+            <span class="folder__count">Low-poly 3D · picoCAD</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards and recognition -->
+  <section class="section section--divider" id="awards">
+    <div class="container">
+      <div class="section__head">
+        <h2>Awards and recognition</h2>
+      </div>
+
+      <div class="folders">
+        <button class="folder" type="button" data-gallery="assets/awards/fyers-rising-star-2025.jpg" aria-label="Open Rising Star, FYERS · Spot Award · Oct 2025">
+          <span class="folder__cover">
+            <img src="assets/awards/fyers-rising-star-2025.jpg" alt="FYERS Rising Star spot award certificate for Jerry Jose, October 2025" width="1500" height="2000" loading="lazy" decoding="async" />
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">Rising Star</span>
+            <span class="folder__count">FYERS · Spot Award · Oct 2025</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/awards/thence-good-samaritan-2023-q2.webp" aria-label="Open The Good Samaritan, Thence · Q2 2023">
+          <span class="folder__cover">
+            <img src="assets/awards/thence-good-samaritan-2023-q2.webp" alt="Thence Good Samaritan award certificate for Jerry Jose, Q2 2023" width="2000" height="1413" loading="lazy" decoding="async" />
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">The Good Samaritan</span>
+            <span class="folder__count">Thence · Q2 2023</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/awards/thence-superman-2022-q2.jpg" aria-label="Open The Superman, Thence · Q2 2022">
+          <span class="folder__cover">
+            <img src="assets/awards/thence-superman-2022-q2.jpg" alt="Thence Superman award for Jerry Jose, Q2 2022" width="900" height="1600" loading="lazy" decoding="async" />
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">The Superman</span>
+            <span class="folder__count">Thence · Q2 2022</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/awards/thence-superman-2022-q1.jpg" aria-label="Open The Superman, Thence · Q1 2022">
+          <span class="folder__cover">
+            <img src="assets/awards/thence-superman-2022-q1.jpg" alt="Thence Superman award for Jerry Jose, Q1 2022" width="512" height="910" loading="lazy" decoding="async" />
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">The Superman</span>
+            <span class="folder__count">Thence · Q1 2022</span>
+          </span>
+        </button>
+
+        <button class="folder" type="button" data-gallery="assets/awards/thence-superman-2021-q3.jpg" aria-label="Open The Superman, Thence · Q3 2021">
+          <span class="folder__cover">
+            <img src="assets/awards/thence-superman-2021-q3.jpg" alt="Thence Superman award for Jerry Jose, Q3 2021" width="512" height="910" loading="lazy" decoding="async" />
+          </span>
+          <span class="folder__meta">
+            <span class="folder__title">The Superman</span>
+            <span class="folder__count">Thence · Q3 2021</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-size viewer for creative work -->
+  <dialog class="viewer" aria-label="Artwork viewer">
+    <button class="viewer__btn viewer__close" type="button" aria-label="Close">✕</button>
+    <button class="viewer__btn viewer__prev" type="button" aria-label="Previous">←</button>
+    <img class="viewer__img" alt="" />
+    <video class="viewer__video" muted loop playsinline controls hidden></video>
+    <button class="viewer__btn viewer__next" type="button" aria-label="Next">→</button>
+  </dialog>
 
   <!-- Final CTA -->
   <section class="cta" id="contact">
@@ -723,6 +908,7 @@
     <div class="footer__inner">
       <div>© 2026 Jerry Jose · made in Bengaluru</div>
       <div class="footer__links">
+        <a href="landing.html">Folio</a>
         <a href="career.html">Career</a>
         <a href="cover.html">Cover page</a>
         <a href="mailto:workwithjerry@gmail.com">Email</a>
@@ -730,5 +916,56 @@
       </div>
     </div>
   </footer>
+  <script>
+    // Recommendations: collapse long ones behind "Read more"
+    document.querySelectorAll('.rec').forEach(function (card) {
+      var text = card.querySelector('.rec__text');
+      var btn = card.querySelector('.rec__more');
+      text.classList.add('is-clamped');
+      if (text.scrollHeight <= text.clientHeight + 4) { text.classList.remove('is-clamped'); return; }
+      btn.hidden = false;
+      btn.addEventListener('click', function () {
+        var open = text.classList.toggle('is-clamped') === false;
+        btn.setAttribute('aria-expanded', String(open));
+        btn.textContent = open ? 'Show less' : 'Read more';
+      });
+    });
+  </script>
+  <script>
+    // Creative work viewer: a folder opens its cover, then each piece, full size
+    (function () {
+      var viewer = document.querySelector('.viewer');
+      if (!viewer || typeof viewer.showModal !== 'function') return;
+      var img = viewer.querySelector('.viewer__img');
+      var items = [], current = 0, title = '';
+      var video = viewer.querySelector('.viewer__video');
+      var arrows = viewer.querySelectorAll('.viewer__prev, .viewer__next');
+      function show(i) {
+        current = (i + items.length) % items.length;
+        var src = items[current], isVideo = /\.mp4$/i.test(src);
+        img.hidden = isVideo; video.hidden = !isVideo;
+        if (isVideo) { img.removeAttribute('src'); video.src = src; video.play(); }
+        else { video.pause(); video.removeAttribute('src'); img.src = src;
+               img.alt = title + ', ' + (current === 0 ? 'cover' : current === 1 && items.length > 2 ? 'overview poster' : 'piece ' + (current - 1)); }
+        arrows.forEach(function (a) { a.hidden = items.length < 2; });
+      }
+      viewer.addEventListener('close', function () { video.pause(); });
+      document.querySelectorAll('.folder').forEach(function (f) {
+        f.addEventListener('click', function () {
+          items = f.dataset.gallery.split('|');
+          title = f.querySelector('.folder__title').textContent;
+          show(0); viewer.showModal();
+        });
+      });
+      viewer.querySelector('.viewer__prev').addEventListener('click', function () { show(current - 1); });
+      viewer.querySelector('.viewer__next').addEventListener('click', function () { show(current + 1); });
+      viewer.querySelector('.viewer__close').addEventListener('click', function () { viewer.close(); });
+      viewer.addEventListener('click', function (e) { if (e.target === viewer) viewer.close(); });
+      viewer.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+    })();
+  </script>
 </body>
 </html>
