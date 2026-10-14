@@ -303,6 +303,17 @@
     }
     .work-card:hover .work-card__media img { transform: scale(1.03); }
     .work-card__body { padding: 22px 24px 26px; }
+    .work-card__icon {
+      display: grid; place-items: center; width: 44px; height: 44px; margin: 0 0 16px;
+      border-radius: 12px; color: #3f8a46;
+      background: linear-gradient(150deg, #e3f1e6 0%, #f6f3e4 60%, #fbefd8 100%);
+      border: 1px solid var(--line);
+    }
+    .work-card__icon svg { width: 24px; height: 24px; }
+    .work-card__icon--purple { color: #6C2BD9; background: linear-gradient(150deg, #f1ecfb 0%, #e9e2f8 100%); }
+    .work-card__icon--blue { color: #3d55e0; background: linear-gradient(150deg, #e9edfc 0%, #dfe5fb 100%); }
+    .work-card__icon--zadinga { color: #0b7d4f; background: linear-gradient(150deg, #eaf6df 0%, #def0cf 100%); }
+    .work-card__icon--gold { color: #a9791b; background: linear-gradient(150deg, #fbf3dc 0%, #f8eccb 100%); }
     .work-card__eyebrow {
       font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
       text-transform: uppercase; color: var(--ink); margin: 0 0 8px;
@@ -541,6 +552,7 @@
       <div class="work-grid">
         <a class="work-card" href="take-a-break.html">
           <div class="work-card__body">
+            <span class="work-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.00488 5.00281H11.0049V14.0028H8.00488V17.0028H6.00488V14.0028H3.00488V5.00281H6.00488V2.00281H8.00488V5.00281ZM18.0049 10.0028H21.0049V19.0028H18.0049V22.0028H16.0049V19.0028H13.0049V10.0028H16.0049V7.00281H18.0049V10.0028Z"></path></svg></span>
             <p class="work-card__eyebrow">Fintech · Interaction Design · 2024–25</p>
             <p class="work-card__desc">Making it okay for traders to take a break from the markets.</p>
             <span class="work-card__more">View interaction</span>
@@ -549,6 +561,7 @@
 
         <a class="work-card" href="takreem.html">
           <div class="work-card__body">
+            <span class="work-card__icon work-card__icon--gold"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.3349 11.5023L11.5049 11.5028C13.9902 11.5028 16.0049 13.5175 16.0049 16.0028H9.00388L9.00488 17.0028L17.0049 17.002V16.0028C17.0049 14.9204 16.6867 13.8997 16.1188 13.002L19.0049 13.0028C20.9972 13.0028 22.7173 14.1681 23.521 15.8542C21.1562 18.9748 17.3268 21.0028 13.0049 21.0028C10.2436 21.0028 7.90445 20.4122 6.00456 19.378L6.00592 10.0738C7.25147 10.2522 8.39122 10.7585 9.3349 11.5023ZM5.00488 19.0028C5.00488 19.5551 4.55717 20.0028 4.00488 20.0028H2.00488C1.4526 20.0028 1.00488 19.5551 1.00488 19.0028V10.0028C1.00488 9.45052 1.4526 9.00281 2.00488 9.00281H4.00488C4.55717 9.00281 5.00488 9.45052 5.00488 10.0028V19.0028ZM18.0049 5.00281C19.6617 5.00281 21.0049 6.34595 21.0049 8.00281C21.0049 9.65966 19.6617 11.0028 18.0049 11.0028C16.348 11.0028 15.0049 9.65966 15.0049 8.00281C15.0049 6.34595 16.348 5.00281 18.0049 5.00281ZM11.0049 2.00281C12.6617 2.00281 14.0049 3.34595 14.0049 5.00281C14.0049 6.65966 12.6617 8.00281 11.0049 8.00281C9.34803 8.00281 8.00488 6.65966 8.00488 5.00281C8.00488 3.34595 9.34803 2.00281 11.0049 2.00281Z"></path></svg></span>
             <p class="work-card__eyebrow">Consumer App · Case Study · 2024</p>
             <p class="work-card__desc">A consumer app experience designed for the UAE market.</p>
             <span class="work-card__more">Read case study</span>
@@ -557,6 +570,7 @@
 
         <a class="work-card" href="deem.html">
           <div class="work-card__body">
+            <span class="work-card__icon work-card__icon--purple"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.0049 9.99979V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V9.99979H22.0049ZM22.0049 7.99979H2.00488V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V7.99979ZM15.0049 15.9998V17.9998H19.0049V15.9998H15.0049Z"></path></svg></span>
             <p class="work-card__eyebrow">Fintech · Case Study · 2023</p>
             <p class="work-card__desc">A UAE lending experience, reworked for clarity and trust.</p>
             <span class="work-card__more">Read case study</span>
@@ -565,6 +579,7 @@
 
         <a class="work-card" href="motor.html">
           <div class="work-card__body">
+            <span class="work-card__icon work-card__icon--blue"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 13.5V21C22 21.5523 21.5523 22 21 22H20C19.4477 22 19 21.5523 19 21V20H5V21C5 21.5523 4.55228 22 4 22H3C2.44772 22 2 21.5523 2 21V13.5L0.757464 13.1894C0.312297 13.0781 0 12.6781 0 12.2192V11.5C0 11.2239 0.223858 11 0.5 11H2.375L4.51334 5.29775C4.80607 4.51715 5.55231 4 6.386 4H17.614C18.4477 4 19.1939 4.51715 19.4867 5.29775L21.625 11H23.5C23.7761 11 24 11.2239 24 11.5V12.2192C24 12.6781 23.6877 13.0781 23.2425 13.1894L22 13.5ZM4 15V17C4 17.5523 4.44772 18 5 18H8.24496C8.3272 18 8.40818 17.9797 8.4807 17.9409C8.72418 17.8107 8.81602 17.5078 8.68582 17.2643L8.68588 17.2643C7.87868 15.7548 6.31672 15 4 15ZM20 15C17.6833 15 16.1213 15.7548 15.3141 17.2643L15.3142 17.2643C15.184 17.5078 15.2758 17.8107 15.5193 17.9409C15.5918 17.9797 15.6728 18 15.755 18H19C19.5523 18 20 17.5523 20 17V15ZM6 6L4.43874 10.6838C4.40475 10.7857 4.38743 10.8925 4.38743 11C4.38743 11.5523 4.83514 12 5.38743 12H18.6126C18.7201 12 18.8268 11.9827 18.9288 11.9487C19.4527 11.774 19.7359 11.2077 19.5613 10.6838L18 6H6Z"></path></svg></span>
             <p class="work-card__eyebrow">Fintech · UI Exploration · 2023</p>
             <p class="work-card__desc">A vehicle super-app UI exploration, from first principles.</p>
             <span class="work-card__more">View exploration</span>
@@ -573,6 +588,7 @@
 
         <a class="work-card" href="zadinga.html">
           <div class="work-card__body">
+            <span class="work-card__icon work-card__icon--zadinga"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.00488 9H19.9433L20.4433 7H8.00488V5H21.7241C22.2764 5 22.7241 5.44772 22.7241 6C22.7241 6.08176 22.7141 6.16322 22.6942 6.24254L20.1942 16.2425C20.083 16.6877 19.683 17 19.2241 17H5.00488C4.4526 17 4.00488 16.5523 4.00488 16V4H2.00488V2H5.00488C5.55717 2 6.00488 2.44772 6.00488 3V9ZM6.00488 23C4.90031 23 4.00488 22.1046 4.00488 21C4.00488 19.8954 4.90031 19 6.00488 19C7.10945 19 8.00488 19.8954 8.00488 21C8.00488 22.1046 7.10945 23 6.00488 23ZM18.0049 23C16.9003 23 16.0049 22.1046 16.0049 21C16.0049 19.8954 16.9003 19 18.0049 19C19.1095 19 20.0049 19.8954 20.0049 21C20.0049 22.1046 19.1095 23 18.0049 23Z"></path></svg></span>
             <p class="work-card__eyebrow">Fintech · Case Study · 2022</p>
             <p class="work-card__desc">Making color mean something in a retail super-app for India's Kirana shop owners.</p>
             <span class="work-card__more">Read case study</span>
