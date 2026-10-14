@@ -104,6 +104,7 @@
     .hero h1 em { font-style: italic; font-weight: 400; color: var(--ink-muted); }
     .hero__sub { font-size: clamp(1.04rem, 1.4vw, 1.16rem); color: var(--ink-muted); max-width: 60ch; margin: 0 0 30px; }
     .hero__sub strong { color: var(--ink); font-weight: 600; }
+    .hero__sub + .hero__sub { margin-top: -14px; }
 
     .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .btn {
@@ -122,15 +123,23 @@
 
     /* At-a-glance numbers */
     .glance {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;
+      display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px;
       margin-top: 40px;
     }
     .glance__item {
-      padding: 16px 18px; border-radius: 14px;
+      grid-column: span 2;
+      display: block; padding: 16px 18px; border-radius: 14px;
       background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.8);
       box-shadow: 0 10px 30px rgba(31, 29, 26, 0.05);
+      transition: transform 0.15s ease, background 0.15s ease;
     }
-    .glance__num { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.9rem; font-weight: 600; line-height: 1; margin-bottom: 6px; }
+    a.glance__item:hover { transform: translateY(-2px); background: rgba(255,255,255,0.75); }
+    .glance__num { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.6rem; font-weight: 600; line-height: 1; margin-bottom: 6px; }
+    /* The two headline results get more room and a larger numeral */
+    .glance__item--lead { grid-column: span 3; padding: 22px 24px; background: rgba(255,255,255,0.72); }
+    .glance__item--lead .glance__num { font-size: clamp(2.2rem, 4vw, 2.9rem); color: var(--accent); margin-bottom: 8px; }
+    .glance__item--lead .glance__label { font-size: 0.95rem; color: var(--ink); }
+    .glance__src { margin-top: 8px; font-size: 0.78rem; color: var(--ink-soft); }
     .glance__label { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.35; }
 
     /* ----------------------------- Sections */
@@ -271,6 +280,8 @@
     /* ----------------------------- Responsive */
     @media (max-width: 760px) {
       .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .glance__item { grid-column: span 1; }
+      .glance__item--lead, .glance__item:last-child { grid-column: span 2; }
       .skills { grid-template-columns: minmax(0, 1fr); gap: 10px; }
       .skills__label { padding-top: 14px; }
       .skills__label:first-child { padding-top: 0; }
@@ -323,12 +334,16 @@
   <section class="hero">
     <div class="hero__inner">
       <p class="eyebrow">Career · Senior Experience Designer</p>
-      <h1>Products don't become intuitive <em>by chance.</em> Someone has to fight for that.</h1>
+      <h1>From zero to shipped, <em>with the bar set by a human.</em></h1>
       <p class="hero__sub">
-        I'm a product and interaction designer with <strong>5+ years</strong> of end-to-end UX for
-        consumer and creator-facing products. I design cross-platform flows, high-fidelity UI and
-        advanced prototypes (Figma variables, interactive prototypes), and I've shipped
-        <strong>AI-assisted features</strong> and creator tools that cut turnaround time and lifted adoption.
+        I've spent <strong>5+ years in product design</strong>, much of it building <strong>0→1</strong>: turning
+        a founder's spreadsheet into a shipped app, and a one-line brief into a flow people actually finish.
+        My work spans <strong>fintech</strong>, <strong>commerce</strong> and <strong>3D/AR creator tools</strong>.
+      </p>
+      <p class="hero__sub">
+        Today I <strong>design with AI</strong>, and it handles more of the execution than ever. The judgement
+        stays with me: I <strong>question every output</strong>, <strong>shape the experience</strong>, and
+        <strong>set the bar</strong> for what's good enough to ship.
       </p>
       <div class="hero__actions">
         <a class="btn" href="landing.html#work">See case studies</a>
@@ -336,10 +351,28 @@
       </div>
 
       <div class="glance">
-        <div class="glance__item"><div class="glance__num">5+</div><div class="glance__label">years in product design</div></div>
-        <div class="glance__item"><div class="glance__num">10M+</div><div class="glance__label">users on a design system I re-architected</div></div>
-        <div class="glance__item"><div class="glance__num">80%</div><div class="glance__label">fewer prototype screens with Figma variables</div></div>
-        <div class="glance__item"><div class="glance__num">5+</div><div class="glance__label">designers mentored</div></div>
+        <a class="glance__item glance__item--lead" href="deem.html">
+          <div class="glance__num">1.8 → 4.0</div>
+          <div class="glance__label">app-store rating after the redesign</div>
+          <div class="glance__src">UAE lending app · Case study</div>
+        </a>
+        <a class="glance__item glance__item--lead" href="takreem.html">
+          <div class="glance__num">2.5×</div>
+          <div class="glance__label">more reviews for businesses, built 0→1 and shipped</div>
+          <div class="glance__src">UAE tipping app · Case study</div>
+        </a>
+        <div class="glance__item">
+          <div class="glance__num">~2×</div>
+          <div class="glance__label">onboarding completion, lead to eSign</div>
+        </div>
+        <a class="glance__item" href="zadinga.html">
+          <div class="glance__num">~35%</div>
+          <div class="glance__label">more app reviews for a retail app</div>
+        </a>
+        <div class="glance__item">
+          <div class="glance__num">Auggie</div>
+          <div class="glance__label">Best Enterprise Solution at AWE USA 2022, won by the 3D/AR company I designed tools for</div>
+        </div>
       </div>
     </div>
   </section>
