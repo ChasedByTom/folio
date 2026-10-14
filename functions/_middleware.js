@@ -50,8 +50,11 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(11
 button{padding:13px 15px;border:none;border-radius:10px;background:var(--ink);color:var(--paper);font-weight:600;font-size:1rem;cursor:pointer;transition:background .15s ease}
 button:hover{background:#2a2723}
 .err{color:#b3261e;font-size:.88rem;margin:4px 0 0;min-height:1.1em}
+.back{position:fixed;top:22px;left:clamp(20px,5vw,60px);display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink-muted);text-decoration:none}
+.back::before{content:'←';transition:transform .2s ease}
+.back:hover{color:var(--ink)}.back:hover::before{transform:translateX(-3px)}
 </style></head>
-<body><main class="card">
+<body><a class="back" href="/landing#work">Back to work</a><main class="card">
 <h1>This case study is private</h1>
 <p class="sub">Enter the password to continue.</p>
 <form method="POST" action="${actionPath}">
