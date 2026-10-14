@@ -54,7 +54,7 @@ button:hover{background:#2a2723}
 .back::before{content:'←';transition:transform .2s ease}
 .back:hover{color:var(--ink)}.back:hover::before{transform:translateX(-3px)}
 </style></head>
-<body><a class="back" href="/landing#work">Back to work</a><main class="card">
+<body><a class="back" href="/landing#work" onclick="if(document.referrer&&history.length>1){history.back();return false}">Back</a><main class="card">
 <h1>This case study is private</h1>
 <p class="sub">Enter the password to continue.</p>
 <form method="POST" action="${actionPath}">
