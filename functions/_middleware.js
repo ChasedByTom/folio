@@ -70,6 +70,13 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, '') || '/';
 
+  // Homepage: serve the portfolio (landing.html) at chasedbytom.com itself,
+  // keeping the address bar on "/". The old holding page stays in index.html.
+  if (path === '/' && (request.method === 'GET' || request.method === 'HEAD')) {
+    const target = new URL('/landing', url);
+    return env.ASSETS.fetch(new Request(target.toString(), request));
+  }
+
   // Not a protected page → serve normally.
   if (!PROTECTED.has(path)) return next();
 
