@@ -71,7 +71,8 @@ export async function onRequest(context) {
   const path = url.pathname.replace(/\/+$/, '') || '/';
 
   // Homepage: serve the portfolio (landing.html) at chasedbytom.com itself,
-  // keeping the address bar on "/". The old holding page stays in index.html.
+  // keeping the address bar on "/". The old holding page is archived outside
+  // the repo (Claude/archive/holding-page); see its README to take the site offline.
   if (path === '/' && (request.method === 'GET' || request.method === 'HEAD')) {
     const target = new URL('/landing', url);
     return env.ASSETS.fetch(new Request(target.toString(), request));
