@@ -899,5 +899,32 @@
       map.forEach((_, el) => io.observe(el));
     })();
   </script>
+  <script>
+    // Keep case-study videos playing: start each one when it scrolls into view,
+    // pause it when it leaves (saves battery), and if the device blocked
+    // autoplay (e.g. iPhone Low Power Mode), start them on the first tap or scroll.
+    (function () {
+      var vids = Array.prototype.slice.call(document.querySelectorAll('video[autoplay]'));
+      if (!vids.length) return;
+      var visible = new Set();
+      function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { visible.add(e.target); play(e.target); }
+            else { visible.delete(e.target); e.target.pause(); }
+          });
+        }, { threshold: 0.25 });
+        vids.forEach(function (v) { io.observe(v); });
+      }
+      function nudge() {
+        (visible.size ? visible : vids).forEach(function (v) { if (v.paused) play(v); });
+      }
+      ['touchstart', 'click', 'scroll', 'keydown'].forEach(function (ev) {
+        window.addEventListener(ev, function once() { nudge(); window.removeEventListener(ev, once); }, { passive: true });
+      });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) nudge(); });
+    })();
+  </script>
 </body>
 </html>
