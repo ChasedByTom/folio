@@ -141,23 +141,15 @@
         var(--sky-r) 100%
       );
     }
-    /* Paper grain scoped to the hero only, sits above clouds but below text. */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background-image: url('https://www.craft.do/_image/width=3840,quality=85,format=auto/_next/static/media/paper-texture.e3705234.png');
-      background-repeat: repeat;
-      background-size: 1192px 843px;
-      mix-blend-mode: multiply;
-      opacity: 0.35;
-    }
     .hero__inner { position: relative; z-index: 2; }
 
+    /* Cloud nudge: clouds near the pointer drift aside as whole shapes and
+       spring back. Uses the independent `translate` property so it stacks on
+       top of the clouds' own drifting `transform` animation. */
+    .hero .cloud { translate: 0 0; }
+
     /* Animated clouds: each starts off the right edge and drifts left over
-       225s, looping seamlessly. Negative animation-delays distribute them
+       214.29s (5% quicker than the original 225s), looping seamlessly. Negative animation-delays distribute them
        across the cycle so 3+ are always on screen. Sizes / y-positions /
        opacities vary to give the field a sense of depth. */
     .hero .cloud {
@@ -167,19 +159,19 @@
       pointer-events: none;
       user-select: none;
       will-change: transform;
-      animation: cloud-drift 225s linear infinite;
+      animation: cloud-drift 214.29s linear infinite;
     }
     @keyframes cloud-drift {
       from { transform: translateX(0); }
       to   { transform: translateX(calc(-100vw - 100%)); }
     }
 
-    .hero .cloud--1 { top:   2%; width: 620px; opacity: 0.92; animation-delay:     0s; }
-    .hero .cloud--2 { top:  26%; width: 540px; opacity: 0.78; animation-delay:  -37.5s; }
-    .hero .cloud--3 { top:  48%; width: 700px; opacity: 0.90; animation-delay:  -75s; }
-    .hero .cloud--4 { top:  14%; width: 460px; opacity: 0.70; animation-delay: -112.5s; }
-    .hero .cloud--5 { top:  60%; width: 580px; opacity: 0.82; animation-delay: -150s; }
-    .hero .cloud--6 { top:  36%; width: 500px; opacity: 0.74; animation-delay: -187.5s; }
+    .hero .cloud--1 { top:   2%; width: 620px; opacity: 0.92; animation-delay: 0s; }
+    .hero .cloud--2 { top:  26%; width: 540px; opacity: 0.78; animation-delay: -35.71s; }
+    .hero .cloud--3 { top:  48%; width: 700px; opacity: 0.90; animation-delay: -71.43s; }
+    .hero .cloud--4 { top:  14%; width: 460px; opacity: 0.70; animation-delay: -107.14s; }
+    .hero .cloud--5 { top:  60%; width: 580px; opacity: 0.82; animation-delay: -142.86s; }
+    .hero .cloud--6 { top:  36%; width: 500px; opacity: 0.74; animation-delay: -178.57s; }
 
     /* Static fallback for users who prefer reduced motion. */
     @media (prefers-reduced-motion: reduce) {
@@ -954,6 +946,64 @@
       });
       list.insertAdjacentElement('afterend', btn);
     });
+  </script>
+  <script>
+    // Cloud nudge: move the pointer through the hero and nearby clouds drift
+    // aside, carried by the pointer's motion and pushed gently away from it,
+    // then ease back on a soft spring. Each cloud moves as one piece, so the
+    // halftone texture is never distorted.
+    (function () {
+      var hero = document.querySelector('.hero');
+      if (!hero) return;
+      var clouds = Array.prototype.slice.call(hero.querySelectorAll('.cloud'));
+      if (!clouds.length || !('translate' in document.documentElement.style)) return;
+      // Desktop and laptop only: needs a real hover-capable, precise pointer
+      if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      var MAX = 11;          // furthest a cloud can be pushed (px), 60% gentler
+      var CARRY = 2.4;       // px/s of cloud velocity per px of pointer movement
+      var PUSH = 1.6;        // light extra push directly away from the pointer
+      var K = 9, C = 4.2;    // spring stiffness and damping (per second): soft, floaty
+      var state = clouds.map(function () { return { x: 0, y: 0, vx: 0, vy: 0 }; });
+      var last = null, running = false, prev = 0;
+
+      function onMove(e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;   // ignore touch and pen
+        var now = performance.now();
+        var mx = last && now - last.t < 80 ? e.clientX - last.x : 0;
+        var my = last && now - last.t < 80 ? e.clientY - last.y : 0;
+        last = { x: e.clientX, y: e.clientY, t: now };
+        clouds.forEach(function (c, i) {
+          var r = c.getBoundingClientRect();
+          var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          var dx = cx - e.clientX, dy = cy - e.clientY;
+          var reach = Math.max(r.width, r.height) * 0.55;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d > reach) return;
+          var f = 1 - d / reach; f = f * f;                 // stronger near the middle
+          var n = d || 1, speed = Math.min(30, Math.sqrt(mx * mx + my * my));
+          state[i].vx += (mx * CARRY + (dx / n) * PUSH * speed) * f;
+          state[i].vy += (my * CARRY + (dy / n) * PUSH * speed) * f;
+        });
+        if (!running) { running = true; prev = performance.now(); requestAnimationFrame(step); }
+      }
+      function step(now) {
+        var dt = Math.min(0.05, Math.max(0.001, (now - prev) / 1000)); prev = now;
+        var moving = false;
+        state.forEach(function (s, i) {
+          s.vx += (-K * s.x - C * s.vx) * dt;
+          s.vy += (-K * s.y - C * s.vy) * dt;
+          s.x += s.vx * dt; s.y += s.vy * dt;
+          var d = Math.sqrt(s.x * s.x + s.y * s.y);
+          if (d > MAX) { s.x *= MAX / d; s.y *= MAX / d; }
+          if (Math.abs(s.x) > 0.05 || Math.abs(s.y) > 0.05 || Math.abs(s.vx) > 0.5 || Math.abs(s.vy) > 0.5) moving = true;
+          clouds[i].style.translate = s.x.toFixed(2) + 'px ' + s.y.toFixed(2) + 'px';
+        });
+        if (moving) requestAnimationFrame(step);
+        else { running = false; clouds.forEach(function (c) { c.style.translate = ''; }); }
+      }
+      hero.addEventListener('pointermove', onMove);
+      hero.addEventListener('pointerleave', function () { last = null; });
+    })();
   </script>
 </body>
 </html>
